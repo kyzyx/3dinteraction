@@ -34,9 +34,7 @@ DirectXApp::~DirectXApp(void)
 		render = NULL;
 	}
 }
-#include <iostream>
 
-using namespace std;
 bool DirectXApp::onInit(void) {
 	if (!initSDL()) return false;
 	try {
