@@ -69,6 +69,7 @@
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
+    <ClCompile Include="ExperimentApp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="SDLHandler.cpp" />
@@ -78,6 +79,7 @@
     <ClInclude Include="D3DMesh.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />
+    <ClInclude Include="ExperimentApp.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="nvapi.h" />
     <ClInclude Include="Renderer.h" />
