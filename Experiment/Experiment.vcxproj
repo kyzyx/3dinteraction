@@ -70,8 +70,10 @@
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
+    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="MouseKeyboard.cpp" />
     <ClCompile Include="SDLHandler.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -80,7 +82,10 @@
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="ExperimentApp.h" />
+    <ClInclude Include="InputHandler.h" />
+    <ClInclude Include="InputInterface.h" />
     <ClInclude Include="Mesh.h" />
+    <ClInclude Include="MouseKeyboard.h" />
     <ClInclude Include="nvapi.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="SDLHandler.h" />
