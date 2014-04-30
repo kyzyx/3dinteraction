@@ -19,7 +19,8 @@ public:
 	InputInterface(){}
 	~InputInterface(){}
 
-	virtual void updateStatus(SDL_Event* Event){}
+	virtual void SDLupdate(SDL_Event* Event){}
+	virtual void update(){}
 
 	InputStatus* getStatus() {return status;}
 

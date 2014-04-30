@@ -10,6 +10,11 @@ InputHandler::InputHandler(InputInterface* Input)
 }
 
 void InputHandler::OnEvent(SDL_Event* Event) {
-	input->updateStatus(Event);
+	input->SDLupdate(Event);
 	SDLHandler::OnEvent(Event);
+}
+
+void InputHandler::update()
+{
+	input->update();
 }

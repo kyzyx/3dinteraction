@@ -10,7 +10,8 @@ public:
 	MouseKeyboard(Mesh* mesh);
 	~MouseKeyboard();
 
-	virtual void updateStatus(SDL_Event* Event);
+	virtual void SDLupdate(SDL_Event* Event);
+	virtual void update();
 
 protected:
 	Mesh* mesh;

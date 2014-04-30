@@ -15,7 +15,7 @@ MouseKeyboard::~MouseKeyboard()
 	delete status;
 }
 
-void MouseKeyboard::updateStatus(SDL_Event* Event)
+void MouseKeyboard::SDLupdate(SDL_Event* Event)
 {
 	switch(Event->type)
 	{
@@ -119,6 +119,6 @@ void MouseKeyboard::updateStatus(SDL_Event* Event)
 	}
 }
 
-void OnLButtonUp(int mX, int mY) {
-    //Pure virtual, do nothing
+void MouseKeyboard::update()
+{
 }

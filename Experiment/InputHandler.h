@@ -11,6 +11,7 @@ public:
 	~InputHandler();
 
 	virtual void OnEvent(SDL_Event* Event);
+	virtual void update();
 
 protected:
 	InputInterface* input;
