@@ -1,7 +1,7 @@
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
 #include "InputInterface.h"
-#include "MouseKeyboard.h"
+#include "MouseKeyboardInterface.h"
 #include "InputHandler.h"
 
 ExperimentApp::ExperimentApp(void) : DirectXApp(false)
@@ -19,7 +19,7 @@ bool ExperimentApp::onInit(void) {
 	mesh->setColor(1,0,0);
 	mesh->setTranslation(0,0,5);
 
-	InputInterface* input = new MouseKeyboard(mesh);
+	InputInterface* input = new MouseKeyboardInterface();
 	handler = new InputHandler(input);
 
 	return true;
