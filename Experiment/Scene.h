@@ -9,7 +9,8 @@
 //
 // SCENE
 //
-// A scene controls meshes on the screen and handles input
+// A scene controls meshes on the screen and handles input.  A Scene in 
+// our experiment is supposed to handle a single run of an experiment
 //
 class Scene {
 public:

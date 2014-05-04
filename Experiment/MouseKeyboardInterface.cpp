@@ -1,21 +1,16 @@
-#include "MouseKeyboard.h"
+#include "MouseKeyboardInterface.h"
 #include <cstdio>
 
-MouseKeyboard::MouseKeyboard() : InputInterface()
+MouseKeyboardInterface::MouseKeyboardInterface() : InputInterface()
 {
 }
 
-MouseKeyboard::MouseKeyboard(Mesh* Mesh)
-{
-	mesh = Mesh;
-}
-
-MouseKeyboard::~MouseKeyboard()
+MouseKeyboardInterface::~MouseKeyboardInterface()
 {
 	delete status;
 }
 
-void MouseKeyboard::SDLupdate(SDL_Event* Event)
+void MouseKeyboardInterface::SDLupdate(SDL_Event* Event)
 {
 	switch(Event->type)
 	{
@@ -119,6 +114,6 @@ void MouseKeyboard::SDLupdate(SDL_Event* Event)
 	}
 }
 
-void MouseKeyboard::update()
+void MouseKeyboardInterface::update()
 {
 }

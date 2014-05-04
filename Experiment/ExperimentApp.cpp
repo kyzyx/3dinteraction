@@ -3,7 +3,7 @@
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
 #include "InputInterface.h"
-#include "MouseKeyboard.h"
+#include "MouseKeyboardInterface.h"
 #include "InputHandler.h"
 #include "Experiment.h"
 #include "Scene.h"
@@ -20,7 +20,7 @@ ExperimentApp::~ExperimentApp(void)
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
-	InputInterface* input = new MouseKeyboard(NULL);
+	InputInterface* input = new MouseKeyboardInterface();
 	handler = new InputHandler(input);
 
 	// PSEUDOCODE

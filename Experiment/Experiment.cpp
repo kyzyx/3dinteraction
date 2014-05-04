@@ -2,7 +2,7 @@
 
 
 Experiment::Experiment (std::string configFile) {
-
+	m_inputDevice
 	return;
 }
 

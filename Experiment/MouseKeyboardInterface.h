@@ -2,13 +2,12 @@
 #include "InputInterface.h"
 #include "Mesh.h"
 
-class MouseKeyboard :
+class MouseKeyboardInterface :
 	public InputInterface
 {
 public:
-	MouseKeyboard();
-	MouseKeyboard(Mesh* mesh);
-	~MouseKeyboard();
+	MouseKeyboardInterface();
+	~MouseKeyboardInterface();
 
 	virtual void SDLupdate(SDL_Event* Event);
 	virtual void update();

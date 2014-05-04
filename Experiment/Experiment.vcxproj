@@ -79,6 +79,7 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MouseKeyboard.cpp" />
     <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="MouseKeyboardInterface.cpp" />
     <ClCompile Include="SDLHandler.cpp" />
     <ClCompile Include="timestamp.cpp" />
   </ItemGroup>
@@ -93,7 +94,7 @@
     <ClInclude Include="InputInterface.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="Mesh.h" />
-    <ClInclude Include="MouseKeyboard.h" />
+    <ClInclude Include="MouseKeyboardInterface.h" />
     <ClInclude Include="nvapi.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
@@ -101,6 +102,7 @@
     <ClInclude Include="timestamp.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ps.ps" />
     <None Include="ps_1light.ps" />
     <None Include="tps.ps" />
