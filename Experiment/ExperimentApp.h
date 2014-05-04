@@ -1,6 +1,9 @@
 #pragma once
 #include "directxapp.h"
 #include "Mesh.h"
+#include "InputInterface.h"
+#include "Experiment.h"
+#include "Scene.h"
 
 class ExperimentApp :
 	public DirectXApp
@@ -14,6 +17,8 @@ public:
 	bool onInit();
 
 private:
-	Mesh* mesh;
+	InputStatus lastInput;
+	Experiment experiment;
+	Scene scene;
 };
 

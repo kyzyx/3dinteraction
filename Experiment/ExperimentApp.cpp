@@ -1,10 +1,14 @@
+#include <cstdio>
+#include <cmath>
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
 #include "InputInterface.h"
 #include "MouseKeyboard.h"
 #include "InputHandler.h"
+#include "Experiment.h"
+#include "Scene.h"
 
-ExperimentApp::ExperimentApp(void) : DirectXApp(false)
+ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json")
 {
 }
 
@@ -15,12 +19,15 @@ ExperimentApp::~ExperimentApp(void)
 
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
-	mesh = new D3DMesh("ico.off", (D3DRenderer*) render);
-	mesh->setColor(1,0,0);
-	mesh->setTranslation(0,0,5);
 
-	InputInterface* input = new MouseKeyboard(mesh);
+	InputInterface* input = new MouseKeyboard(NULL);
 	handler = new InputHandler(input);
+
+	// PSEUDOCODE
+	experiment.init();
+    scene = experiment.getNextScene();	
+	scene.init((D3DRenderer*)render);
+	// END PSEUDOCODE
 
 	return true;
 }
@@ -32,10 +39,14 @@ float up[] = {0.f,1.f,0.f};
 void ExperimentApp::onRender(void) {
 	render->clear();
 	float hfov = 45;
-	float aspectratio = 4./3.;
+	float aspectratio = 4.f/3.f;
 	render->setProjection(hfov, aspectratio);
 	render->lookAt(eye, towards, up);
-	mesh->draw();
+
+	const Scene::MeshVec &meshes = scene.getMeshes();
+	for (Scene::MeshVec::const_iterator it = meshes.begin(); it != meshes.end(); ++it) {
+		(*it)->draw();
+	}
 
 	// Uncomment to draw edges in black
 	/*mesh->setColor(0,0,0);
@@ -48,4 +59,16 @@ void ExperimentApp::onRender(void) {
 }
 
 void ExperimentApp::onLoop(void) {
+	// PSEUDOCODE
+	if (scene.finished()) {
+		scene = experiment.getNextScene();
+        scene.init((D3DRenderer*)render);
+        meshes = scene.getMeshes();
+	}
+
+	InputStatus input = experiment.getInput();
+	InputStatus deltaInput = input - lastInput;
+	lastInput = input;
+	scene.processInput(input, deltaInput);
+	// END PSEUDOCODE
 }

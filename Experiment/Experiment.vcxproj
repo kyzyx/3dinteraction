@@ -71,26 +71,34 @@
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
+    <ClCompile Include="Experiment.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
     <ClCompile Include="InputHandler.cpp" />
+    <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MouseKeyboard.cpp" />
+    <ClCompile Include="Scene.cpp" />
     <ClCompile Include="SDLHandler.cpp" />
+    <ClCompile Include="timestamp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h" />
     <ClInclude Include="D3DMesh.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />
+    <ClInclude Include="Experiment.h" />
     <ClInclude Include="ExperimentApp.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputInterface.h" />
+    <ClInclude Include="json.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MouseKeyboard.h" />
     <ClInclude Include="nvapi.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLHandler.h" />
+    <ClInclude Include="timestamp.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ps.ps" />

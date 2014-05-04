@@ -1,5 +1,6 @@
 #include <SDL.h>
 #include "app.h"
+#include "timestamp.h"
 
 App::App() {
 	running = true;
@@ -26,17 +27,25 @@ void App::stop() {
 
 int App::onExecute() {
 	if (!onInit()) stop();
+
 	SDL_Event ev;
+	loopTime = 0.0;
+	double lastNow = timestamp();
 	while (running) {
+		// Calculate time delta since this loop last ran
+        double now = timestamp();		
+		loopTime = now - lastNow;
+		lastNow = now;
+
 		while (SDL_PollEvent(&ev)) {
 			if (handler) {
 				handler->OnEvent(&ev);
-				for (int i = 0; i < handlers.size(); ++i) handlers[i]->OnEvent(&ev);
+				for (size_t i = 0; i < handlers.size(); ++i) handlers[i]->OnEvent(&ev);
 			}
 		}
 		if (handler) {
 			handler->update();
-			for (int i = 0; i < handlers.size(); ++i) handlers[i]->update();
+			for (size_t i = 0; i < handlers.size(); ++i) handlers[i]->update();
 		}
 		onLoop();
 		onRender();
@@ -72,6 +81,6 @@ void App::onCleanup(){
 	if (handler) {
 		delete handler;
 		handler = NULL;
-		for (int i = 0; i < handlers.size(); ++i) delete handlers[i];
+		for (size_t i = 0; i < handlers.size(); ++i) delete handlers[i];
 	}
 }

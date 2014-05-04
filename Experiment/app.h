@@ -32,4 +32,8 @@ class App {
 		int width;
 		int height;
 		Uint32 flags;
+
+		double loopTime; // how long did the last loop in onExecute take in seconds?
+
+		static const size_t FRAMERATE_LIMIT = 120;
 };
