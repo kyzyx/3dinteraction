@@ -77,7 +77,6 @@
     <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
-    <ClCompile Include="MouseKeyboard.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="MouseKeyboardInterface.cpp" />
     <ClCompile Include="SDLHandler.cpp" />

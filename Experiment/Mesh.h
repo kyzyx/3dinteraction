@@ -37,6 +37,11 @@ public:
 		return colors;
 	}
 
+	void getTranslation (float *t) {
+		t[0] = translation[0];
+		t[1] = translation[1];
+		t[2] = translation[2];
+	}
 	void translateBy(float x, float y, float z) {
 		translation[0] += x; translation[1] += y; translation[2] += z;
 	}

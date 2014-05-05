@@ -341,9 +341,9 @@ void D3DRenderer::DrawWindowTarget(D3DWindowTarget* wt, int x, int y) {
 	if (x != wt->x || y != wt->y) {
 		wt->x = x;
 		wt->y = y;
-		float left = x;
+		float left = (float)x;
 		float right = left + (float)wt->w;
-		float top = y;
+		float top = (float)y;
 		float bottom = top + (float)wt->h;
 		D3DPoint vertices[nwindowverts];
 		// First triangle.

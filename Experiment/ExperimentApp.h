@@ -19,6 +19,6 @@ public:
 private:
 	InputStatus lastInput;
 	Experiment experiment;
-	Scene scene;
+	Scene *scene;
 };
 

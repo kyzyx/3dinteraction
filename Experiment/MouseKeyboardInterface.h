@@ -9,9 +9,5 @@ public:
 	MouseKeyboardInterface();
 	~MouseKeyboardInterface();
 
-	virtual void SDLupdate(SDL_Event* Event);
 	virtual void update();
-
-protected:
-	Mesh* mesh;
 };

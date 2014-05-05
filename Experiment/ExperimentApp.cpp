@@ -2,8 +2,6 @@
 #include <cmath>
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
-#include "InputInterface.h"
-#include "MouseKeyboardInterface.h"
 #include "InputHandler.h"
 #include "Experiment.h"
 #include "Scene.h"
@@ -20,14 +18,11 @@ ExperimentApp::~ExperimentApp(void)
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
-	InputInterface* input = new MouseKeyboardInterface();
-	handler = new InputHandler(input);
+	handler = new InputHandler();
 
-	// PSEUDOCODE
 	experiment.init();
     scene = experiment.getNextScene();	
-	scene.init((D3DRenderer*)render);
-	// END PSEUDOCODE
+	scene->init((D3DRenderer*)render);
 
 	return true;
 }
@@ -43,7 +38,7 @@ void ExperimentApp::onRender(void) {
 	render->setProjection(hfov, aspectratio);
 	render->lookAt(eye, towards, up);
 
-	const Scene::MeshVec &meshes = scene.getMeshes();
+	const Scene::MeshVec &meshes = scene->getMeshes();
 	for (Scene::MeshVec::const_iterator it = meshes.begin(); it != meshes.end(); ++it) {
 		(*it)->draw();
 	}
@@ -59,16 +54,14 @@ void ExperimentApp::onRender(void) {
 }
 
 void ExperimentApp::onLoop(void) {
-	// PSEUDOCODE
-	if (scene.finished()) {
+    experiment.onLoop();
+	if (scene->finished()) {
 		scene = experiment.getNextScene();
-        scene.init((D3DRenderer*)render);
-        meshes = scene.getMeshes();
+        scene->init((D3DRenderer*)render);
 	}
 
 	InputStatus input = experiment.getInput();
 	InputStatus deltaInput = input - lastInput;
 	lastInput = input;
-	scene.processInput(input, deltaInput);
-	// END PSEUDOCODE
+	scene->processInput(input, deltaInput);
 }
