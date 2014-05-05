@@ -35,10 +35,10 @@ bool Scene::finished (void) {
 	return m_finished;
 }
 
-void Scene::processInput (const InputStatus &input, const InputStatus &deltaInput) {
-	double x = -deltaInput.timestamp * deltaInput.x * 100;
-	double y = -deltaInput.timestamp * deltaInput.y * 100;
-	double z = -deltaInput.timestamp * deltaInput.z * 100;
+void Scene::processInput (InputStatus &input, InputStatus &deltaInput) {
+	double x = -deltaInput.timestamp * deltaInput.x() * 100;
+	double y = -deltaInput.timestamp * deltaInput.y() * 100;
+	double z = -deltaInput.timestamp * deltaInput.z() * 100;
 	m_meshes[1]->translateBy((float)x, (float)y, (float)z);
 	float t[3];
 	m_meshes[1]->getTranslation(t);

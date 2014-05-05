@@ -22,7 +22,7 @@ public:
 	bool init (D3DRenderer *render);
     const MeshVec& getMeshes (void);
     bool finished (void);	
-	void processInput (const InputStatus &input, const InputStatus &deltaInput);
+	void processInput (InputStatus &input, InputStatus &deltaInput);
 
 private:
 	MeshVec m_meshes;

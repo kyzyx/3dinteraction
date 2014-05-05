@@ -19,17 +19,17 @@ void MouseKeyboardInterface::update()
 	if (keys != NULL) {
 		if (keys[SDLK_LSHIFT]) {
 			// Move on Z plane
-			status.z = y;
+			status.pos[2] = y;
 		} else {
 			// Move on XY plane
-			status.x = x;
-			status.y = y;
+			status.pos[0] = x;
+			status.pos[1] = y;
 		}
 	} else {
-		status.x = x;
-		status.y = y;
+		status.x() = x;
+		status.y() = y;
 	}
-	status.buttonPressed = buttons&SDL_BUTTON(1);
+	status.flags = buttons&SDL_BUTTON(1) ? InputStatus::INPUTFLAG_SELECT : InputStatus::INPUTFLAG_NONE;
 	status.timestamp = timestamp();
 }
 
