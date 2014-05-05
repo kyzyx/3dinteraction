@@ -86,6 +86,9 @@
     <ClInclude Include="MouseKeyboardInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ps.ps">

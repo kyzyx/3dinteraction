@@ -1,17 +1,6 @@
 #pragma once
 #include "SDLHandler.h"
-
-struct InputStatus
-{
-	double x;
-	double y;
-	double z;
-	double yaw;
-	double pitch;
-	double roll;
-
-	bool buttonPressed;
-};
+#include "InputStatus.h"
 
 class InputInterface
 {

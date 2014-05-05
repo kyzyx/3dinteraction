@@ -84,6 +84,7 @@
     <ClInclude Include="ExperimentApp.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputInterface.h" />
+    <ClInclude Include="InputStatus.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MouseKeyboardInterface.h" />
     <ClInclude Include="nvapi.h" />
