@@ -3,6 +3,7 @@
 #include "json.h"
 #include "InputInterface.h"
 #include "MouseKeyboardInterface.h"
+#include "HydraInterface.h"
 
 Experiment::Experiment (std::string configFile) :
 m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
@@ -17,7 +18,8 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 	m_numScenes = config["scenes"].ToInt();
 
 	if (input == "mousekbd") {
-		m_inputDevice = new MouseKeyboardInterface();
+		// m_inputDevice = new MouseKeyboardInterface();
+		m_inputDevice = new HydraInterface();
 	}
 	return;
 }

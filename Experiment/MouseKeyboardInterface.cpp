@@ -1,6 +1,5 @@
 #include "MouseKeyboardInterface.h"
 #include "timestamp.h"
-#include <cstdio>
 
 MouseKeyboardInterface::MouseKeyboardInterface() : InputInterface()
 {
