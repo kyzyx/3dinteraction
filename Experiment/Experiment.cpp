@@ -18,7 +18,9 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 	m_numScenes = config["scenes"].ToInt();
 
 	if (input == "mousekbd") {
-		// m_inputDevice = new MouseKeyboardInterface();
+		m_inputDevice = new MouseKeyboardInterface();
+	}
+	else if (input == "hydra") {
 		m_inputDevice = new HydraInterface();
 	}
 	return;
