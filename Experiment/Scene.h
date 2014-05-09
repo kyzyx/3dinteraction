@@ -1,6 +1,7 @@
 #pragma once
 
-#include <vector>
+#include <list>
+#include <map>
 
 #include "Mesh.h"
 #include "InputInterface.h"
@@ -14,17 +15,23 @@
 //
 class Scene {
 public:
-	typedef std::vector<Mesh*> MeshVec;
+	typedef std::list<Mesh*> MeshVec;
+	typedef std::map<std::string, Mesh*> MeshMap;
 
 	Scene (void);
 	~Scene (void);
 
-	bool init (D3DRenderer *render);
+	bool init (D3DRenderer *renderer);
     const MeshVec& getMeshes (void);
     bool finished (void);	
 	void processInput (InputStatus &input, InputStatus &deltaInput);
 
 private:
+	Mesh* addMesh (std::string meshName, std::string filename);
+	void removeMesh (std::string meshName);
+
 	MeshVec m_meshes;
+	MeshMap m_meshNames;
 	bool m_finished;
+	D3DRenderer *m_renderer; // memory not managed by this class
 };

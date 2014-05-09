@@ -1,5 +1,6 @@
 
 #pragma once
+#define EIGEN_DONT_ALIGN_STATICALLY 1
 #include "Eigen\Eigen"
 
 typedef enum {MOUSEKBD, HYDRA, LEAP, UNKNOWN} InputType;
@@ -72,6 +73,7 @@ public:
 
 	Eigen::Vector3d pos;
 	Eigen::Quaterniond rot;
+
 	
 	InputType inputType; // what kind of device this data came from
 	double timestamp;    // when was this input event generated?
