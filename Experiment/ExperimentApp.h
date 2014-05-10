@@ -10,7 +10,7 @@ class ExperimentApp :
 {
 public:
 	ExperimentApp(void);
-	~ExperimentApp(void);
+	virtual ~ExperimentApp(void);
 
 	void onRender();
 	void onLoop();

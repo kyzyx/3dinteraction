@@ -7,7 +7,6 @@ class App;
 class SDLHandler
 {
 public:
-	SDLHandler(void);
 	SDLHandler(App* myapp);
 	~SDLHandler(void);
 	

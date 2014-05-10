@@ -10,6 +10,7 @@ class App {
 	public: 
 		App();
 		App(int w, int h, SDLHandler* myhandler);
+		virtual ~App();
 		int onExecute();
 		void stop();
 
@@ -21,6 +22,7 @@ class App {
 		int getWidth() const { return width; }
 		int getHeight() const { return height; }
 		bool isFullscreen() const { return fullscreen; }
+
 	protected:
 		virtual bool initSDL();
 		bool running;

@@ -8,7 +8,7 @@ class DirectXApp :
 public:
 	DirectXApp(void);
 	DirectXApp(bool fullScreen);
-	~DirectXApp(void);
+	virtual ~DirectXApp(void);
 
 	virtual bool onInit();
 	virtual void onRender();

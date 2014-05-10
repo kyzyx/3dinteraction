@@ -21,6 +21,9 @@ App::App(int w, int h, SDLHandler* myhandler) {
 	handler = myhandler;
 }
 
+App::~App (void) {
+}
+
 void App::stop() {
 	running = false;
 }

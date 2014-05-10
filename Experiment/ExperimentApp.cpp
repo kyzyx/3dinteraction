@@ -2,7 +2,6 @@
 #include <cmath>
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
-#include "InputHandler.h"
 #include "Experiment.h"
 #include "Scene.h"
 
@@ -17,8 +16,6 @@ ExperimentApp::~ExperimentApp(void)
 
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
-
-	handler = new InputHandler();
 
 	experiment.init();
     scene = experiment.getNextScene();	
