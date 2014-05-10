@@ -42,9 +42,6 @@
     <ClCompile Include="ExperimentApp.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputHandler.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="MouseKeyboardInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -90,9 +87,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputInterface.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="InputHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MouseKeyboardInterface.h">

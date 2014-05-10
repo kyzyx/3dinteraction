@@ -73,7 +73,6 @@
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Experiment.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
-    <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -89,7 +88,6 @@
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Experiment.h" />
     <ClInclude Include="ExperimentApp.h" />
-    <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputInterface.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="InputStatus.h" />
