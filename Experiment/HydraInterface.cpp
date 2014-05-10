@@ -54,24 +54,10 @@ void HydraInterface::update()
 	int index = sixenseUtils::getTheControllerManager()->getIndex( sixenseUtils::ControllerManager::P1L );
 
 	status.pos[0] = acd.controllers[index].pos[0];
-	status.pos[1] = acd.controllers[index].pos[1];
+	status.pos[1] = -acd.controllers[index].pos[1];
 	status.pos[2] = acd.controllers[index].pos[2];
 
-	Eigen::Matrix3d mat = Eigen::Matrix3d::Identity();
-	Eigen::Vector3d v0(acd.controllers[index].rot_mat[0][0],
-					   acd.controllers[index].rot_mat[0][1],
-					   acd.controllers[index].rot_mat[0][2]);
-	Eigen::Vector3d v1(acd.controllers[index].rot_mat[1][0],
-					   acd.controllers[index].rot_mat[1][1],
-					   acd.controllers[index].rot_mat[1][2]);
-	Eigen::Vector3d v2(acd.controllers[index].rot_mat[2][0],
-					   acd.controllers[index].rot_mat[2][1],
-					   acd.controllers[index].rot_mat[2][2]);
-	mat.row(0) = v0;
-	mat.row(1) = v1;
-	mat.row(2) = v2;
-
-	status.rot = mat;
+	status.rot = Eigen::Quaterniond(acd.controllers[index].rot_quat[3], acd.controllers[index].rot_quat[0], -acd.controllers[index].rot_quat[1], -acd.controllers[index].rot_quat[2]);
 
 	static sixenseUtils::ButtonStates states;
 	states.update( &acd.controllers[index] );
