@@ -1,10 +1,6 @@
 #include "SDLHandler.h"
 
 
-SDLHandler::SDLHandler(void)
-{
-}
-
 SDLHandler::SDLHandler(App* myapp)
 {
 	app = myapp;
