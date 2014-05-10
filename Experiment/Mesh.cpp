@@ -8,6 +8,8 @@
 
 using namespace std;
 
+using namespace Eigen;
+
 Mesh::Mesh(void)
 {
 	vertices = NULL;
@@ -15,21 +17,17 @@ Mesh::Mesh(void)
 	texture = NULL;
 	use_color = false;
 
-	for (int i = 0; i < 3; ++i) {
-		translation[i] = 0;
-		scale[i] = 1;
-		rotation[i] = 0;
-	}
+	translation = Vector3f::Zero();
+	scale = Vector3f::Zero();
+	rotation = Quaternionf::Identity();
 }
 
 Mesh::Mesh(const char* filename, Renderer* r, bool reverse) {
 	render = r;
 	ReadOff(filename, reverse);
-	for (int i = 0; i < 3; ++i) {
-		translation[i] = 0;
-		scale[i] = 1;
-		rotation[i] = 0;
-	}
+	translation = Vector3f::Zero();
+	scale = Vector3f::Zero();
+	rotation = Quaternionf::Identity();
 }
 
 bool isblank(string s) {

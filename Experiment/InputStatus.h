@@ -1,6 +1,5 @@
 
 #pragma once
-#define EIGEN_DONT_ALIGN_STATICALLY 1
 #include "Eigen\Eigen"
 
 typedef enum {MOUSEKBD, HYDRA, LEAP, UNKNOWN} InputType;

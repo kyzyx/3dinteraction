@@ -26,7 +26,8 @@ public:
 	virtual void ortho(float w, float h) = 0;
 
 	// Object Matrix Functions
-	virtual void applyRotation(float a, float b, float c) = 0;
+	virtual void applyEulerRotation(float a, float b, float c) = 0;
+	virtual void applyQuaternionRotation(float x, float y, float z, float w) = 0;
 	virtual void applyTranslation(float a, float b, float c) = 0;
 	virtual void applyScale(float a, float b, float c) = 0;
 	virtual void resetTransforms() = 0;

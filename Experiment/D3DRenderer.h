@@ -65,7 +65,8 @@ public:
 	virtual void ortho();
 	virtual void ortho(float w, float h);
 
-	virtual void applyRotation(float a, float b, float c);
+	virtual void applyEulerRotation(float a, float b, float c);
+	virtual void applyQuaternionRotation(float x, float y, float z, float w);
 	virtual void applyTranslation(float a, float b, float c);
 	virtual void applyScale(float a, float b, float c);
 	virtual void resetTransforms();

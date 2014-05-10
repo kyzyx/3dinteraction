@@ -2,6 +2,7 @@
 #include "Renderer.h"
 #include <exception>
 #include <string>
+#include "Eigen\Eigen"
 
 class OFFFileFormatError : public std::exception {
 public:
@@ -23,9 +24,9 @@ public:
 	virtual void writeBuffer() = 0;
 	bool ReadOff(const char* filename, bool reverse=false);
 
-	const float* getTranslation() { return translation; }
-	const float* getRotation() { return rotation; }
-	const float* getScale() { return scale; }
+	const Eigen::Vector3f getTranslation() { return translation; }
+	const Eigen::Quaternionf getRotation() { return rotation; }
+	const Eigen::Vector3f getScale() { return scale; }
 	
 	void setColor(float x, float y, float z, float a=1.0f) {
 		for (int i = 0; i < nvert; ++i) {
@@ -48,23 +49,39 @@ public:
 	void translateBy(const float* x) {
 		translation[0] += x[0]; translation[1] += x[1]; translation[2] += x[2];
 	}
+	void translateBy(const Eigen::Vector3f& x) {
+		translation += x;
+	}
 	void setTranslation(float x, float y, float z) {
 		translation[0] = x; translation[1] = y; translation[2] = z;
 	}
 	void setTranslation(const float* x) {
 		translation[0] = x[0]; translation[1] = x[1]; translation[2] = x[2];
 	}
-	void rotateBy(float x, float y, float z) {
-		rotation[0] += x; rotation[1] += y; rotation[2] += z;
+	void setTranslation(const Eigen::Vector3f& x) {
+		translation = x;
+	}
+	void rotateBy(float yaw, float pitch, float roll) {
+		rotation = Eigen::AngleAxisf(yaw, Eigen::Vector3f(0,1,0))
+			     * Eigen::AngleAxisf(pitch, Eigen::Vector3f(1,0,0))
+				 * Eigen::AngleAxisf(roll, Eigen::Vector3f(0,0,1))
+				 * rotation;
 	}
 	void rotateBy(const float* x) {
-		rotation[0] += x[0]; rotation[1] += x[1]; rotation[2] += x[2];
+		rotateBy(x[0],x[1],x[2]);
 	}
-	void setRotation(float x, float y, float z) {
-		rotation[0] = x; rotation[1] = y; rotation[2] = z;
+	void rotateBy(float x, float y, float z, float w) {
+		Eigen::Quaternionf q(w,x,y,z);
+		rotation = q.normalized()*rotation;
 	}
-	void setRotation(const float* x) {
-		rotation[0] = x[0]; rotation[1] = x[1]; rotation[2] = x[2];
+	void rotateBy(const Eigen::Quaternionf& x) {
+		rotation = x*rotation;
+	}
+	void setRotation(float x, float y, float z, float w) {
+		rotation = Eigen::Quaternionf(w,x,y,z);
+	}
+	void setRotation(const Eigen::Quaternionf& x) {
+		rotation = x;
 	}
 	void scaleBy(float x, float y, float z) {
 		scale[0] *= x; scale[1] *= y; scale[2] *= z;
@@ -98,9 +115,9 @@ protected:
 	int nvert, nface, nedge;
 	bool use_color;
 
-	float translation[3];
-	float rotation[3];
-	float scale[3];
+	Eigen::Vector3f translation;
+	Eigen::Vector3f scale;
+	Eigen::Quaternionf rotation;
 };
 
 

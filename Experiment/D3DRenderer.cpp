@@ -715,9 +715,19 @@ void D3DRenderer::ortho(float ww, float hh) {
 	D3DXMatrixOrthoRH(&matrices.projection, ww, hh, -100.0f, 100.0f);
 }
 
-void D3DRenderer::applyRotation(float a, float b, float c) {
+void D3DRenderer::applyEulerRotation(float a, float b, float c) {
 	D3DXMATRIX tmp;
 	D3DXMatrixRotationYawPitchRoll(&tmp, a, b, c);
+	matrices.world = tmp*matrices.world;
+}
+void D3DRenderer::applyQuaternionRotation(float x, float y, float z, float w) {
+	D3DXMATRIX tmp;
+	D3DXQUATERNION quat;
+	quat.x = x;
+	quat.y = y;
+	quat.z = z;
+	quat.w = w;
+	D3DXMatrixRotationQuaternion(&tmp, &quat);
 	matrices.world = tmp*matrices.world;
 }
 void D3DRenderer::applyTranslation(float a, float b, float c) {

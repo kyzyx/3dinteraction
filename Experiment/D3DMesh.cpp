@@ -52,8 +52,9 @@ void D3DMesh::draw() {
 	context->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	// TODO: Is this the right order?
 	render->applyTranslation(translation[0], translation[1], translation[2]);
-	render->applyRotation(rotation[0], rotation[1], rotation[2]);
+	render->applyQuaternionRotation(rotation.x(), rotation.y(), rotation.z(), rotation.w());
 	render->applyScale(scale[0], scale[1], scale[2]);
 	render->predraw();
 	context->DrawIndexed(nface*3, 0, 0);
@@ -69,7 +70,7 @@ void D3DMesh::drawWireframe() {
 
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	render->applyTranslation(translation[0], translation[1], translation[2]);
-	render->applyRotation(rotation[0], rotation[1], rotation[2]);
+	render->applyQuaternionRotation(rotation.x(), rotation.y(), rotation.z(), rotation.w());
 	render->applyScale(scale[0], scale[1], scale[2]);
 	render->predraw(false);
 	context->DrawIndexed(nface*3, 0, 0);
