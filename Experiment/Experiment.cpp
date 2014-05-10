@@ -3,6 +3,7 @@
 #include "json.h"
 #include "InputInterface.h"
 #include "MouseKeyboardInterface.h"
+#include "HydraInterface.h"
 
 Experiment::Experiment (std::string configFile) :
 m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
@@ -18,6 +19,9 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 
 	if (input == "mousekbd") {
 		m_inputDevice = new MouseKeyboardInterface();
+	}
+	else if (input == "hydra") {
+		m_inputDevice = new HydraInterface();
 	}
 	return;
 }

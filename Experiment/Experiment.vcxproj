@@ -47,10 +47,12 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(SIXENSE_DIR)\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>nvapi.lib;SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>sixensed.lib;sixense_utilsd.lib;nvapi.lib;SDL.lib;SDLmain.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SIXENSE_DIR)\lib\win32\debug_dll;$(SDL_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -73,6 +75,7 @@
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Experiment.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
+    <ClCompile Include="HydraInterface.cpp" />
     <ClCompile Include="InputHandler.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
@@ -89,6 +92,7 @@
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Experiment.h" />
     <ClInclude Include="ExperimentApp.h" />
+    <ClInclude Include="HydraInterface.h" />
     <ClInclude Include="InputHandler.h" />
     <ClInclude Include="InputInterface.h" />
     <ClInclude Include="json.h" />

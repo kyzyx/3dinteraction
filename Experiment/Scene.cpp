@@ -1,5 +1,6 @@
 #include "Scene.h"
 #include "D3DMesh.h"
+#include "math.h"
 
 Scene::Scene (void) : m_finished(false) {
 	return;
@@ -58,6 +59,13 @@ void Scene::processInput (InputStatus &input, InputStatus &deltaInput) {
 	if (t[2] <  3) t[2] =  3;
 	if (t[2] >  7) t[2] =  7;
     ship->setTranslation(t);
+
+	Eigen::Quaterniond q = input.rot;
+	double roll = atan2(2.0*q.y()*q.w() - 2.0*q.x()*q.z(), 1 - 2.0*q.y()*q.y() - 2.0*q.z()*q.z());
+	double pitch = atan2(2.0*q.x()*q.w() - 2.0*q.y()*q.z(), 1 - 2.0*q.x()*q.x() - 2.0*q.z()*q.z());
+	double yaw = asin(2.0*q.x()*q.y() + 2.0*q.z()*q.w());
+	ship->setRotation(roll, pitch, yaw);
+
 	return;
 }
 
