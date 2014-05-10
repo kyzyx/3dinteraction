@@ -43,12 +43,33 @@ bool Scene::finished (void) {
 	return m_finished;
 }
 
+float dist (float *a, float *b) {
+	double dx = a[0] - b[0];
+	double dy = a[1] - b[1];
+	double dz = a[2] - b[2];
+	return sqrt(dx*dx + dy*dy + dz*dz);
+}
+
 void Scene::processInput (InputStatus &input, InputStatus &deltaInput) {
 	double x = -deltaInput.timestamp * deltaInput.x() * 100;
 	double y = -deltaInput.timestamp * deltaInput.y() * 100;
 	double z = -deltaInput.timestamp * deltaInput.z() * 100;
 
 	Mesh *ship = m_meshNames["spaceship"];
+	Mesh *port = m_meshNames["start"];
+
+	float shipPos[3];
+	float portPos[3];
+	ship->getTranslation(shipPos);
+	port->getTranslation(portPos);
+	float d = dist(shipPos, portPos);
+
+	if (d < .2) {
+		port->setColor(1,1,1);
+	} else {
+		port->setColor(.4,.4,.4);
+	}
+
 	ship->translateBy((float)x, (float)y, (float)z);
 	float t[3];
     ship->getTranslation(t);
