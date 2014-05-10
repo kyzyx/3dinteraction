@@ -10,4 +10,7 @@ public:
 	~MouseKeyboardInterface();
 
 	virtual void update();
+
+private:
+	int last_x, last_y;
 };
