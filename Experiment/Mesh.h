@@ -2,6 +2,7 @@
 #include "Renderer.h"
 #include <exception>
 #include <string>
+#define EIGEN_DONT_ALIGN_STATICALLY 1
 #include "Eigen\Eigen"
 
 class OFFFileFormatError : public std::exception {
