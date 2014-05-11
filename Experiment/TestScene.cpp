@@ -1,5 +1,5 @@
 #include "TestScene.h"
-
+#include "InteractionSpace.h"
 
 TestScene::TestScene(void)
 {
@@ -31,13 +31,6 @@ bool TestScene::initMeshes() {
 	return true;
 }
 
-float dist (float *a, float *b) {
-	double dx = a[0] - b[0];
-	double dy = a[1] - b[1];
-	double dz = a[2] - b[2];
-	return sqrt(dx*dx + dy*dy + dz*dz);
-}
-
 void TestScene::processInput (InputStatus &input, InputStatus &deltaInput) {
 	double x = -deltaInput.timestamp * deltaInput.x() * 100;
 	double y = -deltaInput.timestamp * deltaInput.y() * 100;
@@ -46,12 +39,7 @@ void TestScene::processInput (InputStatus &input, InputStatus &deltaInput) {
 	Mesh *ship = m_meshNames["spaceship"];
 	Mesh *port = m_meshNames["start"];
 
-	float shipPos[3];
-	float portPos[3];
-	ship->getTranslation(shipPos);
-	port->getTranslation(portPos);
-	float d = dist(shipPos, portPos);
-
+	float d = (ship->getTranslation() - port->getTranslation()).norm();
 	if (d < .2) {
 		port->setColor(1,1,1);
 	} else {
@@ -59,18 +47,7 @@ void TestScene::processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	ship->translateBy((float)x, (float)y, (float)z);
-	float t[3];
-    ship->getTranslation(t);
-	if (t[0] < -3) t[0] = -3;
-	if (t[0] >  3) t[0] =  3;
-	if (t[1] < -2) t[1] = -2;
-	if (t[1] >  2) t[1] =  2;
-	if (t[2] <  3) t[2] =  3;
-	if (t[2] >  7) t[2] =  7;
-    ship->setTranslation(t);
-
+	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation()));
 	ship->setRotation(input.rot.cast<float>());
-
-	return;
 }
 

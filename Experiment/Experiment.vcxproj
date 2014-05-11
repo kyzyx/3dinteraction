@@ -69,13 +69,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Alignment.cpp" />
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="CalibrationScene.cpp" />
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Experiment.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
     <ClCompile Include="HydraInterface.cpp" />
+    <ClCompile Include="InteractionSpace.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
@@ -86,7 +89,9 @@
     <ClCompile Include="timestamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Alignment.h" />
     <ClInclude Include="app.h" />
+    <ClInclude Include="CalibrationScene.h" />
     <ClInclude Include="D3DMesh.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />
@@ -94,6 +99,7 @@
     <ClInclude Include="ExperimentApp.h" />
     <ClInclude Include="HydraInterface.h" />
     <ClInclude Include="InputInterface.h" />
+    <ClInclude Include="InteractionSpace.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="InputStatus.h" />
     <ClInclude Include="Mesh.h" />
@@ -139,6 +145,7 @@
     <None Include="Eigen\SuperLUSupport" />
     <None Include="Eigen\SVD" />
     <None Include="Eigen\UmfPackSupport" />
+    <None Include="exp1.json" />
     <None Include="ps.ps" />
     <None Include="ps_1light.ps" />
     <None Include="tps.ps" />
