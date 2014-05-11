@@ -60,6 +60,9 @@
     <ClCompile Include="HydraInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="TestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h">
@@ -111,6 +114,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="HydraInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -229,6 +235,9 @@
     </None>
     <None Include="Eigen\UmfPackSupport">
       <Filter>Header Files\Eigen</Filter>
+    </None>
+    <None Include="exp1.json">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

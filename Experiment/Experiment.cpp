@@ -4,6 +4,7 @@
 #include "InputInterface.h"
 #include "MouseKeyboardInterface.h"
 #include "HydraInterface.h"
+#include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
 m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
@@ -37,7 +38,7 @@ Scene* Experiment::getNextScene (void) {
 	}
 
 	delete m_curScene;
-	m_curScene = new Scene();
+	m_curScene = new TestScene();
 	++m_sceneIdx;
 	return m_curScene;
 }

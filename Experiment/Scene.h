@@ -23,10 +23,13 @@ public:
 
 	bool init (D3DRenderer *renderer);
     const MeshVec& getMeshes (void);
-    bool finished (void);	
-	void processInput (InputStatus &input, InputStatus &deltaInput);
+	bool finished (void) { return m_finished; }
 
-private:
+	virtual void processInput (InputStatus &input, InputStatus &deltaInput) { ; }
+
+protected:
+	virtual bool initMeshes(void) { return true; }
+
 	Mesh* addMesh (std::string meshName, std::string filename);
 	void removeMesh (std::string meshName);
 
