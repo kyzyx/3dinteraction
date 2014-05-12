@@ -58,7 +58,5 @@ void ExperimentApp::onLoop(void) {
 	}
 
 	InputStatus input = experiment.getInput();
-	InputStatus deltaInput = input - lastInput;
-	lastInput = input;
-	scene->processInput(input, deltaInput);
+	scene->processInput(input);
 }

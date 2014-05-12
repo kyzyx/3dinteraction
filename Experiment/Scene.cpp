@@ -38,3 +38,10 @@ void Scene::removeMesh (std::string meshName) {
 	m_meshNames.erase(meshName);
 	delete mesh;
 }
+
+void Scene::processInput (InputStatus &input) {
+	InputStatus deltaInput = input - m_lastInput;
+	m_lastInput = input;
+
+	this->_processInput(input, deltaInput);
+}

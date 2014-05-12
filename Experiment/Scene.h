@@ -25,10 +25,11 @@ public:
     const MeshVec& getMeshes (void);
 	bool finished (void) { return m_finished; }
 
-	virtual void processInput (InputStatus &input, InputStatus &deltaInput) { ; }
+	void processInput (InputStatus &input);
 
 protected:
 	virtual bool initMeshes(void) { return true; }
+	virtual void _processInput (InputStatus &input, InputStatus &deltaInput){;}
 
 	Mesh* addMesh (std::string meshName, std::string filename);
 	void removeMesh (std::string meshName);
@@ -37,4 +38,7 @@ protected:
 	MeshMap m_meshNames;
 	bool m_finished;
 	D3DRenderer *m_renderer; // memory not managed by this class
+
+private:
+	InputStatus m_lastInput;
 };
