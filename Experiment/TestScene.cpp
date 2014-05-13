@@ -32,9 +32,9 @@ bool TestScene::initMeshes() {
 }
 
 void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
-	double x =  deltaInput.timestamp * deltaInput.x() * 100;
-	double y = -deltaInput.timestamp * deltaInput.y() * 100;
-	double z =  deltaInput.timestamp * deltaInput.z() * 100;
+	double x = deltaInput.timestamp * deltaInput.x() * 100;
+	double y = deltaInput.timestamp * deltaInput.y() * 100;
+	double z = deltaInput.timestamp * deltaInput.z() * 100;
 
 	Mesh *ship = m_meshNames["spaceship"];
 	Mesh *port; // where the spaceship wants to go
