@@ -22,6 +22,7 @@ bool CalibrationScene::initMeshes(void) {
 	Mesh* mesh = addMesh("target", "ico.off");
 	mesh->setColor(1,0.6,0);
 	mesh->setTranslation(pos[0],pos[1],pos[2]);
+	mesh->setScale(1,1,1);
 	return true;
 }
 
