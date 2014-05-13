@@ -170,6 +170,7 @@
     <None Include="tvs.vs" />
     <None Include="vs.vs" />
     <None Include="vs_1light.vs" />
+    <None Include="vs_1light_headtracked.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

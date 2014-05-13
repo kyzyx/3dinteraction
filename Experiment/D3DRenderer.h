@@ -106,6 +106,9 @@ protected:
 		D3DXVECTOR4 diffuse;
 		D3DXVECTOR4 ambient;
 	};
+	struct HeadBuffer {
+		D3DXVECTOR4 headpos;
+	};
 	
 	ID3D11Device*           device; 
 	ID3D11DeviceContext*    context;
@@ -127,16 +130,19 @@ protected:
 	ID3D11SamplerState* samplestate;
 	ID3D11VertexShader* vertexLightShader;
 	ID3D11PixelShader* pixelLightShader;
+	ID3D11VertexShader* vertexHeadShader;
 	ID3D11InputLayout* vertexLayout;
 	ID3D11InputLayout* vertexTexLayout;
 	MatrixBuffer matrices;
 	LightBuffer light;
+	HeadBuffer head;
 	
 	static const int MAX_POINTS = 640*480;
 	ID3D11Buffer* testBuffer;
 	ID3D11Buffer* pointBuffer;
 	ID3D11Buffer* matrixBuffer;
 	ID3D11Buffer* lightBuffer;
+	ID3D11Buffer* headBuffer;
 	D3DPoint pts[MAX_POINTS];
 
 	IFW1Factory* fontfactory;

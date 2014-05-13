@@ -293,5 +293,8 @@
     <None Include="exp1.json">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="vs_1light_headtracked.vs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

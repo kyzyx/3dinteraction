@@ -432,6 +432,12 @@ bool D3DRenderer::initShaders() {
 	if (FAILED(res)) return false;
 	vertexshaderblob->Release();
 
+	res = CompileShaderFromFile("vs_1light_headtracked.vs", "VS", "vs_5_0", &vertexshaderblob);
+	if (FAILED(res)) return false;
+	res = device->CreateVertexShader(vertexshaderblob->GetBufferPointer(), vertexshaderblob->GetBufferSize(), NULL, &vertexHeadShader);
+	if (FAILED(res)) return false;
+	vertexshaderblob->Release();
+
 
 	// Create input layout
 	context->IASetInputLayout(vertexLayout);
@@ -487,12 +493,22 @@ bool D3DRenderer::initShaders() {
 	res = device->CreateBuffer(&bd, NULL, &matrixBuffer);
 	if (FAILED(res)) return false;
 
+	// Set constant light buffer
 	ZeroMemory(&bd, sizeof(bd));
 	bd.Usage = D3D11_USAGE_DYNAMIC;
 	bd.ByteWidth = sizeof(LightBuffer);
 	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	res = device->CreateBuffer(&bd, NULL, &lightBuffer);
+	if (FAILED(res)) return false;
+
+	// Set constant head position buffer
+	ZeroMemory(&bd, sizeof(bd));
+	bd.Usage = D3D11_USAGE_DYNAMIC;
+	bd.ByteWidth = sizeof(HeadBuffer);
+	bd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+	bd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+	res = device->CreateBuffer(&bd, NULL, &headBuffer);
 	if (FAILED(res)) return false;
 	return true;
 }
@@ -597,12 +613,14 @@ D3DRenderer::~D3DRenderer() {
 	if (vertexTexShader) vertexTexShader->Release();
 	if (pixelTexShader)  pixelTexShader->Release();
 	if (vertexLightShader) vertexLightShader->Release();
+	if (vertexHeadShader) vertexHeadShader->Release();
 	if (pixelLightShader)  pixelLightShader->Release();
 	if (vertexLayout) vertexLayout->Release();
 	if (vertexTexLayout) vertexTexLayout->Release();
 	if (pointBuffer)  pointBuffer->Release();
 	if (matrixBuffer) matrixBuffer->Release();
 	if (lightBuffer) lightBuffer->Release();
+	if (headBuffer) headBuffer->Release();
 	if (samplestate) samplestate->Release();
 
 	if (fullscreen && swapChain) swapChain->SetFullscreenState(false, NULL);
