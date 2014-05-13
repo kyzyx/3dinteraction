@@ -20,7 +20,7 @@ HydraInterface::HydraInterface()
 	// the hemisphere calibration is complete.
 	sixenseUtils::getTheControllerManager()->setGameType( sixenseUtils::ControllerManager::ONE_PLAYER_TWO_CONTROLLER );
 
-	status.inputType = HYDRA;
+	status.inputType = InputStatus::HYDRA;
 }
 
 HydraInterface::~HydraInterface()
