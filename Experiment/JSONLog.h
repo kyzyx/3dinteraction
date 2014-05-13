@@ -30,6 +30,7 @@ private:
 	std::ofstream m_logFile;
 	std::ofstream m_datFile;
 	int m_sceneCounter;
+	double m_sceneStartTime;
 	json::Object m_object;
 	std::vector<RawInput> m_inputs;
 	double m_inputLastTime;

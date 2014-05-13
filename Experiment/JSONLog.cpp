@@ -58,13 +58,13 @@ void JSONLog::startScene(const InputStatus &start, const InputStatus &end) {
 		<< std::setw(3) << std::setfill('0') << m_sceneCounter << std::setfill(' ')
 		<< ".dat";
 	m_datFile = std::ofstream(sceneFile.str(), std::ofstream::binary);
-
+	m_sceneStartTime = timestamp();
 	// Set up the JSON object to represent this scene
 	json::Object sceneObj;
 	sceneObj["seq"] = m_sceneCounter;
 	sceneObj["startPos"] = input2json(start);
 	sceneObj["endPos"] = input2json(end);
-	sceneObj["startTime"] = timestamp();
+	sceneObj["startTime"] = m_sceneStartTime;
 	sceneObj["inputs"] = sceneFile.str();
 	m_object["scenes"].ToArray().push_back(sceneObj);
 
@@ -80,7 +80,7 @@ void JSONLog::endScene() {
 	// Write binary data to disk
 	int rawSize = m_inputs.size() * std::tuple_size<RawInput>::value * sizeof(RawInput::value_type);
 	if (rawSize > 0) {
-		float *rawStart = (float*)&(m_inputs.front()[0]);
+		RawInput::value_type *rawStart = (RawInput::value_type*)&(m_inputs.front()[0]);
 		m_datFile.write((char*)rawStart, rawSize);
 	}
 	m_datFile.close();
@@ -93,17 +93,16 @@ void JSONLog::logInput(InputStatus &input) {
 	} else {
 		m_inputLastTime = input.timestamp;
 	}
-	size_t rawIdx = 0;
 	RawInput raw;
-	raw[rawIdx++] = input.timestamp;
-	raw[rawIdx++] = input.pos.x();
-	raw[rawIdx++] = input.pos.y();
-	raw[rawIdx++] = input.pos.z();
-	raw[rawIdx++] = input.rot.w();
-	raw[rawIdx++] = input.rot.x();
-	raw[rawIdx++] = input.rot.y();
-	raw[rawIdx++] = input.rot.z();
-	raw[rawIdx++] = *((float*)&input.flags); // interpret as float
+	raw[0] = input.timestamp - m_sceneStartTime;
+	raw[1] = input.pos.x();
+	raw[2] = input.pos.y();
+	raw[3] = input.pos.z();
+	raw[4] = input.rot.w();
+	raw[5] = input.rot.x();
+	raw[6] = input.rot.y();
+	raw[7] = input.rot.z();
+	raw[8] = *((RawInput::value_type*)&input.flags); // interpret as float
 	m_inputs.push_back(raw);
 	return;
 }
