@@ -3,11 +3,17 @@
 #include "Eigen\Eigen"
 #include <cstdint>
 
-typedef enum {MOUSEKBD, HYDRA, LEAP, UNKNOWN} InputType;
-
 class InputStatus
 {
 public:
+	enum InputType : uint32_t {MOUSEKBD, HYDRA, LEAP, UNKNOWN};
+	enum InputFlag : uint32_t {
+		INPUTFLAG_NONE = 0,
+		INPUTFLAG_SELECT = 1,
+		INPUTFLAG_DESELECT = 2
+		// INPUTFLAG_XXX = 4,
+	};
+
 	// Constructors
 	InputStatus() 
 		: pos(0,0,0), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0) { ; }
@@ -64,12 +70,9 @@ public:
 
 	Eigen::Quaterniond rotation() const { return rot; }
 
-	enum {
-		INPUTFLAG_NONE = 0,
-		INPUTFLAG_SELECT = 1,
-		INPUTFLAG_DESELECT = 2,
-		// INPUTFLAG_XXX = 4,
-	};
+	bool flagSet (InputFlag flag) { return (flags & (uint32_t)flag) != 0; }
+	void setFlag (InputFlag flag) { flags |= (uint32_t)flag; }
+	void clearFlag (InputFlag flag) { flags &= ~(uint32_t)flag; }
 
 	Eigen::Vector3d pos;
 	Eigen::Quaterniond rot;
@@ -78,4 +81,5 @@ public:
 	double timestamp;    // when was this input event generated?
 
 	uint32_t flags;
+
 };
