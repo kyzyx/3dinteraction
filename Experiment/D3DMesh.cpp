@@ -52,7 +52,6 @@ void D3DMesh::draw() {
 	context->IASetIndexBuffer(indexBuffer, DXGI_FORMAT_R32_UINT, 0);
 
 	context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	// TODO: Is this the right order?
 	render->applyTranslation(translation[0], translation[1], translation[2]);
 	render->applyQuaternionRotation(rotation.x(), rotation.y(), rotation.z(), rotation.w());
 	render->applyScale(scale[0], scale[1], scale[2]);

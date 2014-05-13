@@ -696,7 +696,9 @@ void D3DRenderer::predraw(bool lights) {
 }
 
 void D3DRenderer::setProjection(float fov, float aspect, float nearclip, float farclip) {
-	D3DXMatrixPerspectiveFovRH(&matrices.projection, fov, aspect, nearclip, farclip);
+	float yfov = fov/aspect;
+	yfov *= 3.1415926536/180;
+	D3DXMatrixPerspectiveFovRH(&matrices.projection, yfov, aspect, nearclip, farclip);
 }
 
 typedef D3DXVECTOR3 vec3;
