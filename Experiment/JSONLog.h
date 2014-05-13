@@ -17,17 +17,22 @@ public:
 	void startExperiment(json::Value config);
 	void endExperiment();
 
-	void startScene();
+	void startScene(const InputStatus &start, const InputStatus &end);
 	void endScene();
 
+	// Saves inputs at a frequency of 1/m_inputSavePeriod
 	void logInput(InputStatus &input);
 
 private:
 	json::Object& getSceneObj(); // return reference to the current scene
 
+	std::string m_basename;
 	std::ofstream m_logFile;
+	std::ofstream m_datFile;
 	int m_sceneCounter;
 	json::Object m_object;
-	std::vector<RawInput> inputs;
+	std::vector<RawInput> m_inputs;
+	double m_inputLastTime;
+	double m_inputSavePeriod; // in seconds
 };
 
