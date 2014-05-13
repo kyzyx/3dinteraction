@@ -38,6 +38,7 @@ protected:
 	virtual void _processInput (InputStatus &input, InputStatus &deltaInput){;}
 
 	Mesh* addMesh (std::string meshName, std::string filename);
+	Mesh* addMesh (std::string meshName, Mesh* m);
 	void removeMesh (std::string meshName);
 
 	MeshVec m_meshes;

@@ -29,16 +29,17 @@ const Scene::MeshVec& Scene::getMeshes (void) {
 	return m_meshes;
 }
 
-Mesh* Scene::addMesh (std::string meshName, std::string filename) {
+Mesh* Scene::addMesh (std::string meshName, Mesh* m) {
 	// Overwrite any current meshes with the same name
 	if (m_meshNames.count(meshName) != 0) {
 		removeMesh(meshName);
 	}
-
-	Mesh *mesh = new D3DMesh(filename.c_str(), m_renderer, true);
-	m_meshes.push_back(mesh);
-	m_meshNames[meshName] = mesh;
-	return mesh;
+	m_meshes.push_back(m);
+	m_meshNames[meshName] = m;
+	return m;
+}
+Mesh* Scene::addMesh (std::string meshName, std::string filename) {
+	return addMesh(meshName, new D3DMesh(filename.c_str(), m_renderer, true));
 }
 
 void Scene::removeMesh (std::string meshName) {

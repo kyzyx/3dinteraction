@@ -1,5 +1,6 @@
 #include "TestScene.h"
 #include "InteractionSpace.h"
+#include "D3DMesh.h"
 
 TestScene::TestScene(JSONLog *log) : Scene(log), m_state(WAIT_START)
 {
@@ -23,7 +24,8 @@ bool TestScene::initMeshes() {
 	mesh->setTranslation(10,0,15);
 	mesh->setScale(1,1,1);
 
-	mesh = addMesh("spaceship", "spaceship.off");
+	Mesh* m = new D3DMesh("spaceship.off", m_renderer, true, true);
+	mesh = addMesh("spaceship", m);
 	mesh->setColor(1,0,0);
 	mesh->setTranslation(15,-5,20);
 	mesh->setScale(0.4f, 0.4f, 0.1f);

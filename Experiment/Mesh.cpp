@@ -5,6 +5,7 @@
 #include <fstream>
 #include <exception>
 #include <set>
+#include <vector>
 
 using namespace std;
 
@@ -16,14 +17,16 @@ Mesh::Mesh(void)
 	colors = NULL;
 	texture = NULL;
 	use_color = false;
+	isflatshaded = true;
 
 	translation = Vector3f::Zero();
 	scale = Vector3f::Zero();
 	rotation = Quaternionf::Identity();
 }
 
-Mesh::Mesh(const char* filename, Renderer* r, bool reverse) {
+Mesh::Mesh(const char* filename, Renderer* r, bool reverse, bool flatshaded) {
 	render = r;
+	isflatshaded = flatshaded;
 	ReadOff(filename, reverse);
 	translation = Vector3f::Zero();
 	scale = Vector3f::Zero();
@@ -56,12 +59,17 @@ bool Mesh::ReadOff(const char* filename, bool reverse) {
 	if (sscanf_s(line.c_str(), "%d %d %d", &nvert, &nface, &nedge) != 3) {
 		throw OFFFileFormatError("Invalid OFF line counts"); 
 	}
+	indices = new unsigned int[nface*3];
 	vertices = new float[nvert*3];
 	colors = new float[nvert*4];
 	texture = new float[nvert*2];
 	normals = new float[nvert*3];
-	indices = new unsigned int[nface*3];
 
+	vector<float> v;
+	vector<float> c;
+	vector<float> t;
+
+	// Read in vertex data
 	for (int i = 0; i < nvert; ++i) {
 		getnextline(in, line);
 		int nread = sscanf_s(line.c_str(), "%f %f %f %f %f %f %f %f", &vertices[3*i], &vertices[3*i+1], &vertices[3*i+2], &colors[4*i], &colors[4*i+1], &colors[4*i+2], &colors[4*i+3]);
@@ -75,30 +83,75 @@ bool Mesh::ReadOff(const char* filename, bool reverse) {
 			if (nread == 6) colors[4*i+3] = 1;
 		}
 	}
-
+	if (isflatshaded) nvert = 0;
 	for (int i = 0; i < nface; ++i) {
 		getnextline(in, line);
-		int n;
+		int num;
 		// Only handle triangles
-		if (!sscanf_s(line.c_str(), "%d", &n)) {
+		if (!sscanf_s(line.c_str(), "%d", &num)) {
 			throw OFFFileFormatError("Invalid face specification");
 		}
-		if (n != 3) {
+		if (num != 3) {
 			throw OFFFileFormatError("Invalid face size - must be triangle");
 		} else {
-			int a,b,c;
-			if (sscanf_s(line.c_str(), "%d %d %d %d", &n,&a,&b,&c) != 4) {
+			int x,y,z;
+			if (sscanf_s(line.c_str(), "%d %d %d %d", &num,&x,&y,&z) != 4) {
 				throw OFFFileFormatError("Incomplete face specification");
 			}
+			if (isflatshaded) {
+				for (int i = 0; i < 3; ++i) v.push_back(vertices[3*x+i]);
+				for (int i = 0; i < 4; ++i) c.push_back(colors[4*x+i]);
+				for (int i = 0; i < 2; ++i) t.push_back(texture[2*x+i]);
+				x = nvert++;
+				for (int i = 0; i < 3; ++i) v.push_back(vertices[3*y+i]);
+				for (int i = 0; i < 4; ++i) c.push_back(colors[4*y+i]);
+				for (int i = 0; i < 2; ++i) t.push_back(texture[2*y+i]);
+				y = nvert++;
+				for (int i = 0; i < 3; ++i) v.push_back(vertices[3*z+i]);
+				for (int i = 0; i < 4; ++i) c.push_back(colors[4*z+i]);
+				for (int i = 0; i < 2; ++i) t.push_back(texture[2*z+i]);
+				z = nvert++;
+			}
 			if (reverse) {
-				indices[3*i] = b; indices[3*i+1] = a; indices[3*i+2] = c;
+				indices[3*i] = y; indices[3*i+1] = x; indices[3*i+2] = z;
 			} else {
-				indices[3*i] = a; indices[3*i+1] = b; indices[3*i+2] = c;
+				indices[3*i] = x; indices[3*i+1] = y; indices[3*i+2] = z;
 			}
 		}
 	}
-	calcNormals();
+	if (isflatshaded) {
+		delete [] vertices;
+		delete [] colors;
+		delete [] texture;
+		delete [] normals;
+
+		vertices = new float[nvert*3];
+		colors = new float[nvert*4];
+		texture = new float[nvert*2];
+		normals = new float[nvert*3];
+		for (int i = 0; i < nvert; ++i) {
+			for (int j = 0; j < 3; ++j) vertices[3*i+j] = v[3*i+j];
+			for (int j = 0; j < 4; ++j) colors[4*i+j] = c[4*i+j];
+			for (int j = 0; j < 2; ++j) texture[2*i+j] = t[2*i+j];
+		}
+		calcFaceNormals();
+	} else {
+		calcNormals();
+	}
 	return true;
+}
+
+void Mesh::calcFaceNormals() {
+	for (int i = 0; i < nface; ++i) {
+		Vector3f a(vertices[3*indices[3*i+0]], vertices[3*indices[3*i+0]+1], vertices[3*indices[3*i+0]+2]);
+		Vector3f b(vertices[3*indices[3*i+1]], vertices[3*indices[3*i+1]+1], vertices[3*indices[3*i+1]+2]);
+		Vector3f c(vertices[3*indices[3*i+2]], vertices[3*indices[3*i+2]+1], vertices[3*indices[3*i+2]+2]);
+		Vector3f n = (c - a).cross(b - a);
+		n.normalize();
+		for (int j = 0; j < 3; ++j) {
+			for (int k = 0; k < 3; ++k) normals[3*indices[3*i+j]+k] = n[k];
+		}
+	}
 }
 
 void Mesh::calcNormals() {

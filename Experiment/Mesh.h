@@ -17,7 +17,7 @@ class Mesh
 {
 public:
 	Mesh(void);
-	Mesh(const char* filename, Renderer* r, bool reverse=false);
+	Mesh(const char* filename, Renderer* r, bool reverse=false, bool flatshaded=false);
 	~Mesh(void);
 
 	virtual void draw() = 0;
@@ -104,6 +104,7 @@ public:
 	}
 protected:
 	void calcNormals();
+	void calcFaceNormals();
 
 	Renderer* render;
 
@@ -115,6 +116,7 @@ protected:
 
 	int nvert, nface, nedge;
 	bool use_color;
+	bool isflatshaded;
 
 	Eigen::Vector3f translation;
 	Eigen::Vector3f scale;

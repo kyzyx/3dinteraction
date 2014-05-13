@@ -7,7 +7,7 @@ class D3DMesh :
 {
 public:
 	D3DMesh(void);
-	D3DMesh(const char* filename, D3DRenderer* render, bool reverse=false);
+	D3DMesh(const char* filename, D3DRenderer* render, bool reverse=false, bool flatshaded=false);
 	~D3DMesh(void);
 
 	virtual void draw();

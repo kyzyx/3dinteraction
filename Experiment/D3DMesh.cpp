@@ -7,7 +7,7 @@ D3DMesh::D3DMesh(void)
 	indexBuffer = NULL;
 }
 
-D3DMesh::D3DMesh(const char* filename, D3DRenderer* r, bool reverse) : Mesh(filename, r, reverse)
+D3DMesh::D3DMesh(const char* filename, D3DRenderer* r, bool reverse, bool flatshaded) : Mesh(filename, r, reverse, flatshaded)
 {
 	HRESULT res;
 	context = r->context;
