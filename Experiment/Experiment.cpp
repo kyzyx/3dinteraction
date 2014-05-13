@@ -37,7 +37,7 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 		<< (now->tm_mday) << "_"
 		<< (now->tm_hour) << "_"
 		<< (now->tm_min) << "_"
-		<< (now->tm_sec) << ".json";
+		<< (now->tm_sec);
 	m_log = new JSONLog(logName.str());
 
 	// Start logging data

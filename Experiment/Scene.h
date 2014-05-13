@@ -46,6 +46,10 @@ protected:
 	D3DRenderer *m_renderer; // memory not managed by this class
 	JSONLog *m_log; // memory not managed by this class
 
+	// True if user has clicked the start position, but not the end.
+	// Input logging is only done when this is true
+	bool m_started; 
+
 private:
 	InputStatus m_lastInput;
 };
