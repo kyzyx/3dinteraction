@@ -82,6 +82,7 @@
     <ClCompile Include="HydraInterface.cpp" />
     <ClCompile Include="InteractionSpace.cpp" />
     <ClCompile Include="json.cpp" />
+    <ClCompile Include="JSONLog.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="InteractionSpace.h" />
     <ClInclude Include="json.h" />
     <ClInclude Include="InputStatus.h" />
+    <ClInclude Include="JSONLog.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MouseKeyboardInterface.h" />
     <ClInclude Include="nvapi.h" />

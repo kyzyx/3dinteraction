@@ -2,12 +2,20 @@
 #include "D3DMesh.h"
 #include "math.h"
 
-Scene::Scene (void) : m_finished(false) {
+Scene::Scene (void) : m_finished(false), m_log(NULL) {
+}
+
+Scene::Scene (JSONLog *log) : m_finished(false), m_log(log) {
+	m_log->startScene();
 }
 
 Scene::~Scene (void) {
 	for (MeshVec::iterator it = m_meshes.begin(); it != m_meshes.end(); ++it) {
 		delete (*it);
+	}
+
+	if (m_log != NULL) {	
+		m_log->endScene();
 	}
 }
 
@@ -40,6 +48,9 @@ void Scene::removeMesh (std::string meshName) {
 }
 
 void Scene::processInput (InputStatus &input) {
+	if (m_log != NULL) {
+		m_log->logInput(input);		
+	}
 	InputStatus deltaInput = input - m_lastInput;
 	m_lastInput = input;
 

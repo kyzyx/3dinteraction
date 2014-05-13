@@ -4,5 +4,7 @@
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow) {
 	double startTime = timestamp();
 	App* app = new ExperimentApp();
-	return app->onExecute();
+	int ret = app->onExecute();
+	delete app;
+	return ret;
 }

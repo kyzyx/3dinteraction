@@ -3,7 +3,7 @@
 #include <string>
 #include "Scene.h"
 #include "InputInterface.h"
-
+#include "JSONLog.h"
 //
 // EXPERIMENT
 //
@@ -25,4 +25,5 @@ private:
 	int m_sceneIdx;
 	int m_numScenes;
 	Scene *m_curScene;
+	JSONLog *m_log;
 };

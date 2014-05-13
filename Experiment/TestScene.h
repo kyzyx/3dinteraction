@@ -4,7 +4,7 @@ class TestScene :
 	public Scene
 {
 public:
-	TestScene(void);
+	TestScene(JSONLog *log);
 	~TestScene(void);
 
 protected:

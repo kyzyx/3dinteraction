@@ -1,7 +1,7 @@
 #include "TestScene.h"
 #include "InteractionSpace.h"
 
-TestScene::TestScene(void)
+TestScene::TestScene(JSONLog *log) : Scene(log)
 {
 }
 

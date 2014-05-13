@@ -1,4 +1,6 @@
 #include <fstream>
+#include <sstream>
+#include <ctime>
 #include "Experiment.h"
 #include "json.h"
 #include "InputInterface.h"
@@ -24,12 +26,32 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 	else if (input == "hydra") {
 		m_inputDevice = new HydraInterface();
 	}
+
+	// Figure out what the log name should be and create it
+	std::time_t t = std::time(0); // get NOW
+	struct std::tm *now = std::localtime(&t);
+	std::stringstream logName;
+	logName << subject << "_" 
+		<< (now->tm_year + 1900) << "_"
+		<< (now->tm_mon + 1) << "_"
+		<< (now->tm_mday) << "_"
+		<< (now->tm_hour) << "_"
+		<< (now->tm_min) << "_"
+		<< (now->tm_sec) << ".json";
+	m_log = new JSONLog(logName.str());
+
+	// Start logging data
+	m_log->startExperiment(config);
+	
 	return;
 }
 
 Experiment::~Experiment (void) {
 	delete m_inputDevice;
 	delete m_curScene;
+
+	m_log->endExperiment();
+	delete m_log;
 }
 
 Scene* Experiment::getNextScene (void) {
@@ -38,7 +60,7 @@ Scene* Experiment::getNextScene (void) {
 	}
 
 	delete m_curScene;
-	m_curScene = new TestScene();
+	m_curScene = new TestScene(m_log);
 	++m_sceneIdx;
 	return m_curScene;
 }

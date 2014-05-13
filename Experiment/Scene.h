@@ -6,6 +6,7 @@
 #include "Mesh.h"
 #include "InputInterface.h"
 #include "D3DRenderer.h"
+#include "JSONLog.h"
 
 //
 // SCENE
@@ -18,7 +19,12 @@ public:
 	typedef std::list<Mesh*> MeshVec;
 	typedef std::map<std::string, Mesh*> MeshMap;
 
+	// No log constructor, assumes we won't be recording input data (see CalibrationScene)
 	Scene (void);
+
+	// Log constructor, uses log to record input data (see TestScene)
+	Scene (JSONLog *log);
+
 	~Scene (void);
 
 	bool init (D3DRenderer *renderer);
@@ -38,6 +44,7 @@ protected:
 	MeshMap m_meshNames;
 	bool m_finished;
 	D3DRenderer *m_renderer; // memory not managed by this class
+	JSONLog *m_log; // memory not managed by this class
 
 private:
 	InputStatus m_lastInput;

@@ -357,13 +357,20 @@ namespace json
 
 		
 			// non-operator versions
-			int 		ToInt() const		{assert(IsNumeric()); return mIntVal;}
-			float 		ToFloat() const		{assert(IsNumeric()); return mFloatVal;}
-			double 		ToDouble() const	{assert(IsNumeric()); return mDoubleVal;}
-			bool 		ToBool() const		{assert(mValueType == BoolVal); return mBoolVal;}
-			std::string	ToString() const	{assert(mValueType == StringVal); return mStringVal;}
-			Object 		ToObject() const	{assert(mValueType == ObjectVal); return mObjectVal;}
-			Array 		ToArray() const		{assert(mValueType == ArrayVal); return mArrayVal;}
+			int& 		ToInt() 		{assert(IsNumeric()); return mIntVal;}
+			float& 		ToFloat() 		{assert(IsNumeric()); return mFloatVal;}
+			double& 		ToDouble() 	{assert(IsNumeric()); return mDoubleVal;}
+			bool& 		ToBool() 		{assert(mValueType == BoolVal); return mBoolVal;}
+			std::string&	ToString() 	{assert(mValueType == StringVal); return mStringVal;}
+			Object& 		ToObject() 	{assert(mValueType == ObjectVal); return mObjectVal;}
+			Array& 		ToArray() 		{assert(mValueType == ArrayVal); return mArrayVal;}
+			const int& 		ToInt() const 		{assert(IsNumeric()); return mIntVal;}
+			const float& 		ToFloat() const 		{assert(IsNumeric()); return mFloatVal;}
+			const double& 		ToDouble() const 	{assert(IsNumeric()); return mDoubleVal;}
+			const bool& 		ToBool() const 		{assert(mValueType == BoolVal); return mBoolVal;}
+			const std::string&	ToString() const 	{assert(mValueType == StringVal); return mStringVal;}
+			const Object& 		ToObject() const 	{assert(mValueType == ObjectVal); return mObjectVal;}
+			const Array& 		ToArray() const 		{assert(mValueType == ArrayVal); return mArrayVal;}
 			
 			// Please note that as per C++ rules, implicitly casting a Value to a std::string won't work.
 			// This is because it could use the int/float/double/bool operators as well. So to assign a
