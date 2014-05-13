@@ -14,27 +14,27 @@ bool TestScene::initMeshes() {
 	Mesh *mesh;
 
 	mesh = addMesh("target", "ico.off");
-	mesh->setColor(1,0,0);
+	mesh->setColor(.4,.4,.4);
 	mesh->setTranslation(-10,0,15);
-	mesh->setScale(2,2,2);
+	mesh->setScale(1,1,1);
 
 	mesh = addMesh("start", "ico.off");
 	mesh->setColor(.4, .4, .4);
 	mesh->setTranslation(10,0,15);
-	mesh->setScale(2,2,2);
+	mesh->setScale(1,1,1);
 
 	mesh = addMesh("spaceship", "spaceship.off");
 	mesh->setColor(1,0,0);
 	mesh->setTranslation(15,-5,20);
-	mesh->setScale(0.2f, 0.2f, 0.05f);
+	mesh->setScale(0.4f, 0.4f, 0.1f);
 
 	return true;
 }
 
 void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
-	double x = -deltaInput.timestamp * deltaInput.x() * 100;
+	double x =  deltaInput.timestamp * deltaInput.x() * 100;
 	double y = -deltaInput.timestamp * deltaInput.y() * 100;
-	double z = -deltaInput.timestamp * deltaInput.z() * 100;
+	double z =  deltaInput.timestamp * deltaInput.z() * 100;
 
 	Mesh *ship = m_meshNames["spaceship"];
 	Mesh *port; // where the spaceship wants to go
@@ -48,11 +48,12 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	// Calculate useful values
+	const float CLICK_DIST = 0.8;
 	float d = (ship->getTranslation() - port->getTranslation()).norm(); // distance to target
-	bool validClick = d < 0.2 && input.flagSet(InputStatus::INPUTFLAG_SELECT);
+	bool validClick = d <= CLICK_DIST && input.flagSet(InputStatus::INPUTFLAG_SELECT);
 
 	// Update colors based on conditions
-	if (d < .2) {
+	if (d <= CLICK_DIST) {
 		port->setColor(1,1,1);
 	} else {
 		port->setColor(0.8,0,0);
@@ -80,6 +81,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 		}
 		break;
 	case FINISHED:
+		port->setColor(0,.5,.5);
 		// TODO end it all
 		break;
 	default:
