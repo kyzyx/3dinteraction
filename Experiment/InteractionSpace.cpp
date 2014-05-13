@@ -4,8 +4,9 @@
 using namespace Eigen;
 
 // Bounding box shortcut
-Vector3f mincoords(-3,-2,0);
-Vector3f maxcoords(3,2,6);
+// Screen dimensions 59.790cm width 33.632cm height
+Vector3f mincoords(-59.79/2+5,-33.632/2+5,0);
+Vector3f maxcoords(59.79/2-5,33.632/2-5,60);
 
 Vector3f InteractionSpace::randomPointInVolume(void)
 {

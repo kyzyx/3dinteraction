@@ -15,26 +15,25 @@ bool TestScene::initMeshes() {
 
 	mesh = addMesh("target", "ico.off");
 	mesh->setColor(1,0,0);
-	mesh->setTranslation(-2,0,5);
-	mesh->setScale(0.2f, 0.2f, 0.2f);
+	mesh->setTranslation(-10,0,15);
+	mesh->setScale(2,2,2);
 
 	mesh = addMesh("start", "ico.off");
 	mesh->setColor(.4, .4, .4);
-	mesh->setTranslation(2,0,5);
-	mesh->setScale(0.2f, 0.2f, 0.2f);
+	mesh->setTranslation(10,0,15);
+	mesh->setScale(2,2,2);
 
 	mesh = addMesh("spaceship", "spaceship.off");
 	mesh->setColor(1,0,0);
-	mesh->setTranslation(2,-1,7);
-	mesh->setScale(0.2f, 0.2f, 0.2f);
+	mesh->setTranslation(15,-5,20);
 
 	return true;
 }
 
 void TestScene::processInput (InputStatus &input, InputStatus &deltaInput) {
-	double x = -deltaInput.timestamp * deltaInput.x() * 100;
-	double y = -deltaInput.timestamp * deltaInput.y() * 100;
-	double z = -deltaInput.timestamp * deltaInput.z() * 100;
+	double x = deltaInput.timestamp * deltaInput.x() * 500;
+	double y = deltaInput.timestamp * deltaInput.y() * 500;
+	double z = deltaInput.timestamp * deltaInput.z() * 500;
 
 	Mesh *ship = m_meshNames["spaceship"];
 	Mesh *port = m_meshNames["start"];

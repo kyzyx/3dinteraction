@@ -24,14 +24,14 @@ bool ExperimentApp::onInit(void) {
 	return true;
 }
 
-float eye[] = {0.f,0.f,0.f};
-float towards[] = {0.f,0.f,1.f};
+float eye[] = {0.f,0.f,80.f};
+float towards[] = {0.f,0.f,-1.f};
 float up[] = {0.f,1.f,0.f};
 
 void ExperimentApp::onRender(void) {
 	render->clear();
-	float hfov = 45;
-	float aspectratio = 4.f/3.f;
+	float hfov = 41;
+	float aspectratio = 16.f/9.f;
 	render->setProjection(hfov, aspectratio);
 	render->lookAt(eye, towards, up);
 

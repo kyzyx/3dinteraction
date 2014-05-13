@@ -4,8 +4,8 @@
 DirectXApp::DirectXApp(void) {
 	running = true;
 	screen = NULL;
-	width = 640;
-	height = 480;
+	width = 1280;
+	height = 720;
 	flags = 0;
 	fullscreen = false;
 	handler = new SDLHandler(this);
@@ -15,8 +15,8 @@ DirectXApp::DirectXApp(void) {
 DirectXApp::DirectXApp(bool fullScreen) {
 	running = true;
 	screen = NULL;
-	width = 640;
-	height = 480;
+	width = 1280;
+	height = 720;
 	fullscreen = fullScreen;
 	flags = 0;
 	handler = new SDLHandler(this);

@@ -26,7 +26,7 @@ Mesh* Scene::addMesh (std::string meshName, std::string filename) {
 		removeMesh(meshName);
 	}
 
-	Mesh *mesh = new D3DMesh(filename.c_str(), m_renderer);
+	Mesh *mesh = new D3DMesh(filename.c_str(), m_renderer, true);
 	m_meshes.push_back(mesh);
 	m_meshNames[meshName] = mesh;
 	return mesh;

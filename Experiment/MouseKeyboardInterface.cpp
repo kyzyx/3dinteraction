@@ -14,11 +14,12 @@ void MouseKeyboardInterface::update()
 {
     int x,y;	
 	uint32_t buttons = SDL_GetMouseState(&x, &y);
+	y = -y;
 	uint8_t *keys = SDL_GetKeyState(NULL); // memory handled by SDL, do not free
 	if (keys != NULL) {
 		if (keys[SDLK_LSHIFT]) {
 			// Move on Z plane
-			status.pos[2] += y - last_y;
+			status.pos[2] -= y - last_y;
 		} else {
 			// Move on XY plane
 			status.pos[0] = x;
