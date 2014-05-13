@@ -4,6 +4,7 @@
 MouseKeyboardInterface::MouseKeyboardInterface() : InputInterface()
 {
 	status.inputType = InputStatus::MOUSEKBD;
+	SDL_GetMouseState(&last_x, &last_y);
 }
 
 MouseKeyboardInterface::~MouseKeyboardInterface()

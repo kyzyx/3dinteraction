@@ -5,7 +5,7 @@
 class InputInterface
 {
 public:
-	InputInterface() {}
+	InputInterface() : status() {}
 	~InputInterface() {}
 
 	virtual void update(){}
