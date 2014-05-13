@@ -681,6 +681,45 @@ void D3DRenderer::display() {
 	swapChain->Present(0,0);
 }
 
+void D3DRenderer::predrawHeadtracked(float hx, float hy, float hz, float eyesep, bool lights) {
+	// Set matrices
+	D3D11_MAPPED_SUBRESOURCE mapped;
+	if (FAILED(context->Map(matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;
+	MatrixBuffer* mb = (MatrixBuffer*) mapped.pData;
+	D3DXMatrixTranspose(&(mb->world), &matrices.world);
+	D3DXMatrixTranspose(&(mb->view), &matrices.view);
+	D3DXMatrixTranspose(&(mb->projection), &matrices.projection);
+	context->Unmap(matrixBuffer, 0);
+
+	// Set lights
+	if (FAILED(context->Map(lightBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;
+	if (lights) {
+		memcpy(mapped.pData, &light, sizeof(LightBuffer));
+	} else {
+		LightBuffer l;
+		l.ambient = D3DXVECTOR4(1.f,1.f,1.f,1.f);
+		l.diffuse = D3DXVECTOR4(0.f,0.f,0.f,1.f);
+		l.lightpos = D3DXVECTOR4(0.f,0.f,0.f,1.f); // irrelevant
+		memcpy(mapped.pData, &l, sizeof(LightBuffer));
+	}
+	context->Unmap(lightBuffer, 0);
+
+	// Set head position
+	if (FAILED(context->Map(headBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;
+	head.headpos = D3DXVECTOR4(hx,hy,hz,eyesep);
+	memcpy(mapped.pData, &head, sizeof(HeadBuffer));
+	context->Unmap(headBuffer, 0);
+
+	// Draw
+	context->IASetInputLayout(vertexLayout);
+	context->VSSetShader(vertexHeadShader, NULL, 0);
+	context->VSSetConstantBuffers(0, 1, &matrixBuffer);
+	context->VSSetConstantBuffers(1, 1, &lightBuffer);
+	context->VSSetConstantBuffers(2, 1, &headBuffer);
+	context->PSSetShader(pixelLightShader, NULL, 0);
+	context->PSSetConstantBuffers(0, 1, &lightBuffer);
+}
+
 void D3DRenderer::predraw(bool lights) {
 	// Set matrices
 	D3D11_MAPPED_SUBRESOURCE mapped;

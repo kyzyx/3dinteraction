@@ -58,6 +58,7 @@ public:
 	virtual void drawPoints(int n, float* coords, float* colors, float pointSize);
 	virtual void drawText(const WCHAR* text, float x, float y, int color, float size);
 	virtual void predraw(bool lights=true);
+	void predrawHeadtracked(float hx, float hy, float hz, float eyesep, bool lights);
 	virtual void clear();
 	virtual void display();
 	virtual void setProjection(float fov, float aspect, float near, float far);
