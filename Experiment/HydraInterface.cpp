@@ -62,6 +62,7 @@ void HydraInterface::update()
 	static sixenseUtils::ButtonStates states;
 	states.update( &acd.controllers[index] );
 
+	status.flags = 0;
 	// Do something if the trigger was pulled
 	if( states.triggerJustPressed() ) {
 		status.flags = InputStatus::INPUTFLAG_SELECT;
