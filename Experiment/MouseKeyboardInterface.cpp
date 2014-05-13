@@ -3,7 +3,7 @@
 
 MouseKeyboardInterface::MouseKeyboardInterface() : InputInterface()
 {
-	status.inputType = MOUSEKBD;
+	status.inputType = InputStatus::MOUSEKBD;
 }
 
 MouseKeyboardInterface::~MouseKeyboardInterface()
@@ -14,22 +14,28 @@ void MouseKeyboardInterface::update()
 {
     int x,y;	
 	uint32_t buttons = SDL_GetMouseState(&x, &y);
-	y = -y;
+
 	uint8_t *keys = SDL_GetKeyState(NULL); // memory handled by SDL, do not free
 	if (keys != NULL) {
 		if (keys[SDLK_LSHIFT]) {
 			// Move on Z plane
-			status.pos[2] -= y - last_y;
+			status.z() += y - last_y;
 		} else {
 			// Move on XY plane
-			status.pos[0] = x;
-			status.pos[1] = y;
+			status.x() += x - last_x;
+			status.y() += y - last_y;
 		}
 	} else {
-		status.x() = x;
-		status.y() = y;
+		status.x() = x - last_x;
+		status.y() = y - last_y;
 	}
-	status.flags = buttons&SDL_BUTTON(1) ? InputStatus::INPUTFLAG_SELECT : InputStatus::INPUTFLAG_NONE;
+
+	if (buttons & SDL_BUTTON(1)) {
+		status.setFlag(InputStatus::INPUTFLAG_SELECT);
+	} else {
+		status.flags = 0;
+	}
+
 	status.timestamp = timestamp();
 
 	last_x = x;
