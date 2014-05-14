@@ -158,7 +158,7 @@ void SDLHandler::OnInputBlur() {
 }
  
 void SDLHandler::OnKeyDown(SDLKey sym, SDLMod mod, Uint16 unicode) {
-    //Pure virtual, do nothing
+	if (sym == SDLK_ESCAPE) OnExit();
 }
  
 void SDLHandler::OnKeyUp(SDLKey sym, SDLMod mod, Uint16 unicode) {

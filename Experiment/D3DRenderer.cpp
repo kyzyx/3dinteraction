@@ -585,11 +585,10 @@ D3DRenderer::D3DRenderer(App* app) {
 	}
 	initCamera();
 	
-	float conv;
 	NvAPI_Initialize();
 	NvAPI_Stereo_CreateHandleFromIUnknown(device, &stereohandle);
-	NvAPI_Stereo_GetConvergence(stereohandle, &conv);
-	NvAPI_Stereo_SetConvergence(stereohandle, 4.0);
+	NvAPI_Stereo_SetConvergence(stereohandle, 80.0);
+	NvAPI_Stereo_SetSeparation(stereohandle,100);
 }
 
 D3DRenderer::~D3DRenderer() {
