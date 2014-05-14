@@ -17,6 +17,16 @@ ExperimentApp::~ExperimentApp(void)
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
+	if(tracker.init())
+	{
+		OutputDebugString("Track Label Init Succeeded\n");
+	}
+	else
+	{
+		OutputDebugString("Track Label Init Failed\n");
+		// return false;
+	}
+
 	experiment.init();
     scene = experiment.getNextScene();	
 	scene->init((D3DRenderer*)render);
@@ -52,6 +62,11 @@ void ExperimentApp::onRender(void) {
 
 void ExperimentApp::onLoop(void) {
     experiment.onLoop();
+
+	tracker.update();
+	// Donny: throttling for Label Tracker
+	Sleep(30);
+
 	if (scene->finished()) {
 		scene = experiment.getNextScene();
         scene->init((D3DRenderer*)render);
