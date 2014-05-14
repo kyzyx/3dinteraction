@@ -38,6 +38,7 @@
     <Import Project="opencv.props" />
     <Import Project="aruco.props" />
     <Import Project="local_macros.props" />
+    <Import Project="LeapSDK.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -88,6 +89,7 @@
     <ClCompile Include="InteractionSpace.cpp" />
     <ClCompile Include="json.cpp" />
     <ClCompile Include="JSONLog.cpp" />
+    <ClCompile Include="LeapInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Scene.cpp" />
@@ -113,6 +115,7 @@
     <ClInclude Include="json.h" />
     <ClInclude Include="InputStatus.h" />
     <ClInclude Include="JSONLog.h" />
+    <ClInclude Include="LeapInterface.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MouseKeyboardInterface.h" />
     <ClInclude Include="nvapi.h" />

@@ -7,6 +7,7 @@
 #include "MouseKeyboardInterface.h"
 #include "HydraInterface.h"
 #include "ARInterface.h"
+#include "LeapInterface.h"
 #include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
@@ -29,6 +30,9 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
 	}
 	else if (input == "aruco") {
 		m_inputDevice = new ARInputInterface();
+    }
+	else  if (input == "leap") {
+		m_inputDevice = new LeapInterface();
 	}
 
 	// Figure out what the log name should be and create it
