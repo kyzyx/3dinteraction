@@ -603,7 +603,7 @@ D3DRenderer::D3DRenderer(App* app) {
 	
 	NvAPI_Initialize();
 	NvAPI_Stereo_CreateHandleFromIUnknown(device, &stereohandle);
-	NvAPI_Stereo_SetConvergence(stereohandle, 80.0);
+	NvAPI_Stereo_SetConvergence(stereohandle, 1.0);
 	NvAPI_Stereo_SetSeparation(stereohandle,100);
 }
 

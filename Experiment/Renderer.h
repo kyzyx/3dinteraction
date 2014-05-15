@@ -20,7 +20,7 @@ public:
 	virtual void display() = 0;
 
 	// Camera Matrix Functions
-	virtual void setProjection(float fov, float aspect, float near=0.1, float far=1000.) = 0;
+	virtual void setProjection(float fov, float aspect, float near=1.0, float far=1000.) = 0;
 	virtual void lookAt(float eye[3], float towards[3], float up[3]) = 0;
 	virtual void ortho() = 0;
 	virtual void ortho(float w, float h) = 0;
