@@ -53,9 +53,9 @@ void HydraInterface::update()
 	//         Even if you look for "P1R" -- it always returns the left one)
 	int index = sixenseUtils::getTheControllerManager()->getIndex( sixenseUtils::ControllerManager::P1L );
 
-	status.pos[0] = acd.controllers[index].pos[0];
-	status.pos[1] = acd.controllers[index].pos[1];
-	status.pos[2] = acd.controllers[index].pos[2];
+	status.pos[0] = acd.controllers[index].pos[0]/10; // mm to cm
+	status.pos[1] = acd.controllers[index].pos[1]/10;
+	status.pos[2] = acd.controllers[index].pos[2]/10;
 
 	status.rot = Eigen::Quaterniond(acd.controllers[index].rot_quat[3], acd.controllers[index].rot_quat[0], acd.controllers[index].rot_quat[1], acd.controllers[index].rot_quat[2]);
 

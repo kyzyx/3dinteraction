@@ -39,10 +39,6 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 		return;
 	}
 
-	double x = input.x() * 100;
-	double y = input.y() * 100;
-	double z = input.z() * 100;
-
 	Mesh *ship = m_meshNames["spaceship"];
 	Mesh *port; // where the spaceship wants to go
 
@@ -96,7 +92,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	// Update the ship's position
-	ship->setTranslation((float)x, (float)y, (float)z);
+	ship->setTranslation(input.x(), input.y(), input.z());
 	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation()));
 	ship->setRotation(input.rot.cast<float>());
 }
