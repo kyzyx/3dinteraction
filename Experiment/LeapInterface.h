@@ -13,5 +13,6 @@ public:
 private:
 	Leap::Controller controller;
 	int tracked;
+	Eigen::Quaterniond baserotation;
 };
 
