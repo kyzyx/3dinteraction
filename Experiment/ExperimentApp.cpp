@@ -1,21 +1,27 @@
 #include <cstdio>
 #include <cmath>
+#include <sstream>
 #include "ExperimentApp.h"
 #include "D3DMesh.h"
 #include "Experiment.h"
 #include "Scene.h"
 
-ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json")
+ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json"), m_arInput(nullptr)
 {
 }
 
 
 ExperimentApp::~ExperimentApp(void)
 {
+	if (m_arInput != nullptr) {
+		delete m_arInput;
+	}
 }
 
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
+
+	//m_arInput = new ARInterface();
 
 	experiment.init();
     scene = experiment.getNextScene();	
@@ -46,6 +52,19 @@ void ExperimentApp::onRender(void) {
 	mesh->drawWireframe();
 	mesh->translateBy(0,0,-0.0001);
 	mesh->setColor(1,0,0);*/
+
+	int line = 0;
+	InputStatus arInput = experiment.getInput();//m_arInput->getTag(10);
+	std::wstringstream msg;
+	msg
+		<< L"Id: " << arInput.flags
+		<< L", pos=("
+		<< arInput.pos.x() << L", "
+		<< arInput.pos.y() << L", "
+		<< arInput.pos.z()
+		<< L")";
+	render->drawText(msg.str().c_str(), 300, 100+30*line, 0xffffffff, 20);
+	++line;
 
 	render->display();
 }

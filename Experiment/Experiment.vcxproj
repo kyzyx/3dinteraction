@@ -33,8 +33,11 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
     <Import Project="D3D11.props" />
     <Import Project="SDL.props" />
-    <Import Project="local_macros.props" />
     <Import Project="sixense.props" />
+    <Import Project="flycap.props" />
+    <Import Project="opencv.props" />
+    <Import Project="aruco.props" />
+    <Import Project="local_macros.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
@@ -73,12 +76,14 @@
   <ItemGroup>
     <ClCompile Include="Alignment.cpp" />
     <ClCompile Include="app.cpp" />
+    <ClCompile Include="ARInterface.cpp" />
     <ClCompile Include="CalibrationScene.cpp" />
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
     <ClCompile Include="Experiment.cpp" />
     <ClCompile Include="ExperimentApp.cpp" />
+    <ClCompile Include="Flea3.cpp" />
     <ClCompile Include="HydraInterface.cpp" />
     <ClCompile Include="InteractionSpace.cpp" />
     <ClCompile Include="json.cpp" />
@@ -94,12 +99,14 @@
   <ItemGroup>
     <ClInclude Include="Alignment.h" />
     <ClInclude Include="app.h" />
+    <ClInclude Include="ARInterface.h" />
     <ClInclude Include="CalibrationScene.h" />
     <ClInclude Include="D3DMesh.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />
     <ClInclude Include="Experiment.h" />
     <ClInclude Include="ExperimentApp.h" />
+    <ClInclude Include="Flea3.h" />
     <ClInclude Include="HydraInterface.h" />
     <ClInclude Include="InputInterface.h" />
     <ClInclude Include="InteractionSpace.h" />

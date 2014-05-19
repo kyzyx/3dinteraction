@@ -4,6 +4,7 @@
 #include "InputInterface.h"
 #include "Experiment.h"
 #include "Scene.h"
+#include "ARInterface.h"
 
 class ExperimentApp :
 	public DirectXApp
@@ -19,6 +20,7 @@ public:
 private:
 	InputStatus lastInput;
 	Experiment experiment;
+	ARInterface *m_arInput;
 	Scene *scene;
 };
 
