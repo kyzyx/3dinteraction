@@ -3,7 +3,7 @@
 #include <opencv2/opencv.hpp>
 
 #define WIN32 1
-#include "FlyCapture2.h"
+#include "FlyCap2/FlyCapture2.h"
 
 class ARInterface; // forward declaration
 

@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include <functional>
 
-#include "FlyCapture2.h"
+#include "FlyCap2/FlyCapture2.h"
 
 #include "Flea3.h"
 #include "ARInterface.h"

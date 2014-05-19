@@ -4,7 +4,7 @@
 #include <map>
 #include "InputInterface.h"
 #include <opencv2/opencv.hpp>
-#include "aruco.h"
+#include "aruco/aruco.h"
 #include "Flea3.h"
 
 class ARInterface :
