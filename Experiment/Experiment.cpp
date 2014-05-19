@@ -6,6 +6,7 @@
 #include "InputInterface.h"
 #include "MouseKeyboardInterface.h"
 #include "HydraInterface.h"
+#include "ARInterface.h"
 #include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
@@ -25,6 +26,9 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
 	}
 	else if (input == "hydra") {
 		m_inputDevice = new HydraInterface();
+	}
+	else if (input == "aruco") {
+		m_inputDevice = new ARInputInterface();
 	}
 
 	// Figure out what the log name should be and create it

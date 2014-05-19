@@ -34,6 +34,11 @@ bool TestScene::initMeshes() {
 }
 
 void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
+	if (input.inputType == InputStatus::NONE) {
+		// Ignore invalide inputs
+		return;
+	}
+
 	double x = input.x() * 100;
 	double y = input.y() * 100;
 	double z = input.z() * 100;

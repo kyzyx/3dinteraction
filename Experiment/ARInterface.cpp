@@ -2,7 +2,12 @@
 #include "Flea3.h"
 #include "timestamp.h"
 
-ARInterface::ARInterface(void) : m_markerSize(0.0508), m_camera(nullptr)
+ARInterface& ARInterface::getInstance (void) {
+	static ARInterface instance;
+	return instance;
+}
+
+ARInterface::ARInterface(void) : m_markerSize(0.0508), m_tagID(0), m_camera(nullptr)
 {
 	// Camera Matrix for FLEA3 at 1280x640
 	double _camMat[3][3] = {
@@ -39,8 +44,6 @@ ARInterface::~ARInterface(void)
 void ARInterface::processFrame (cv::Mat &frame) {
 	m_detector.detect(frame, m_markers, m_camParams, m_markerSize);
 	cv::Mat bw = m_detector.getThresholdedImage();
-	// Delete any old inputs ... if no one grabbed them, they are stale
-	//m_stati.clear();
 	for (size_t idx = 0; idx != m_markers.size(); ++idx) {
 		aruco::Marker &m = m_markers[idx];
 		double pos[3];
@@ -56,19 +59,30 @@ void ARInterface::processFrame (cv::Mat &frame) {
 		m_statusMap[m.id] = s;
 		m.draw(bw, cv::Scalar(0,0,0));
 	}
-	cv::imshow("t", bw);
-	cv::waitKey(1);
+
+	// Uncomment here for debugging view of thresholding
+	//cv::imshow("t", bw);
+	//cv::waitKey(1);
 }
 
-InputStatus ARInterface::_getStatus (void) {
-	// Pump the list of queued inputs
-	if (m_stati.size() > 0) {
-		InputStatus s = m_stati.front();
-		m_stati.pop_front();
-		return s;
-	} else {
+void ARInterface::setActiveTag (int tagID) {
+	m_tagID = tagID;
+	if (m_tagID < 1) m_tagID = 1;
+	if (m_tagID > 1023) m_tagID = 1023;
+	if (m_statusMap.count(tagID) == 0) {
+		InputStatus s;
+		s.inputType = InputStatus::NONE;
+		m_statusMap[tagID] = s;
+	}
+}
+
+// Returns inputStatus for the currently active tag ID
+InputStatus ARInterface::getStatus (void) {
+	if (m_tagID == 0) {
 		InputStatus s;
 		s.inputType = InputStatus::NONE;
 		return s;
 	}
+		
+	return m_statusMap[m_tagID];
 }

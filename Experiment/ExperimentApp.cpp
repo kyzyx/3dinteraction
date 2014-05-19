@@ -13,15 +13,13 @@ ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json"),
 
 ExperimentApp::~ExperimentApp(void)
 {
-	if (m_arInput != nullptr) {
-		delete m_arInput;
-	}
 }
 
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
-	//m_arInput = new ARInterface();
+	// Comment out this line to disable using the camera
+	m_arInput = &ARInterface::getInstance();
 
 	experiment.init();
     scene = experiment.getNextScene();	
@@ -54,17 +52,19 @@ void ExperimentApp::onRender(void) {
 	mesh->setColor(1,0,0);*/
 
 	int line = 0;
-	InputStatus arInput = experiment.getInput();//m_arInput->getTag(10);
-	std::wstringstream msg;
-	msg
-		<< L"Id: " << arInput.flags
-		<< L", pos=("
-		<< arInput.pos.x() << L", "
-		<< arInput.pos.y() << L", "
-		<< arInput.pos.z()
-		<< L")";
-	render->drawText(msg.str().c_str(), 300, 100+30*line, 0xffffffff, 20);
-	++line;
+	if (m_arInput != nullptr) {
+		InputStatus arInput = m_arInput->getTag(10);
+		std::wstringstream msg;
+		msg
+			<< L"Tag Id: " << arInput.flags
+			<< L", pos=("
+			<< arInput.pos.x() << L", "
+			<< arInput.pos.y() << L", "
+			<< arInput.pos.z()
+			<< L")";
+		render->drawText(msg.str().c_str(), 300, 100+30*line, 0xffffffff, 20);
+		++line;
+	}
 
 	render->display();
 }

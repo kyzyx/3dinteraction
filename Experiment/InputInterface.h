@@ -7,7 +7,7 @@ public:
 	InputInterface() : status() {}
 	virtual ~InputInterface() {}
 
-	virtual void update(){}
+	virtual void update() {}
 
 	InputStatus getStatus(void) {return _getStatus();}
 
