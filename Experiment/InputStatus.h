@@ -6,7 +6,7 @@
 class InputStatus
 {
 public:
-	enum InputType : uint32_t {MOUSEKBD, HYDRA, LEAP, UNKNOWN};
+	enum InputType : uint32_t {MOUSEKBD, HYDRA, LEAP, ARTAG, NONE, UNKNOWN};
 	enum InputFlag : uint32_t {
 		INPUTFLAG_NONE = 0,
 		INPUTFLAG_SELECT = 1,
@@ -24,7 +24,7 @@ public:
 	InputStatus(Eigen::Vector4d position) 
 		: pos(position[0], position[1], position[2]), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0)  { ; }
 
-	InputStatus(InputStatus& inputstatus) : pos(inputstatus.pos), rot(inputstatus.rot), flags(inputstatus.flags), inputType(inputstatus.inputType), timestamp(inputstatus.timestamp) { ; }
+	InputStatus(const InputStatus& inputstatus) : pos(inputstatus.pos), rot(inputstatus.rot), flags(inputstatus.flags), inputType(inputstatus.inputType), timestamp(inputstatus.timestamp) { ; }
 	InputStatus(Eigen::Vector3d position, Eigen::Quaterniond rotation, int inputflags)
 		: pos(position), rot(rotation), flags(inputflags), inputType(UNKNOWN), timestamp(0.0)  { ; }
 	InputStatus(Eigen::Vector4d position, Eigen::Quaterniond rotation, int inputflags)
@@ -79,7 +79,7 @@ public:
 	
 	InputType inputType; // what kind of device this data came from
 	double timestamp;    // when was this input event generated?
-
+	
 	uint32_t flags;
-
+	
 };

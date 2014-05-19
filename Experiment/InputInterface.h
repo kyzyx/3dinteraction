@@ -1,17 +1,17 @@
 #pragma once
-#include "SDLHandler.h"
 #include "InputStatus.h"
 
 class InputInterface
 {
 public:
 	InputInterface() : status() {}
-	~InputInterface() {}
+	virtual ~InputInterface() {}
 
 	virtual void update(){}
 
-	InputStatus getStatus() {return status;}
+	InputStatus getStatus(void) {return _getStatus();}
 
 protected:
+	virtual InputStatus _getStatus (void) { return status; }
 	InputStatus status;
 };

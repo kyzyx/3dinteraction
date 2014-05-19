@@ -9,7 +9,7 @@
 #include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
-m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
+m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
 	std::ifstream inFile(configFile);
 	std::string jsonString( 
 		(std::istreambuf_iterator<char>(inFile) ),
@@ -49,7 +49,6 @@ m_inputDevice(NULL), m_sceneIdx(0), m_curScene(NULL) {
 Experiment::~Experiment (void) {
 	delete m_inputDevice;
 	delete m_curScene;
-
 	m_log->endExperiment();
 	delete m_log;
 }
