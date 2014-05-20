@@ -92,6 +92,7 @@
     <ClCompile Include="LeapInterface.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Mesh.cpp" />
+    <ClCompile Include="RelativeInputInterface.cpp" />
     <ClCompile Include="Scene.cpp" />
     <ClCompile Include="MouseKeyboardInterface.cpp" />
     <ClCompile Include="SDLHandler.cpp" />
@@ -119,6 +120,7 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="MouseKeyboardInterface.h" />
     <ClInclude Include="nvapi.h" />
+    <ClInclude Include="RelativeInputInterface.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="Scene.h" />
     <ClInclude Include="SDLHandler.h" />

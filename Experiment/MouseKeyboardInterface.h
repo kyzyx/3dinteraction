@@ -1,16 +1,14 @@
 #pragma once
-#include "InputInterface.h"
-#include "Mesh.h"
+#include "RelativeInputInterface.h"
 
 class MouseKeyboardInterface :
-	public InputInterface
+	public RelativeInputInterface
 {
 public:
 	MouseKeyboardInterface();
 	~MouseKeyboardInterface();
 
-	virtual void update();
-
-private:
-	int last_x, last_y;
+protected:
+	virtual InputStatus updateDelta();
+	int width, height;
 };
