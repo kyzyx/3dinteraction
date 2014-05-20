@@ -87,6 +87,9 @@
     <ClCompile Include="RelativeInputInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="HydraRelativeInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h">
@@ -165,6 +168,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RelativeInputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HydraRelativeInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

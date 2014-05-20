@@ -6,6 +6,7 @@
 #include "InputInterface.h"
 #include "MouseKeyboardInterface.h"
 #include "HydraInterface.h"
+#include "HydraRelativeInterface.h"
 #include "ARInterface.h"
 #include "LeapInterface.h"
 #include "TestScene.h"
@@ -27,6 +28,9 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
 	}
 	else if (input == "hydra") {
 		m_inputDevice = new HydraInterface();
+	}
+	else if (input == "3dmouse") {
+		m_inputDevice = new HydraRelativeInterface();
 	}
 	else if (input == "aruco") {
 		m_inputDevice = new ARInputInterface();
