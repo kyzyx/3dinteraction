@@ -58,7 +58,7 @@ public:
 	virtual void drawPoints(int n, float* coords, float* colors, float pointSize);
 	virtual void drawText(const WCHAR* text, float x, float y, int color, float size);
 	virtual void predraw(bool lights=true);
-	void predrawHeadtracked(float hx, float hy, float hz, float eyesep, bool lights);
+	void predrawHeadtracked(bool lights);
 	virtual void clear();
 	virtual void display();
 	virtual void setProjection(float fov, float aspect, float near, float far);
@@ -86,6 +86,8 @@ public:
 	void clearRenderTarget(D3DRenderTarget* target);
 	D3DWindowTarget* InitializeWindowTarget(int w, int h);
 	void DrawWindowTarget(D3DWindowTarget* wt, int x, int y);
+	void EnableHeadtracking(void) { headtracking = true; }
+	void setHeadPosition(float hx, float hy, float hz, float eyesep);
 
 	friend class D3DMesh;
 protected:
@@ -151,6 +153,7 @@ protected:
 
 	StereoHandle stereohandle;
 
+	bool headtracking;
 	bool fullscreen;
 	int w, h;
 };

@@ -12,7 +12,7 @@
 #include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
-m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
+m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_arInput(nullptr) {
 	std::ifstream inFile(configFile);
 	std::string jsonString( 
 		(std::istreambuf_iterator<char>(inFile) ),
@@ -37,6 +37,16 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr) {
     }
 	else  if (input == "leap") {
 		m_inputDevice = new LeapInterface();
+	}
+
+	if (output == "3d") {
+		outputtype = OUTPUT_3D;
+	}
+	else if (output == "2d") {
+		outputtype = OUTPUT_2D;
+	}
+	else if (output == "3dHeadtracked") {
+		outputtype = OUTPUT_3D | OUTPUT_HEADTRACKED;
 	}
 
 	// Figure out what the log name should be and create it
@@ -77,7 +87,18 @@ Scene* Experiment::getNextScene (void) {
 }
 
 
-bool Experiment::init (void) {
+bool Experiment::init (D3DRenderer* r) {
+	renderer = r;
+	if (outputtype & OUTPUT_HEADTRACKED) {
+		m_arInput = &ARInterface::getInstance();
+		renderer->EnableHeadtracking();
+		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);
+	}
+	if (outputtype & OUTPUT_3D) {
+		renderer->enableStereo();
+	} else {
+		renderer->disableStereo();
+	}
 	return true;
 }
 
@@ -87,4 +108,18 @@ InputStatus Experiment::getInput (void) {
 
 void Experiment::onLoop (void) {
 	m_inputDevice->update();
+	if (outputtype & OUTPUT_HEADTRACKED) {
+		if (m_arInput != nullptr) {
+			InputStatus arInput = m_arInput->getTag(10);
+			std::wstringstream msg;
+			msg	<< L"Tag Id: " << arInput.flags
+				<< L", pos=("
+				<< arInput.x() << L", "
+				<< arInput.y() << L", "
+				<< arInput.z()
+				<< L")";
+			renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
+			((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);
+		}
+	}
 }

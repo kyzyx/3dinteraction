@@ -572,6 +572,7 @@ bool D3DRenderer::initFont() {
 
 D3DRenderer::D3DRenderer(App* app) {
 	fullscreen = app->isFullscreen();
+	headtracking = false;
 	device = NULL;
 	context = NULL;
 	swapChain = NULL;
@@ -681,7 +682,11 @@ void D3DRenderer::display() {
 	swapChain->Present(0,0);
 }
 
-void D3DRenderer::predrawHeadtracked(float hx, float hy, float hz, float eyesep, bool lights) {
+void D3DRenderer::setHeadPosition(float hx, float hy, float hz, float eyesep) {
+	head.headpos = D3DXVECTOR4(hx,hy,hz,eyesep);
+}
+
+void D3DRenderer::predrawHeadtracked(bool lights) {
 	// Set matrices
 	D3D11_MAPPED_SUBRESOURCE mapped;
 	if (FAILED(context->Map(matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;
@@ -706,7 +711,6 @@ void D3DRenderer::predrawHeadtracked(float hx, float hy, float hz, float eyesep,
 
 	// Set head position
 	if (FAILED(context->Map(headBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;
-	head.headpos = D3DXVECTOR4(hx,hy,hz,eyesep);
 	memcpy(mapped.pData, &head, sizeof(HeadBuffer));
 	context->Unmap(headBuffer, 0);
 
@@ -721,6 +725,10 @@ void D3DRenderer::predrawHeadtracked(float hx, float hy, float hz, float eyesep,
 }
 
 void D3DRenderer::predraw(bool lights) {
+	if (headtracking) {
+		predrawHeadtracked(lights);
+		return;
+	}
 	// Set matrices
 	D3D11_MAPPED_SUBRESOURCE mapped;
 	if (FAILED(context->Map(matrixBuffer, 0, D3D11_MAP_WRITE_DISCARD, 0, &mapped))) return;

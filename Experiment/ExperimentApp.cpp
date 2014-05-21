@@ -6,7 +6,7 @@
 #include "Experiment.h"
 #include "Scene.h"
 
-ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json"), m_arInput(nullptr)
+ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json")
 {
 }
 
@@ -18,10 +18,7 @@ ExperimentApp::~ExperimentApp(void)
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
-	// Comment out this line to disable using the camera
-	m_arInput = &ARInterface::getInstance();
-
-	experiment.init();
+	experiment.init((D3DRenderer*) render);
     scene = experiment.getNextScene();	
 	scene->init((D3DRenderer*)render);
 
@@ -33,7 +30,6 @@ float towards[] = {0.f,0.f,-1.f};
 float up[] = {0.f,1.f,0.f};
 
 void ExperimentApp::onRender(void) {
-	render->clear();
 	float hfov = 41;
 	float aspectratio = 16.f/9.f;
 	render->setProjection(hfov, aspectratio);
@@ -51,26 +47,12 @@ void ExperimentApp::onRender(void) {
 	mesh->translateBy(0,0,-0.0001);
 	mesh->setColor(1,0,0);*/
 
-	int line = 0;
-	if (m_arInput != nullptr) {
-		InputStatus arInput = m_arInput->getTag(10);
-		std::wstringstream msg;
-		msg
-			<< L"Tag Id: " << arInput.flags
-			<< L", pos=("
-			<< arInput.pos.x() << L", "
-			<< arInput.pos.y() << L", "
-			<< arInput.pos.z()
-			<< L")";
-		render->drawText(msg.str().c_str(), 300, 100+30*line, 0xffffffff, 20);
-		++line;
-	}
-
 	render->display();
+	render->clear();
 }
 
 void ExperimentApp::onLoop(void) {
-    experiment.onLoop();
+	experiment.onLoop();
 	if (scene->finished()) {
 		scene = experiment.getNextScene();
         scene->init((D3DRenderer*)render);

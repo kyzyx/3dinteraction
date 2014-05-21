@@ -1,13 +1,14 @@
 #include "ARInterface.h"
 #include "Flea3.h"
 #include "timestamp.h"
+#include <opencv2/core/eigen.hpp>
 
 ARInterface& ARInterface::getInstance (void) {
 	static ARInterface instance;
 	return instance;
 }
 
-ARInterface::ARInterface(void) : m_markerSize(0.0508), m_tagID(0), m_camera(nullptr)
+ARInterface::ARInterface(void) : m_markerSize(5.08), m_tagID(0), m_camera(nullptr)
 {
 	// Camera Matrix for FLEA3 at 1280x640
 	double _camMat[3][3] = {
@@ -27,7 +28,7 @@ ARInterface::ARInterface(void) : m_markerSize(0.0508), m_tagID(0), m_camera(null
 	m_camParams = aruco::CameraParameters(camMat, distMat, cv::Size(1280,640));
 	m_detector.setCornerRefinementMethod(aruco::MarkerDetector::LINES);
 	m_detector.setThresholdMethod(aruco::MarkerDetector::FIXED_THRES);
-	m_detector.setThresholdParams(164,0);
+	m_detector.setThresholdParams(80,0);
 
 	m_camera = new Flea3();
 	m_camera->setARInterface(this);
@@ -46,12 +47,16 @@ void ARInterface::processFrame (cv::Mat &frame) {
 	cv::Mat bw = m_detector.getThresholdedImage();
 	for (size_t idx = 0; idx != m_markers.size(); ++idx) {
 		aruco::Marker &m = m_markers[idx];
-		double pos[3];
-		double quat[4];
-		m.OgreGetPoseParameters(pos, quat);
 		InputStatus s;
-		s.pos = Eigen::Map<const Eigen::Vector3d>(pos);
-		s.rot = Eigen::Map<const Eigen::Quaterniond>(quat);
+		cv2eigen(m.Tvec, s.pos);
+		s.pos.x() = -s.pos.x();
+		s.pos.y() = -s.pos.y();
+		double x = -m.Rvec.at<float>(0);
+		double y = -m.Rvec.at<float>(1);
+		double z = m.Rvec.at<float>(2);
+		double angle = sqrt(x*x + y*y + z*z);
+		Eigen::Vector3d axis(x/angle, y/angle, z/angle);
+		s.rot = Eigen::Quaterniond(Eigen::AngleAxisd(angle, axis));
 		s.flags = m.id;
 		s.inputType = InputStatus::ARTAG;
 		s.timestamp = timestamp();

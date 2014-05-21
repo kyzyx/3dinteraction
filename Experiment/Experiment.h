@@ -4,6 +4,8 @@
 #include "Scene.h"
 #include "InputInterface.h"
 #include "JSONLog.h"
+#include "D3DRenderer.h"
+#include "ARInterface.h"
 
 //
 // EXPERIMENT
@@ -13,18 +15,22 @@
 //
 class Experiment {
 public:
-   Experiment (std::string configFile);
+   enum {OUTPUT_2D = 0, OUTPUT_3D = 1, OUTPUT_HEADTRACKED = 2};
+	Experiment (std::string configFile);
    ~Experiment (void);
    
-   bool init (void);
+   bool init (D3DRenderer* renderer);
    Scene* getNextScene (void);
    InputStatus getInput (void);
    void onLoop (void);
 
 private:
+	D3DRenderer* renderer;
+	ARInterface *m_arInput;
 	InputInterface *m_inputDevice;
 	int m_sceneIdx;
 	int m_numScenes;
+	int outputtype;
 	Scene *m_curScene;
 	JSONLog *m_log;
 };
