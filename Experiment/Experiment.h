@@ -5,7 +5,6 @@
 #include "InputInterface.h"
 #include "JSONLog.h"
 #include "D3DRenderer.h"
-#include "ARInterface.h"
 
 //
 // EXPERIMENT
@@ -26,7 +25,7 @@ public:
 
 private:
 	D3DRenderer* renderer;
-	ARInterface *m_arInput;
+	InputInterface *m_headtrackInput;
 	InputInterface *m_inputDevice;
 	int m_sceneIdx;
 	int m_numScenes;

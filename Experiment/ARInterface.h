@@ -39,7 +39,6 @@ public:
 protected:
 	virtual InputStatus _getStatus (void) { 
 		InputStatus s = m_interface.getStatus();
-		s.z() -= 0.3; // Move 30cm away from camera to zero plane
 		return s;
 	}
 

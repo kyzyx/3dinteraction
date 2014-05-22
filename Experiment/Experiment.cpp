@@ -12,7 +12,7 @@
 #include "TestScene.h"
 
 Experiment::Experiment (std::string configFile) :
-m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_arInput(nullptr) {
+m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nullptr) {
 	std::ifstream inFile(configFile);
 	std::string jsonString( 
 		(std::istreambuf_iterator<char>(inFile) ),
@@ -71,6 +71,7 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_arInput(nullptr) {
 Experiment::~Experiment (void) {
 	delete m_inputDevice;
 	delete m_curScene;
+	if (m_headtrackInput) delete m_headtrackInput;
 	m_log->endExperiment();
 	delete m_log;
 }
@@ -90,7 +91,7 @@ Scene* Experiment::getNextScene (void) {
 bool Experiment::init (D3DRenderer* r) {
 	renderer = r;
 	if (outputtype & OUTPUT_HEADTRACKED) {
-		m_arInput = &ARInterface::getInstance();
+		m_headtrackInput = new ARInputInterface();
 		renderer->EnableHeadtracking();
 		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);
 	}
@@ -108,18 +109,16 @@ InputStatus Experiment::getInput (void) {
 
 void Experiment::onLoop (void) {
 	m_inputDevice->update();
-	if (outputtype & OUTPUT_HEADTRACKED) {
-		if (m_arInput != nullptr) {
-			InputStatus arInput = m_arInput->getTag(10);
-			std::wstringstream msg;
-			msg	<< L"Tag Id: " << arInput.flags
-				<< L", pos=("
-				<< arInput.x() << L", "
-				<< arInput.y() << L", "
-				<< arInput.z()
-				<< L")";
-			renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
-			((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);
-		}
+	if ((outputtype & OUTPUT_HEADTRACKED) && m_headtrackInput != nullptr) {
+		InputStatus arInput = m_headtrackInput->getStatus();
+		std::wstringstream msg;
+		msg	<< L"Tag Id: " << arInput.flags
+			<< L", pos=("
+			<< arInput.x() << L", "
+			<< arInput.y() << L", "
+			<< arInput.z()
+			<< L")";
+		renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
+		((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);
 	}
 }
