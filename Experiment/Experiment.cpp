@@ -10,6 +10,7 @@
 #include "ARInterface.h"
 #include "LeapInterface.h"
 #include "TestScene.h"
+#include "TransformedInterface.h"
 
 Experiment::Experiment (std::string configFile) :
 m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nullptr) {
@@ -27,7 +28,10 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 		m_inputDevice = new MouseKeyboardInterface();
 	}
 	else if (input == "hydra") {
-		m_inputDevice = new HydraInterface();
+		Eigen::Matrix4d m;
+		// Insert hydra->screen transformation here
+		m.setIdentity();
+		m_inputDevice = new TransformedInterface(new HydraInterface(), Xform(m));
 	}
 	else if (input == "3dmouse") {
 		m_inputDevice = new HydraRelativeInterface();
@@ -36,7 +40,10 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 		m_inputDevice = new ARInputInterface();
     }
 	else  if (input == "leap") {
-		m_inputDevice = new LeapInterface();
+		Eigen::Matrix4d m;
+		// Insert leap->screen transformation here
+		m.setIdentity();
+		m_inputDevice = new TransformedInterface(new LeapInterface(), Xform(m));
 	}
 
 	if (output == "3d") {
@@ -91,7 +98,10 @@ Scene* Experiment::getNextScene (void) {
 bool Experiment::init (D3DRenderer* r) {
 	renderer = r;
 	if (outputtype & OUTPUT_HEADTRACKED) {
-		m_headtrackInput = new ARInputInterface();
+		Eigen::Matrix4d m;
+		// Insert camera->screen transformation here
+		m.setIdentity();
+		m_headtrackInput = new TransformedInterface(new ARInputInterface(), Xform(m));
 		renderer->EnableHeadtracking();
 		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);
 	}

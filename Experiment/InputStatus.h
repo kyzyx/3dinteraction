@@ -61,6 +61,15 @@ public:
 		return is;
 	}
 
+	InputStatus& operator=(const InputStatus& other) {
+		inputType = other.inputType;
+		pos = other.pos;
+		rot = other.rot;
+		flags = other.flags;
+		timestamp = other.timestamp;
+		return (*this);
+	}
+
 	// Accessors
 	double& operator[](int n) { return pos[n]; }
 	double& x() { return pos[0]; }

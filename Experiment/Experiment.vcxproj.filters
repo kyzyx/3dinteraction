@@ -173,6 +173,9 @@
     <ClInclude Include="HydraRelativeInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TransformedInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ps.ps">
