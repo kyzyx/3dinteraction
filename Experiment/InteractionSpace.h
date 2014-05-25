@@ -6,7 +6,7 @@ class InteractionSpace
 {
 public:
 	static Eigen::Vector3f randomPointInVolume();
-	static Eigen::Vector3f closestPointInVolume(Eigen::Vector3f p);
+	static Eigen::Vector3f closestPointInVolume(Eigen::Vector3f p, bool headtrack=true);
 	static bool inVolume(Eigen::Vector3f p);
 private:
 	InteractionSpace() {;}

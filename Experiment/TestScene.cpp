@@ -93,6 +93,6 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 
 	// Update the ship's position
 	ship->setTranslation(input.x(), input.y(), input.z());
-	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation()));
+	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
 	ship->setRotation(input.rot.cast<float>());
 }

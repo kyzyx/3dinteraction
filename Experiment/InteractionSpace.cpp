@@ -1,5 +1,6 @@
 #include "InteractionSpace.h"
 #include <ctime>
+#include "ARInterface.h"
 
 using namespace Eigen;
 
@@ -20,21 +21,60 @@ Vector3f InteractionSpace::randomPointInVolume(void)
 	return p;
 }
 
-Vector3f InteractionSpace::closestPointInVolume(Vector3f p)
+Vector3f normal(Vector3f a, Vector3f b, Vector3f c) {
+	Vector3f x = a-b;
+	Vector3f y = c-b;
+	Vector3f n = x.cross(y);
+	n.normalize();
+	return n;
+}
+
+double checkPlane(Vector3f p, Vector3f a, Vector3f b, Vector3f c) {
+	Vector3f n = normal(a,b,c);
+	double d = -n.dot(b);
+	return n.dot(p) + d;
+}
+
+Vector3f InteractionSpace::closestPointInVolume(Vector3f p, bool headtrack)
 {
-	// FIXME: Bbox check shortcut
-	for (int i = 0; i < 3; ++i) {
-		if (p[i] < mincoords[i]) p[i] = mincoords[i];
-		else if (p[i] > maxcoords[i]) p[i] = maxcoords[i];
+	Vector3f h = Vector3f(0,0,80);
+	if (headtrack) h = ARInterface::getInstance().getStatus().pos.cast<float>();
+
+	if (p.z() < 0) p.z() = 0;
+	double ratio = p.z()/h.z();
+	if (ratio > 0.75) {
+		p.z() = h.z()*0.75;
+		ratio = 0.75;
 	}
+	// Clip left
+	double clip = ratio*h.x() + (1-ratio)*mincoords.x();
+	if (p.x() < clip) p.x() = clip;
+	// Clip right
+	clip = ratio*h.x() + (1-ratio)*maxcoords.x();
+	if (p.x() > clip) p.x() = clip;
+	// Clip top
+	clip = ratio*h.y() + (1-ratio)*mincoords.y();
+	if (p.y() < clip) p.y() = clip;
+	// Clip bottom
+	clip = ratio*h.y() + (1-ratio)*maxcoords.y();
+	if (p.y() > clip) p.y() = clip;
 	return p;
 }
 
 bool InteractionSpace::inVolume(Vector3f p) {
-	// Bbox check
-	for (int i = 0; i < 3; ++i) {
-		if (p[i] < mincoords[i] || p[i] > maxcoords[i]) return false;
+	Vector3f tl = Vector3f(mincoords.x(), maxcoords.y(), mincoords.z());
+	Vector3f tr = Vector3f(maxcoords.x(), maxcoords.y(), mincoords.z());
+	Vector3f bl = Vector3f(mincoords.x(), mincoords.y(), mincoords.z());
+	Vector3f br = Vector3f(maxcoords.x(), mincoords.y(), mincoords.z());
+	Vector3f h = ARInterface::getInstance().getStatus().pos.cast<float>();
+	if (h.z() < 5) h = Vector3f(0,0,80);
+	if (p.z() < 0) return false;
+	if (p.z() > h.z()*3/4) return false;
+	if (checkPlane(p, tl, tr, h) > 0 ||
+		checkPlane(p, tr, br, h) > 0 ||
+		checkPlane(p, br, bl, h) > 0 ||
+		checkPlane(p, bl, tl, h) > 0) {
+		return false;
 	}
-	// TODO: Frustum check
 	return true;
 }
