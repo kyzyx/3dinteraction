@@ -49,10 +49,8 @@ void ARInterface::processFrame (cv::Mat &frame) {
 		aruco::Marker &m = m_markers[idx];
 		InputStatus s;
 		cv2eigen(m.Tvec, s.pos);
-		s.pos.x() = -s.pos.x();
-		s.pos.y() = -s.pos.y();
-		double x = -m.Rvec.at<float>(0);
-		double y = -m.Rvec.at<float>(1);
+		double x = m.Rvec.at<float>(0);
+		double y = m.Rvec.at<float>(1);
 		double z = m.Rvec.at<float>(2);
 		double angle = sqrt(x*x + y*y + z*z);
 		Eigen::Vector3d axis(x/angle, y/angle, z/angle);

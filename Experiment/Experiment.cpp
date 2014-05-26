@@ -37,7 +37,13 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 		m_inputDevice = new HydraRelativeInterface();
 	}
 	else if (input == "aruco") {
-		m_inputDevice = new ARInputInterface();
+		Eigen::Matrix4d m;
+		m <<
+			-0.99957198, -0.02474514,  0.01560538,  -0.730564,
+             0.02044090, -0.97236698, -0.23256102,  24.426980,
+			 0.02092891, -0.23214250,  0.97245660,  6.051621,
+             0.        , 0.         ,  0.        ,  1.;
+		m_inputDevice = new TransformedInterface(new ARInputInterface(), Xform(m));
     }
 	else  if (input == "leap") {
 		Eigen::Matrix4d m;
@@ -100,7 +106,11 @@ bool Experiment::init (D3DRenderer* r) {
 	if (outputtype & OUTPUT_HEADTRACKED) {
 		Eigen::Matrix4d m;
 		// Insert camera->screen transformation here
-		m.setIdentity();
+		m <<
+			-0.99957198, -0.02474514,  0.01560538,  -0.730564,
+             0.02044090, -0.97236698, -0.23256102,  24.426980,
+			 0.02092891, -0.23214250,  0.97245660,  6.051621,
+             0.        , 0.         ,  0.        ,  1.;
 		m_headtrackInput = new TransformedInterface(new ARInputInterface(), Xform(m));
 		renderer->EnableHeadtracking();
 		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);
