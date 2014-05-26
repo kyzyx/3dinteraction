@@ -25,10 +25,10 @@ ARInterface::ARInterface(void) : m_markerSize(5.08), m_tagID(0), m_camera(nullpt
 		{ 0.0                    }
 	};
 	cv::Mat distMat(4,1, CV_64F, _distCoef);
-	m_camParams = aruco::CameraParameters(camMat, distMat, cv::Size(1280,640));
+	m_camParams.setParams(camMat, distMat, cv::Size(1280,640));
 	m_detector.setCornerRefinementMethod(aruco::MarkerDetector::LINES);
 	m_detector.setThresholdMethod(aruco::MarkerDetector::FIXED_THRES);
-	m_detector.setThresholdParams(80,0);
+	m_detector.setThresholdParams(70,0);
 
 	m_camera = new Flea3();
 	m_camera->setARInterface(this);
@@ -45,7 +45,7 @@ ARInterface::~ARInterface(void)
 void ARInterface::processFrame (cv::Mat &frame) {
 	m_detector.detect(frame, m_markers, m_camParams, m_markerSize);
 	cv::Mat bw = m_detector.getThresholdedImage();
-	for (size_t idx = 0; idx != m_markers.size(); ++idx) {
+	for (size_t idx = 0; idx < m_markers.size(); ++idx) {
 		aruco::Marker &m = m_markers[idx];
 		InputStatus s;
 		cv2eigen(m.Tvec, s.pos);

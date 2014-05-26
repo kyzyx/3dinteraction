@@ -131,6 +131,8 @@ void Experiment::onLoop (void) {
 	m_inputDevice->update();
 	if ((outputtype & OUTPUT_HEADTRACKED) && m_headtrackInput != nullptr) {
 		InputStatus arInput = m_headtrackInput->getStatus();
+		// Fiducial -> eye position conversion
+		arInput.pos += arInput.rot*Eigen::Vector3d(-5.15,0,-3);
 		std::wstringstream msg;
 		msg	<< L"Tag Id: " << arInput.flags
 			<< L", pos=("
