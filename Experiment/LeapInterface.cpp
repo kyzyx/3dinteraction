@@ -1,6 +1,8 @@
 #include "LeapInterface.h"
 #include "timestamp.h"
+#include <vector>
 
+using namespace std;
 using namespace Leap;
 LeapInterface::LeapInterface(void)
 {
@@ -16,18 +18,23 @@ LeapInterface::~LeapInterface(void)
 
 void LeapInterface::update() {
 	Frame f = controller.frame();
-	int numpointables = f.pointables().count();
+	vector<int> extended;
+	for (int i = 0; i < f.pointables().count(); ++i) {
+		if (f.pointables()[i].isExtended()) {
+			int id = f.pointables()[i].id();
+			// Ignore thumb
+			if (f.pointable(id).isFinger() && f.finger(id).type() != Finger::TYPE_THUMB) {
+				extended.push_back(id);
+			}
+		}
+	}
+	if (extended.size() == 0) return;
 	if (tracked == -1) {
-		if (numpointables > 1) return;
-		tracked = f.pointables().frontmost().id();
+		if (extended.size() > 1) return;
+		tracked = extended.front();
 	}
 	Pointable p = f.pointable(tracked);
-	if (!p.isValid()) {
-		baserotation = status.rot;
-		tracked = -1;
-		return;
-	}
-	if (numpointables > 2) {
+	if (!p.isValid() || extended.size() > 2) {
 		baserotation = status.rot;
 		tracked = -1;
 		return;

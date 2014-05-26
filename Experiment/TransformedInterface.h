@@ -8,7 +8,7 @@ public:
 	TransformedInterface(InputInterface* inputinterface, Xform xform) 
 		: input(inputinterface), transform(xform), rot(xform.linear()) { ; }
 	~TransformedInterface() { delete input; }
-
+	virtual void update() { input->update(); }
 private:
 	TransformedInterface() {;}
 	virtual InputStatus _getStatus (void) {
