@@ -60,10 +60,16 @@
     <ClCompile Include="HydraInterface.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CalibrationScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="TestScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="InteractionSpace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Alignment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="JSONLog.cpp">
@@ -140,10 +146,16 @@
     <ClInclude Include="HydraInterface.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CalibrationScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="TestScene.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InteractionSpace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Alignment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="JSONLog.h">
