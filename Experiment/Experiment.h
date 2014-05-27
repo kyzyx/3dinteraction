@@ -14,7 +14,7 @@
 //
 class Experiment {
 public:
-   enum {OUTPUT_2D = 0, OUTPUT_3D = 1, OUTPUT_HEADTRACKED = 2};
+   enum {OUTPUT_2D = 0, OUTPUT_3D = 1, OUTPUT_HEADTRACKED = 2, OUTPUT_PROJECTIONS = 4};
 	Experiment (std::string configFile);
    ~Experiment (void);
    
@@ -22,6 +22,8 @@ public:
    Scene* getNextScene (void);
    InputStatus getInput (void);
    void onLoop (void);
+
+   int getOutputType(void) const { return outputtype; }
 
 private:
 	D3DRenderer* renderer;

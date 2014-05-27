@@ -64,6 +64,9 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 	else if (output == "3dHeadtracked") {
 		outputtype = OUTPUT_3D | OUTPUT_HEADTRACKED;
 	}
+	else if (output == "2dprojections") {
+		outputtype = OUTPUT_PROJECTIONS;
+	}
 
 	// Figure out what the log name should be and create it
 	std::time_t t = std::time(0); // get NOW
