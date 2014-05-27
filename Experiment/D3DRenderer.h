@@ -62,7 +62,7 @@ public:
 	virtual void clear();
 	virtual void display();
 	virtual void setProjection(float fov, float aspect, float near, float far);
-	virtual void lookAt(float eye[3], float towards[3], float up[3]);
+	virtual void lookAt(const float eye[3], const float towards[3], const float up[3]);
 	virtual void ortho();
 	virtual void ortho(float w, float h);
 
@@ -88,6 +88,10 @@ public:
 	void DrawWindowTarget(D3DWindowTarget* wt, int x, int y);
 	void EnableHeadtracking(void) { headtracking = true; }
 	void setHeadPosition(float hx, float hy, float hz, float eyesep);
+
+	void setAmbient(float r, float g, float b);
+	void setDiffuse(float r, float g, float b);
+	void setLightPosition(float x, float y, float z);
 
 	friend class D3DMesh;
 protected:

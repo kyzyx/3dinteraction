@@ -15,6 +15,7 @@ public:
 	InputStatus getTag (int tagID) { return m_statusMap[tagID]; }
 	void setActiveTag (int tagID);
 	InputStatus getStatus (void);
+	bool isValid(void);
 
 private:
 	ARInterface(void);

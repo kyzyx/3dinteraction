@@ -766,7 +766,7 @@ void D3DRenderer::setProjection(float fov, float aspect, float nearclip, float f
 }
 
 typedef D3DXVECTOR3 vec3;
-void D3DRenderer::lookAt(float eye[3], float towards[3], float up[3]) {
+void D3DRenderer::lookAt(const float eye[3], const float towards[3], const float up[3]) {
 	vec3 eyev = vec3(eye);
 	vec3 atv = vec3(towards) + eyev;
 	vec3 upv = vec3(up);
@@ -808,4 +808,14 @@ void D3DRenderer::applyScale(float a, float b, float c) {
 }
 void D3DRenderer::resetTransforms() {
 	D3DXMatrixIdentity(&matrices.world);
+}
+
+void D3DRenderer::setAmbient(float r, float g, float b) {
+	light.ambient = D3DXVECTOR4(r,g,b,1.f);
+}
+void D3DRenderer::setDiffuse(float r, float g, float b) {
+	light.diffuse = D3DXVECTOR4(r,g,b,1.f);
+}
+void D3DRenderer::setLightPosition(float x, float y, float z) {
+	light.lightpos = D3DXVECTOR4(x,y,z,1.f);
 }

@@ -9,6 +9,12 @@ using namespace Eigen;
 Vector3f mincoords(-59.79/2+5,-33.632/2+5,0);
 Vector3f maxcoords(59.79/2-5,33.632/2-5,60);
 
+double InteractionSpace::screenheight(void) {
+	return maxcoords.y()*2;
+}
+double InteractionSpace::screenwidth(void) {
+	return maxcoords.x()*2;
+}
 Vector3f InteractionSpace::randomPointInVolume(void)
 {
 	Vector3f p;
@@ -38,6 +44,7 @@ double checkPlane(Vector3f p, Vector3f a, Vector3f b, Vector3f c) {
 Vector3f InteractionSpace::closestPointInVolume(Vector3f p, bool headtrack)
 {
 	Vector3f h = Vector3f(0,0,80);
+	headtrack = headtrack && ARInterface::getInstance().isValid();
 	if (headtrack) h = ARInterface::getInstance().getStatus().pos.cast<float>();
 
 	if (p.z() < 0) p.z() = 0;
