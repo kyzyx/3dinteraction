@@ -45,7 +45,10 @@ Vector3f InteractionSpace::closestPointInVolume(Vector3f p, bool headtrack)
 {
 	Vector3f h = Vector3f(0,0,80);
 	headtrack = headtrack && ARInterface::getInstance().isValid();
-	if (headtrack) h = ARInterface::getInstance().getStatus().pos.cast<float>();
+	if (headtrack) {
+		Vector3f headpos = ARInterface::getInstance().getStatus().pos.cast<float>();
+		if (headpos.z() > 5) h = headpos;
+	}
 
 	if (p.z() < 0) p.z() = 0;
 	double ratio = p.z()/h.z();

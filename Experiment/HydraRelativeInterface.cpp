@@ -25,6 +25,7 @@ InputStatus HydraRelativeInterface::updateDelta(void)
 	InputStatus s;
 	s.flags = 0;
 	s.timestamp = timestamp();
+	s.inputType = InputStatus::HYDRA;
 
 	int STATE;
 	STATE = sixenseSetActiveBase(0);

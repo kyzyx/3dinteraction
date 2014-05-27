@@ -35,7 +35,7 @@ bool TestScene::initMeshes() {
 
 void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	if (input.inputType == InputStatus::NONE) {
-		// Ignore invalide inputs
+		// Ignore invalid inputs
 		return;
 	}
 

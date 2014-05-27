@@ -27,6 +27,8 @@ bool ExperimentApp::onInit(void) {
 	for (int i = 0; i < 4; ++i) {
 		views[i] = dr->InitializeWindowTarget(width/2, height/2);
 	}
+
+	SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 
@@ -67,7 +69,7 @@ void ExperimentApp::onRender(void) {
 		for (int i = 0; i < 4; ++i) {
 			dr->setRenderTarget(views[i]->rt);
 			if (i&2) dr->setClearColor(0.f,0.f,0.f);
-			else     dr->setClearColor(0.02f,0.02f,0.02f);
+			else     dr->setClearColor(0.08f,0.08f,0.08f);
 			dr->clearRenderTarget(views[i]->rt);
 			if (i) dr->setAmbient(1.f,1.f,1.f);
 			setCamera(i);
