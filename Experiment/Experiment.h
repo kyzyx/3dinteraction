@@ -25,6 +25,7 @@ public:
 
    int getOutputType(void) const { return outputtype; }
 
+   void addAdjustable(App* app);
 private:
 	D3DRenderer* renderer;
 	InputInterface *m_headtrackInput;

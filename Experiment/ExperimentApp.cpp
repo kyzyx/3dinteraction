@@ -23,6 +23,7 @@ bool ExperimentApp::onInit(void) {
 	experiment.init(dr);
     scene = experiment.getNextScene();	
 	scene->init(dr);
+	experiment.addAdjustable(this);
 
 	for (int i = 0; i < 4; ++i) {
 		views[i] = dr->InitializeWindowTarget(width/2, height/2);

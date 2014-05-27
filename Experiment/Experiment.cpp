@@ -10,6 +10,7 @@
 #include "ARInterface.h"
 #include "LeapInterface.h"
 #include "TestScene.h"
+#include "AdjustableInterface.h"
 #include "TransformedInterface.h"
 
 Experiment::Experiment (std::string configFile) :
@@ -93,6 +94,10 @@ Experiment::~Experiment (void) {
 	if (m_headtrackInput) delete m_headtrackInput;
 	m_log->endExperiment();
 	delete m_log;
+}
+
+void Experiment::addAdjustable(App* app) {
+	m_inputDevice = new AdjustableInterface(m_inputDevice, app);
 }
 
 Scene* Experiment::getNextScene (void) {
