@@ -23,7 +23,7 @@ public:
 	Scene (void);
 
 	// Log constructor, uses log to record input data (see TestScene)
-	Scene (JSONLog *log);
+	Scene (JSONLog *log, InputStatus startPos=InputStatus(), InputStatus endPos=InputStatus());
 
 	~Scene (void);
 
@@ -37,7 +37,7 @@ protected:
 	virtual bool initMeshes(void) { return true; }
 	virtual void _processInput (InputStatus &input, InputStatus &deltaInput){;}
 
-	Mesh* addMesh (std::string meshName, std::string filename);
+	Mesh* addMesh (std::string meshName, std::string filename, bool reversed=true, bool flatshaded=false);
 	Mesh* addMesh (std::string meshName, Mesh* m);
 	void removeMesh (std::string meshName);
 
@@ -50,6 +50,8 @@ protected:
 	// True if user has clicked the start position, but not the end.
 	// Input logging is only done when this is true
 	bool m_started; 
+
+	InputStatus m_startPos, m_endPos;
 
 private:
 	InputStatus m_lastInput;

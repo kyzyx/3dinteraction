@@ -4,7 +4,7 @@
 SDLHandler::SDLHandler(App* myapp)
 {
 	app = myapp;
-	app->addHandler(this);
+	//app->addHandler(this);
 }
 
 SDLHandler::~SDLHandler(void)

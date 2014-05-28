@@ -18,5 +18,8 @@ protected:
 	};
 
 	SceneState m_state;
+
+	InputStatus m_startPos;
+	InputStatus m_endPos;
 };
 

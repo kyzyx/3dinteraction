@@ -1,9 +1,27 @@
+#include <random>
+
 #include "TestScene.h"
 #include "InteractionSpace.h"
 #include "D3DMesh.h"
 
-TestScene::TestScene(JSONLog *log) : Scene(log), m_state(WAIT_START)
-{
+TestScene::TestScene(JSONLog *log) : Scene(), m_state(WAIT_START) {
+	m_log = log;
+
+	std::random_device rd;
+	std::default_random_engine el(rd());
+	std::uniform_real_distribution<float> x_uniform_dist(-15,15);
+	std::uniform_real_distribution<float> y_uniform_dist(-8,8);
+	std::uniform_real_distribution<float> z_uniform_dist(10,20);
+
+	m_startPos = InputStatus();
+	m_startPos.x() = x_uniform_dist(el);
+	m_startPos.y() = y_uniform_dist(el);
+	m_startPos.z() = z_uniform_dist(el);
+	m_endPos = InputStatus();
+	m_endPos.x() = x_uniform_dist(el);
+	m_endPos.y() = y_uniform_dist(el);
+	m_endPos.z() = z_uniform_dist(el);
+	m_log->startScene(m_startPos, m_endPos);
 }
 
 
@@ -14,19 +32,18 @@ TestScene::~TestScene(void)
 bool TestScene::initMeshes() {
 	Mesh *mesh;
 
-	mesh = addMesh("target", "ico.off");
-	mesh->setColor(.4,.4,.4);
-	mesh->setTranslation(-10,0,15);
-	mesh->setScale(1,1,1);
-
 	mesh = addMesh("start", "ico.off");
-	mesh->setColor(.4, .4, .4);
-	mesh->setTranslation(10,0,15);
+	mesh->setColor(.4f, .4f, .4f);
+	mesh->setTranslation(m_startPos.x(), m_startPos.y(), m_startPos.z());
 	mesh->setScale(1,1,1);
 
-	Mesh* m = new D3DMesh("spaceship.off", m_renderer, true, true);
-	mesh = addMesh("spaceship", m);
-	mesh->setColor(1,0,0);
+	mesh = addMesh("target", "ico.off");
+	mesh->setColor(.4f,.4f,.4f);
+	mesh->setTranslation(m_endPos.x(), m_endPos.y(), m_endPos.z());
+	mesh->setScale(1,1,1);
+
+	mesh = addMesh("spaceship", "pointer.off", true, true);
+	//mesh->setColor(1,0,0);
 	mesh->setTranslation(0,0,20);
 	mesh->setScale(0.4f, 0.4f, 0.1f);
 
@@ -51,7 +68,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	// Calculate useful values
-	const float CLICK_DIST = 0.8;
+	const float CLICK_DIST = 0.8f;
 	float d = (ship->getTranslation() - port->getTranslation()).norm(); // distance to target
 	bool validClick = d <= CLICK_DIST && input.isFlagSet(InputStatus::INPUTFLAG_SELECT);
 
@@ -59,21 +76,21 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	if (d <= CLICK_DIST) {
 		port->setColor(1,1,1);
 	} else {
-		port->setColor(0.8,0,0);
+		port->setColor(0.8f,0,0);
 	}
 
-	if (input.isFlagSet(InputStatus::INPUTFLAG_SELECT)) {
-		ship->setColor(0,0,1);
-	} else {
-		ship->setColor(1,0,0);
-	}
+	//if (input.isFlagSet(InputStatus::INPUTFLAG_SELECT)) {
+	//	ship->setColor(0,0,1);
+	//} else {
+	//	ship->setColor(1,0,0);
+	//}
 
 	// Update the state machine
 	switch (m_state) {
 	case WAIT_START:
 		if (validClick) {
 			m_started = true;
-			port->setColor(.4, .4, .4);
+			port->setColor(.4f, .4f, .4f);
 			m_state = WAIT_TARGET;
 		}
 		break;
@@ -84,15 +101,15 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 		}
 		break;
 	case FINISHED:
-		port->setColor(0,.5,.5);
-		// TODO end it all
+		port->setColor(0,.5f,.5f);
+		m_finished = true;		
 		break;
 	default:
 		break;
 	}
 
 	// Update the ship's position
-	ship->setTranslation(input.x(), input.y(), input.z());
+	ship->setTranslation((float)input.x(), (float)input.y(), (float)input.z());
 	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
 	ship->setRotation(input.rot.cast<float>());
 }

@@ -109,7 +109,13 @@ void ExperimentApp::drawMeshes(void) {
 void ExperimentApp::onLoop(void) {
 	experiment->onLoop();
 	if (scene->finished()) {
-		scene = experiment->getNextScene();
+		Scene *nextScene = experiment->getNextScene();
+		if (nextScene == nullptr) {
+			// that was the last scene...let's end this
+			stop();
+		} else {
+			scene = nextScene;
+		}
         scene->init((D3DRenderer*)render);
 	}
 

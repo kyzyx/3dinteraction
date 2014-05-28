@@ -5,9 +5,8 @@
 Scene::Scene (void) : m_finished(false), m_log(nullptr), m_started(false) {
 }
 
-Scene::Scene (JSONLog *log) : m_finished(false), m_log(log), m_started(false) {
-	// TODO placeholders
-	m_log->startScene(InputStatus(), InputStatus());
+Scene::Scene (JSONLog *log, InputStatus startPos, InputStatus endPos) : m_finished(false), m_log(log), m_started(false) {
+	m_log->startScene(startPos, endPos);
 }
 
 Scene::~Scene (void) {
@@ -38,8 +37,9 @@ Mesh* Scene::addMesh (std::string meshName, Mesh* m) {
 	m_meshNames[meshName] = m;
 	return m;
 }
-Mesh* Scene::addMesh (std::string meshName, std::string filename) {
-	return addMesh(meshName, new D3DMesh(filename.c_str(), m_renderer, true));
+
+Mesh* Scene::addMesh (std::string meshName, std::string filename, bool reversed, bool flatshaded) {
+	return addMesh(meshName, new D3DMesh(filename.c_str(), m_renderer, reversed, flatshaded));
 }
 
 void Scene::removeMesh (std::string meshName) {

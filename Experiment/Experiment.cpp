@@ -102,7 +102,7 @@ void Experiment::addAdjustable(App* app) {
 
 Scene* Experiment::getNextScene (void) {
 	if (m_sceneIdx == m_numScenes) {
-		return NULL;
+		return nullptr;
 	}
 
 	delete m_curScene;

@@ -1,9 +1,15 @@
+#include <string>
+
 #include "ExperimentApp.h"
 #include "timestamp.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PSTR pScmdline, int iCmdshow) {
 	double startTime = timestamp();
-	App* app = new ExperimentApp("exp1.json");
+	std::string experimentConfig(pScmdline);
+	if (experimentConfig.size() == 0) {
+		experimentConfig = "exp1.json";
+	}
+	App* app = new ExperimentApp(experimentConfig);
 	int ret = app->onExecute();
 	delete app;
 	return ret;

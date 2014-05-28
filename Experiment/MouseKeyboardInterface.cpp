@@ -38,10 +38,12 @@ InputStatus MouseKeyboardInterface::updateDelta()
 		y = -y;
 	
 		uint8_t *keys = SDL_GetKeyState(NULL); // memory handled by SDL, do not free
-		s.x() = x/10.;
 		if (keys != NULL) {
 			if (keys[SDLK_LSHIFT]) s.z() = -y/10.; // Move on XZ plane
-			else                   s.y() = y/10.;  // Move on XY plane
+			else {
+				s.x() = x/10.;
+				s.y() = y/10.;  // Move on XY plane
+			}
 		}
 		if (buttons & SDL_BUTTON(1)) {
 			s.setFlag(InputStatus::INPUTFLAG_SELECT);
