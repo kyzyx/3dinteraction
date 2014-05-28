@@ -26,8 +26,8 @@ bool CalibrationScene::initMeshes(void) {
 	return true;
 }
 
-void CalibrationScene::processInput(InputStatus &input, InputStatus &deltaInput) {
-	if (input.flags & InputStatus::INPUTFLAG_SELECT) {
+void CalibrationScene::_processInput(InputStatus &input, InputStatus &deltaInput) {
+	if (input.isFlagSet(InputStatus::INPUTFLAG_SELECT)) {
 		alignment->addCorrespondence(input.pos.cast<float>(), pos);
 		m_finished = true;
 	}

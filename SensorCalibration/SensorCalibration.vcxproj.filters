@@ -51,9 +51,6 @@
     <ClInclude Include="..\Experiment\InputStatus.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Experiment\InteractionSpace.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\Experiment\json.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -90,6 +87,30 @@
     <ClInclude Include="CalibrationExperiment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Experiment\AdjustableInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Flea3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\HydraRelativeInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\JSONLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\LeapInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\RelativeInputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\ARInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractionSpace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\Experiment\Alignment.cpp">
@@ -117,9 +138,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Experiment\HydraInterface.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Experiment\InteractionSpace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Experiment\json.cpp">
@@ -150,6 +168,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CalibrationExperiment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\AdjustableInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\ARInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\Flea3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\HydraRelativeInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\JSONLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\RelativeInputInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\LeapInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractionSpace.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -267,6 +309,15 @@
     </None>
     <None Include="..\Experiment\Eigen\UmfPackSupport">
       <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="calib.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="vs_1light_headtracked.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="exp1.json">
+      <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
 </Project>

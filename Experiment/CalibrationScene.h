@@ -10,8 +10,8 @@ public:
 	CalibrationScene(Alignment* a, Eigen::Vector3f p);
 	~CalibrationScene(void);
 
-	virtual void processInput (InputStatus &input, InputStatus &deltaInput);
 protected:
+	virtual void _processInput (InputStatus &input, InputStatus &deltaInput);
 	virtual bool initMeshes(void);
 
 	Alignment* alignment;

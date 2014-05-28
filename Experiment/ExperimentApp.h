@@ -10,6 +10,7 @@ class ExperimentApp :
 {
 public:
 	ExperimentApp(void);
+	ExperimentApp(std::string configfile);
 	virtual ~ExperimentApp(void);
 
 	void onRender();
@@ -20,10 +21,9 @@ private:
 	void drawMeshes();
 	void setCamera(int camera);
 	enum {CAMERA_MAIN, CAMERA_FRONT, CAMERA_TOP, CAMERA_SIDE};
-	InputStatus lastInput;
-	Experiment experiment;
-	Scene *scene;
-
 	D3DWindowTarget* views[4];
+protected:
+	Experiment* experiment;
+	Scene *scene;
 };
 

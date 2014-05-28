@@ -1,25 +1,17 @@
 #pragma once
-#include "directxapp.h"
-
 #include "Mesh.h"
 #include "InputInterface.h"
 #include "CalibrationExperiment.h"
 #include "Scene.h"
+#include "ExperimentApp.h"
 
 class CalibrationApp :
-	public DirectXApp
+	public ExperimentApp
 {
 public:
 	CalibrationApp(void);
 	~CalibrationApp(void);
 	
-	void onRender();
 	void onLoop();
-	bool onInit();
-
-private:
-	InputStatus lastInput;
-	CalibrationExperiment experiment;
-	Scene *scene;
 };
 
