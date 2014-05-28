@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{95176C58-2D0F-466E-89BE-0709B4BB47E6}</ProjectGuid>
+    <RootNamespace>SensorCalibration</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Experiment\SDL.props" />
+    <Import Project="..\Experiment\D3D11.props" />
+    <Import Project="..\Experiment\aruco.props" />
+    <Import Project="..\Experiment\local_macros.props" />
+    <Import Project="..\Experiment\LeapSDK_Debug.props" />
+    <Import Project="..\Experiment\opencv_debug.props" />
+    <Import Project="..\Experiment\flycap_debug.props" />
+    <Import Project="..\Experiment\sixense_debug.props" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\Experiment\SDL.props" />
+    <Import Project="..\Experiment\D3D11_release.props" />
+    <Import Project="..\Experiment\aruco.props" />
+    <Import Project="..\Experiment\local_macros.props" />
+    <Import Project="..\Experiment\LeapSDK.props" />
+    <Import Project="..\Experiment\flycap.props" />
+    <Import Project="..\Experiment\opencv.props" />
+    <Import Project="..\Experiment\sixense.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>../Experiment;$(FW1FONTWRAPPER_DIR);$(DXSDK_DIR)\Include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalDependencies>nvapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Experiment\AdjustableInterface.h" />
+    <ClInclude Include="..\Experiment\Alignment.h" />
+    <ClInclude Include="..\Experiment\app.h" />
+    <ClInclude Include="..\Experiment\ARInterface.h" />
+    <ClInclude Include="..\Experiment\CalibrationScene.h" />
+    <ClInclude Include="..\Experiment\D3DMesh.h" />
+    <ClInclude Include="..\Experiment\D3DRenderer.h" />
+    <ClInclude Include="..\Experiment\DirectXApp.h" />
+    <ClInclude Include="..\Experiment\Experiment.h" />
+    <ClInclude Include="..\Experiment\ExperimentApp.h" />
+    <ClInclude Include="..\Experiment\Flea3.h" />
+    <ClInclude Include="..\Experiment\HydraInterface.h" />
+    <ClInclude Include="..\Experiment\HydraRelativeInterface.h" />
+    <ClInclude Include="..\Experiment\InputInterface.h" />
+    <ClInclude Include="..\Experiment\InputStatus.h" />
+    <ClInclude Include="..\Experiment\json.h" />
+    <ClInclude Include="..\Experiment\JSONLog.h" />
+    <ClInclude Include="..\Experiment\LeapInterface.h" />
+    <ClInclude Include="..\Experiment\Mesh.h" />
+    <ClInclude Include="..\Experiment\MouseKeyboardInterface.h" />
+    <ClInclude Include="..\Experiment\nvapi.h" />
+    <ClInclude Include="..\Experiment\RelativeInputInterface.h" />
+    <ClInclude Include="..\Experiment\Renderer.h" />
+    <ClInclude Include="..\Experiment\Scene.h" />
+    <ClInclude Include="..\Experiment\SDLHandler.h" />
+    <ClInclude Include="..\Experiment\TestScene.h" />
+    <ClInclude Include="..\Experiment\timestamp.h" />
+    <ClInclude Include="..\Experiment\TransformedInterface.h" />
+    <ClInclude Include="CalibrationApp.h" />
+    <ClInclude Include="CalibrationExperiment.h" />
+    <ClInclude Include="InteractionSpace.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Experiment\AdjustableInterface.cpp" />
+    <ClCompile Include="..\Experiment\Alignment.cpp" />
+    <ClCompile Include="..\Experiment\app.cpp" />
+    <ClCompile Include="..\Experiment\ARInterface.cpp" />
+    <ClCompile Include="..\Experiment\CalibrationScene.cpp" />
+    <ClCompile Include="..\Experiment\D3DMesh.cpp" />
+    <ClCompile Include="..\Experiment\D3DRenderer.cpp" />
+    <ClCompile Include="..\Experiment\DirectXApp.cpp" />
+    <ClCompile Include="..\Experiment\Experiment.cpp" />
+    <ClCompile Include="..\Experiment\ExperimentApp.cpp" />
+    <ClCompile Include="..\Experiment\Flea3.cpp" />
+    <ClCompile Include="..\Experiment\HydraInterface.cpp" />
+    <ClCompile Include="..\Experiment\HydraRelativeInterface.cpp" />
+    <ClCompile Include="..\Experiment\json.cpp" />
+    <ClCompile Include="..\Experiment\JSONLog.cpp" />
+    <ClCompile Include="..\Experiment\LeapInterface.cpp" />
+    <ClCompile Include="..\Experiment\Mesh.cpp" />
+    <ClCompile Include="..\Experiment\MouseKeyboardInterface.cpp" />
+    <ClCompile Include="..\Experiment\RelativeInputInterface.cpp" />
+    <ClCompile Include="..\Experiment\Scene.cpp" />
+    <ClCompile Include="..\Experiment\SDLHandler.cpp" />
+    <ClCompile Include="..\Experiment\TestScene.cpp" />
+    <ClCompile Include="..\Experiment\timestamp.cpp" />
+    <ClCompile Include="CalibrationApp.cpp" />
+    <ClCompile Include="CalibrationExperiment.cpp" />
+    <ClCompile Include="InteractionSpace.cpp" />
+    <ClCompile Include="main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Experiment\Eigen\Array" />
+    <None Include="..\Experiment\Eigen\Cholesky" />
+    <None Include="..\Experiment\Eigen\CholmodSupport" />
+    <None Include="..\Experiment\Eigen\Core" />
+    <None Include="..\Experiment\Eigen\Dense" />
+    <None Include="..\Experiment\Eigen\Eigen" />
+    <None Include="..\Experiment\Eigen\Eigen2Support" />
+    <None Include="..\Experiment\Eigen\Eigenvalues" />
+    <None Include="..\Experiment\Eigen\Geometry" />
+    <None Include="..\Experiment\Eigen\Householder" />
+    <None Include="..\Experiment\Eigen\IterativeLinearSolvers" />
+    <None Include="..\Experiment\Eigen\Jacobi" />
+    <None Include="..\Experiment\Eigen\LeastSquares" />
+    <None Include="..\Experiment\Eigen\LU" />
+    <None Include="..\Experiment\Eigen\MetisSupport" />
+    <None Include="..\Experiment\Eigen\OrderingMethods" />
+    <None Include="..\Experiment\Eigen\PardisoSupport" />
+    <None Include="..\Experiment\Eigen\PaStiXSupport" />
+    <None Include="..\Experiment\Eigen\QR" />
+    <None Include="..\Experiment\Eigen\QtAlignedMalloc" />
+    <None Include="..\Experiment\Eigen\Sparse" />
+    <None Include="..\Experiment\Eigen\SparseCholesky" />
+    <None Include="..\Experiment\Eigen\SparseCore" />
+    <None Include="..\Experiment\Eigen\SparseLU" />
+    <None Include="..\Experiment\Eigen\SparseQR" />
+    <None Include="..\Experiment\Eigen\SPQRSupport" />
+    <None Include="..\Experiment\Eigen\StdDeque" />
+    <None Include="..\Experiment\Eigen\StdList" />
+    <None Include="..\Experiment\Eigen\StdVector" />
+    <None Include="..\Experiment\Eigen\SuperLUSupport" />
+    <None Include="..\Experiment\Eigen\SVD" />
+    <None Include="..\Experiment\Eigen\UmfPackSupport" />
+    <None Include="..\Experiment\ps.ps" />
+    <None Include="..\Experiment\ps_1light.ps" />
+    <None Include="..\Experiment\tps.ps" />
+    <None Include="..\Experiment\tvs.vs" />
+    <None Include="..\Experiment\vs.vs" />
+    <None Include="..\Experiment\vs_1light.vs" />
+    <None Include="calib.json" />
+    <None Include="exp1.json" />
+    <None Include="vs_1light_headtracked.vs" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

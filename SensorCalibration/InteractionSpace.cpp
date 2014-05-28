@@ -6,8 +6,8 @@ using namespace Eigen;
 
 // Bounding box shortcut
 // Screen dimensions 59.790cm width 33.632cm height
-Vector3f mincoords(-59.79/2+5,-33.632/2+5,0);
-Vector3f maxcoords(59.79/2-5,33.632/2-5,60);
+Vector3f mincoords(-59.79/2+5,-33.632/2+5,25);
+Vector3f maxcoords(59.79/2-5,33.632/2-5,70);
 
 double InteractionSpace::screenheight(void) {
 	return maxcoords.y()*2;
@@ -17,6 +17,7 @@ double InteractionSpace::screenwidth(void) {
 }
 Vector3f InteractionSpace::randomPointInVolume(void)
 {
+	srand(time(0));
 	Vector3f p;
 	do {
 		p = Vector3f::Random();

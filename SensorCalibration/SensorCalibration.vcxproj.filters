@@ -1,0 +1,323 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\eigen">
+      <UniqueIdentifier>{9088500c-413e-4a43-9ef7-d15f872ab504}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Experiment\Alignment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\app.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\CalibrationScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\D3DMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\D3DRenderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\DirectXApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Experiment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\ExperimentApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\HydraInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\InputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\InputStatus.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\json.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Mesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\MouseKeyboardInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\nvapi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Renderer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Scene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\SDLHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\TestScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\timestamp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\TransformedInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalibrationApp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CalibrationExperiment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\AdjustableInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\Flea3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\HydraRelativeInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\JSONLog.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\LeapInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\RelativeInputInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Experiment\ARInterface.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="InteractionSpace.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\Experiment\Alignment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\app.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\CalibrationScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\D3DMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\D3DRenderer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\DirectXApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\Experiment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\ExperimentApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\HydraInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\json.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\Mesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\MouseKeyboardInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\Scene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\SDLHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\TestScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\timestamp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibrationApp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CalibrationExperiment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\AdjustableInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\ARInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\Flea3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\HydraRelativeInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\JSONLog.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\RelativeInputInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Experiment\LeapInterface.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InteractionSpace.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Experiment\ps.ps">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\ps_1light.ps">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\tps.ps">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\tvs.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\vs.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\vs_1light.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Array">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Cholesky">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\CholmodSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Core">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Dense">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Eigen">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Eigen2Support">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Eigenvalues">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Geometry">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Householder">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\IterativeLinearSolvers">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Jacobi">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\LeastSquares">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\LU">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\MetisSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\OrderingMethods">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\PardisoSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\PaStiXSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\QR">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\QtAlignedMalloc">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\Sparse">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SparseCholesky">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SparseCore">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SparseLU">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SparseQR">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SPQRSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\StdDeque">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\StdList">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\StdVector">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SuperLUSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\SVD">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="..\Experiment\Eigen\UmfPackSupport">
+      <Filter>Header Files\eigen</Filter>
+    </None>
+    <None Include="calib.json">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="vs_1light_headtracked.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="exp1.json">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
+</Project>

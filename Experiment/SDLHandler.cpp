@@ -4,13 +4,14 @@
 SDLHandler::SDLHandler(App* myapp)
 {
 	app = myapp;
+	app->addHandler(this);
 }
 
 SDLHandler::~SDLHandler(void)
 {
 }
 
-void SDLHandler::update() {
+void SDLHandler::Update() {
 };
 
 void SDLHandler::OnEvent(SDL_Event* Event) {

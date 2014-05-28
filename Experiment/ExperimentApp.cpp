@@ -7,26 +7,34 @@
 #include "Scene.h"
 #include "InteractionSpace.h"
 
-ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment("exp1.json")
+ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment(nullptr)
+{
+}
+
+ExperimentApp::ExperimentApp(std::string configfile) : DirectXApp(false), experiment(new Experiment(configfile))
 {
 }
 
 
 ExperimentApp::~ExperimentApp(void)
 {
+	if (experiment) delete experiment;
 }
 
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
 	D3DRenderer* dr = (D3DRenderer*) render;
-	experiment.init(dr);
-    scene = experiment.getNextScene();	
+	experiment->init(dr);
+    scene = experiment->getNextScene();	
 	scene->init(dr);
+	experiment->addAdjustable(this);
 
 	for (int i = 0; i < 4; ++i) {
 		views[i] = dr->InitializeWindowTarget(width/2, height/2);
 	}
+
+	SDL_ShowCursor(SDL_DISABLE);
 	return true;
 }
 
@@ -62,12 +70,13 @@ void ExperimentApp::setCamera(int camera) {
 
 
 void ExperimentApp::onRender(void) {
+	if (!scene) return;
 	D3DRenderer* dr = (D3DRenderer*) render;
-	if (experiment.getOutputType() & Experiment::OUTPUT_PROJECTIONS) {
+	if (experiment->getOutputType() & Experiment::OUTPUT_PROJECTIONS) {
 		for (int i = 0; i < 4; ++i) {
 			dr->setRenderTarget(views[i]->rt);
 			if (i&2) dr->setClearColor(0.f,0.f,0.f);
-			else     dr->setClearColor(0.02f,0.02f,0.02f);
+			else     dr->setClearColor(0.08f,0.08f,0.08f);
 			dr->clearRenderTarget(views[i]->rt);
 			if (i) dr->setAmbient(1.f,1.f,1.f);
 			setCamera(i);
@@ -98,12 +107,12 @@ void ExperimentApp::drawMeshes(void) {
 }
 
 void ExperimentApp::onLoop(void) {
-	experiment.onLoop();
+	experiment->onLoop();
 	if (scene->finished()) {
-		scene = experiment.getNextScene();
+		scene = experiment->getNextScene();
         scene->init((D3DRenderer*)render);
 	}
 
-	InputStatus input = experiment.getInput();
+	InputStatus input = experiment->getInput();
 	scene->processInput(input);
 }

@@ -31,7 +31,7 @@ public:
     const MeshVec& getMeshes (void);
 	bool finished (void) { return m_finished; }
 
-	void processInput (InputStatus &input);
+	virtual void processInput (InputStatus &input);
 
 protected:
 	virtual bool initMeshes(void) { return true; }

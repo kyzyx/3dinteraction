@@ -35,7 +35,7 @@ bool TestScene::initMeshes() {
 
 void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	if (input.inputType == InputStatus::NONE) {
-		// Ignore invalide inputs
+		// Ignore invalid inputs
 		return;
 	}
 
@@ -53,7 +53,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	// Calculate useful values
 	const float CLICK_DIST = 0.8;
 	float d = (ship->getTranslation() - port->getTranslation()).norm(); // distance to target
-	bool validClick = d <= CLICK_DIST && input.flagSet(InputStatus::INPUTFLAG_SELECT);
+	bool validClick = d <= CLICK_DIST && input.isFlagSet(InputStatus::INPUTFLAG_SELECT);
 
 	// Update colors based on conditions
 	if (d <= CLICK_DIST) {
@@ -62,7 +62,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 		port->setColor(0.8,0,0);
 	}
 
-	if (input.flagSet(InputStatus::INPUTFLAG_SELECT)) {
+	if (input.isFlagSet(InputStatus::INPUTFLAG_SELECT)) {
 		ship->setColor(0,0,1);
 	} else {
 		ship->setColor(1,0,0);

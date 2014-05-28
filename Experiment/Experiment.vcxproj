@@ -81,8 +81,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AdjustableInterface.cpp" />
+    <ClCompile Include="Alignment.cpp" />
     <ClCompile Include="app.cpp" />
     <ClCompile Include="ARInterface.cpp" />
+    <ClCompile Include="CalibrationScene.cpp" />
     <ClCompile Include="D3DMesh.cpp" />
     <ClCompile Include="D3DRenderer.cpp" />
     <ClCompile Include="DirectXApp.cpp" />
@@ -105,8 +108,11 @@
     <ClCompile Include="timestamp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AdjustableInterface.h" />
+    <ClInclude Include="Alignment.h" />
     <ClInclude Include="app.h" />
     <ClInclude Include="ARInterface.h" />
+    <ClInclude Include="CalibrationScene.h" />
     <ClInclude Include="D3DMesh.h" />
     <ClInclude Include="D3DRenderer.h" />
     <ClInclude Include="DirectXApp.h" />

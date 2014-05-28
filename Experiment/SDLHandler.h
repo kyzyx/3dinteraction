@@ -10,7 +10,7 @@ public:
 	SDLHandler(App* myapp);
 	~SDLHandler(void);
 	
-	virtual void update();
+	virtual void Update();
 	virtual void OnEvent(SDL_Event* Event);
 	virtual void OnInputFocus();
 	virtual void OnInputBlur();
@@ -38,7 +38,7 @@ public:
 	virtual void OnExit();
 	virtual void OnUser(Uint8 type, int code, void* data1, void* data2);
 	
-	virtual int status() { return 0; }
+	virtual int Status() { return 0; }
 
 protected:
 	App* app;

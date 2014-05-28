@@ -16,13 +16,13 @@ public:
 
 	// Constructors
 	InputStatus() 
-		: pos(0,0,0), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0) { ; }
+		: pos(0,0,0), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0), flags(0) { ; }
 	InputStatus(double x, double y, double z) 
-		: pos(x,y,z), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0)  { ; }
+		: pos(x,y,z), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0), flags(0)  { ; }
 	InputStatus(Eigen::Vector3d position) 
-		: pos(position), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0)  { ; }
+		: pos(position), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0), flags(0)  { ; }
 	InputStatus(Eigen::Vector4d position) 
-		: pos(position[0], position[1], position[2]), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0)  { ; }
+		: pos(position[0], position[1], position[2]), rot(1,0,0,0), inputType(UNKNOWN), timestamp(0.0), flags(0)  { ; }
 
 	InputStatus(const InputStatus& inputstatus) : pos(inputstatus.pos), rot(inputstatus.rot), flags(inputstatus.flags), inputType(inputstatus.inputType), timestamp(inputstatus.timestamp) { ; }
 	InputStatus(Eigen::Vector3d position, Eigen::Quaterniond rotation, int inputflags)
@@ -79,7 +79,7 @@ public:
 
 	Eigen::Quaterniond rotation() const { return rot; }
 
-	bool flagSet (InputFlag flag) { return (flags & (uint32_t)flag) != 0; }
+	bool isFlagSet (InputFlag flag) { return (flags & (uint32_t)flag) != 0; }
 	void setFlag (InputFlag flag) { flags |= (uint32_t)flag; }
 	void clearFlag (InputFlag flag) { flags &= ~(uint32_t)flag; }
 

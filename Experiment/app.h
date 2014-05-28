@@ -19,6 +19,8 @@ class App {
 		virtual void onRender();
 		virtual void onCleanup();
 
+		void addHandler(SDLHandler* h) { handlers.push_back(h); }
+
 		int getWidth() const { return width; }
 		int getHeight() const { return height; }
 		bool isFullscreen() const { return fullscreen; }

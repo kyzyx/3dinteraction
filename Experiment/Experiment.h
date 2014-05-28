@@ -19,16 +19,19 @@ public:
    ~Experiment (void);
    
    bool init (D3DRenderer* renderer);
-   Scene* getNextScene (void);
+   virtual Scene* getNextScene (void);
    InputStatus getInput (void);
    void onLoop (void);
 
    int getOutputType(void) const { return outputtype; }
 
+   void addAdjustable(App* app);
 private:
 	D3DRenderer* renderer;
 	InputInterface *m_headtrackInput;
 	InputInterface *m_inputDevice;
+
+protected:
 	int m_sceneIdx;
 	int m_numScenes;
 	int outputtype;
