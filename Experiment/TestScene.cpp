@@ -32,20 +32,20 @@ TestScene::~TestScene(void)
 bool TestScene::initMeshes() {
 	Mesh *mesh;
 
-	mesh = addMesh("start", "ico.off");
+	mesh = addMesh("start", "spaceship.off", true, true);
 	mesh->setColor(.4f, .4f, .4f);
 	mesh->setTranslation(m_startPos.x(), m_startPos.y(), m_startPos.z());
-	mesh->setScale(1,1,1);
+	mesh->setScale(0.4f,0.4f,0.1f);
 
-	mesh = addMesh("target", "ico.off");
+	mesh = addMesh("target", "spaceship.off", true, true);
 	mesh->setColor(.4f,.4f,.4f);
 	mesh->setTranslation(m_endPos.x(), m_endPos.y(), m_endPos.z());
-	mesh->setScale(1,1,1);
+	mesh->setScale(0.4f,0.4f,0.1f);
 
-	mesh = addMesh("spaceship", "pointer.off", true, true);
+	mesh = addMesh("spaceship", "ico.off");
 	//mesh->setColor(1,0,0);
 	mesh->setTranslation(0,0,20);
-	mesh->setScale(0.4f, 0.4f, 0.1f);
+	mesh->setScale(1.f, 1.f, 1.f);
 
 	return true;
 }
@@ -110,6 +110,8 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 
 	// Update the ship's position
 	ship->setTranslation((float)input.x(), (float)input.y(), (float)input.z());
-	ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
+	if (input.inputType != InputStatus::HYDRA && input.inputType != InputStatus::LEAP) {
+		ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
+	}
 	ship->setRotation(input.rot.cast<float>());
 }

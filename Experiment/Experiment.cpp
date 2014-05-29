@@ -142,6 +142,9 @@ InputStatus Experiment::getInput (void) {
 
 void Experiment::onLoop (void) {
 	m_inputDevice->update();
+	if (!(outputtype & OUTPUT_3D)) {
+		renderer->disableStereo();
+	}
 	if ((outputtype & OUTPUT_HEADTRACKED) && m_headtrackInput != nullptr) {
 		InputStatus arInput = m_headtrackInput->getStatus();
 		// Fiducial -> eye position conversion
@@ -155,7 +158,7 @@ void Experiment::onLoop (void) {
 		//	<< L")";
 		//renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
 		msg.clear();
-		msg << "Scene " << m_sceneIdx + 1 << " / " << m_numScenes;
+		msg << "Scene " << m_sceneIdx << " / " << m_numScenes;
 		renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
 		((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);
 	}

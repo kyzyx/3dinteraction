@@ -37,6 +37,7 @@ ARInterface::ARInterface(void) : m_markerSize(5.08), m_tagID(0), m_camera(nullpt
 
 ARInterface::~ARInterface(void)
 {
+	m_camera = nullptr;
 	//delete m_camera;
 }
 
@@ -44,6 +45,7 @@ bool ARInterface::isValid(void) {
 	return m_camera && m_camera->connected();
 }
 void ARInterface::processFrame (cv::Mat &frame) {
+	if (!m_camera) return;
 	m_detector.detect(frame, m_markers, m_camParams, m_markerSize);
 	cv::Mat bw = m_detector.getThresholdedImage();
 	for (size_t idx = 0; idx < m_markers.size(); ++idx) {

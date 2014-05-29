@@ -6,7 +6,7 @@ from ttk import *
 
 class TopLevel (Frame):
 	inputs = ['mousekbd', '3dmouse', 'leap']
-	outputs = ['2d', '3dHeadtracked']
+	outputs = ['2dprojections', '3dHeadtracked']
 
 	def __init__ (self, parent):
 		Frame.__init__(self, parent)
