@@ -115,5 +115,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	if (input.inputType != InputStatus::HYDRA && input.inputType != InputStatus::LEAP) {
 		ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
 	}
+	if (input.isFlagSet(InputStatus::INPUTFLAG_ACTIVE)) ship->setColor(1.f, 0.f, 0.f);
+	else ship->setColor(0.7f,0.f,1.f);
 	ship->setRotation(input.rot.cast<float>());
 }

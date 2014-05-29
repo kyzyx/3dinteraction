@@ -71,6 +71,7 @@ InputStatus HydraRelativeInterface::updateDelta(void)
 		originpos[2] = acd.controllers[index].pos[2]/10;
 
 		originrot = Eigen::Quaterniond(acd.controllers[index].rot_quat[3], acd.controllers[index].rot_quat[0], acd.controllers[index].rot_quat[1], acd.controllers[index].rot_quat[2]);
+		s.setFlag(InputStatus::INPUTFLAG_ACTIVE);
 	}
 
 	return s;

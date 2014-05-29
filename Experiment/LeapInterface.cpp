@@ -19,6 +19,9 @@ LeapInterface::~LeapInterface(void)
 void LeapInterface::update() {
 	Frame f = controller.frame();
 	vector<int> extended;
+	status.timestamp = timestamp();
+	status.flags = 0;
+
 	for (int i = 0; i < f.pointables().count(); ++i) {
 		if (f.pointables()[i].isExtended()) {
 			int id = f.pointables()[i].id();
@@ -48,6 +51,5 @@ void LeapInterface::update() {
 	Eigen::Vector3d y(p.direction().x, p.direction().y, p.direction().z);
 	Eigen::AngleAxisd t(acos(x.dot(y)), x.cross(y));
 	status.rot = t*baserotation;
-	status.timestamp = timestamp();
-	status.flags = 0;
+	status.setFlag(InputStatus::INPUTFLAG_ACTIVE);
 }
