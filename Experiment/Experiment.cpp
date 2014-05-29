@@ -12,6 +12,7 @@
 #include "TestScene.h"
 #include "AdjustableInterface.h"
 #include "TransformedInterface.h"
+#include "SmoothedInterface.h"
 
 Experiment::Experiment (std::string configFile) :
 m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nullptr) {
@@ -113,6 +114,7 @@ Scene* Experiment::getNextScene (void) {
 	return m_curScene;
 }
 
+Eigen::Vector3d vzero() { return Eigen::Vector3d::Zero(); }
 
 bool Experiment::init (D3DRenderer* r) {
 	renderer = r;
@@ -124,7 +126,10 @@ bool Experiment::init (D3DRenderer* r) {
              0.02044090, -0.97236698, -0.23256102,  24.426980,
 			 0.02092891, -0.23214250,  0.97245660,  6.051621,
              0.        , 0.         ,  0.        ,  1.;
-		m_headtrackInput = new TransformedInterface(new ARInputInterface(), Xform(m));
+		m_headtrackInput = new SmoothedInterface(
+			new TransformedInterface(new ARInputInterface(), Xform(m)),
+			new DoubleAvgFilter<Eigen::Vector3d, vzero>(8)
+		);
 		renderer->EnableHeadtracking();
 		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);
 	}
