@@ -97,7 +97,9 @@ Experiment::~Experiment (void) {
 }
 
 void Experiment::addAdjustable(App* app) {
-	m_inputDevice = new AdjustableInterface(m_inputDevice, app);
+	AdjustableInterface* ai = new AdjustableInterface(m_inputDevice, app);
+	m_inputDevice = ai;
+	app->addHandler(ai);
 }
 
 Scene* Experiment::getNextScene (void) {

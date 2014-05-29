@@ -84,6 +84,5 @@ void App::onCleanup(){
 	if (handler) {
 		delete handler;
 		handler = NULL;
-		for (size_t i = 0; i < handlers.size(); ++i) delete handlers[i];
 	}
 }
