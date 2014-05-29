@@ -49,13 +49,19 @@ InputStatus HydraRelativeInterface::updateDelta(void)
 		s.flags = InputStatus::INPUTFLAG_DESELECT;
 	}
 	
-	if (acd.controllers[index].buttons & SIXENSE_BUTTON_BUMPER) {
-		if (!states.buttonJustPressed(SIXENSE_BUTTON_BUMPER)) {
+	if (acd.controllers[index].buttons & SIXENSE_BUTTON_1) {
+		if (!states.buttonJustPressed(SIXENSE_BUTTON_1)) {
+			const double MOUSE_THRESHOLD = 0.08;
 			s.pos[0] = acd.controllers[index].pos[0]/10; // mm to cm
 			s.pos[1] = acd.controllers[index].pos[1]/10;
 			s.pos[2] = acd.controllers[index].pos[2]/10;
 
 			s.pos -= originpos;
+
+			if (s.pos.norm() > MOUSE_THRESHOLD) {
+				s.pos *= 1.6;
+				s.setFlag(InputStatus::INPUTFLAG_DEBUG);
+			}
 
 			s.rot = Eigen::Quaterniond(acd.controllers[index].rot_quat[3], acd.controllers[index].rot_quat[0], acd.controllers[index].rot_quat[1], acd.controllers[index].rot_quat[2]);
 			s.rot = s.rot*originrot.inverse();

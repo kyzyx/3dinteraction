@@ -10,8 +10,8 @@ public:
 	enum InputFlag : uint32_t {
 		INPUTFLAG_NONE = 0,
 		INPUTFLAG_SELECT = 1,
-		INPUTFLAG_DESELECT = 2
-		// INPUTFLAG_XXX = 4,
+		INPUTFLAG_DESELECT = 2,
+		INPUTFLAG_DEBUG = 4,
 	};
 
 	// Constructors
