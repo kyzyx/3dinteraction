@@ -145,12 +145,15 @@ void Experiment::onLoop (void) {
 		// Fiducial -> eye position conversion
 		arInput.pos += arInput.rot*Eigen::Vector3d(-5.15,0,-3);
 		std::wstringstream msg;
-		msg	<< L"Tag Id: " << arInput.flags
-			<< L", pos=("
-			<< arInput.x() << L", "
-			<< arInput.y() << L", "
-			<< arInput.z()
-			<< L")";
+		//msg	<< L"Tag Id: " << arInput.flags
+		//	<< L", pos=("
+		//	<< arInput.x() << L", "
+		//	<< arInput.y() << L", "
+		//	<< arInput.z()
+		//	<< L")";
+		//renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
+		msg.clear();
+		msg << "Scene " << m_sceneIdx + 1 << " / " << m_numScenes;
 		renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
 		((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);
 	}
