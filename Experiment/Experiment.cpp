@@ -48,13 +48,18 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 		m_inputDevice = new TransformedInterface(new ARInputInterface(), Xform(m));
     }
 	else  if (input == "leap") {
-		Eigen::Matrix4d m;
-		m <<
+		Eigen::Matrix4d m1, m2;
+		m1 <<
 		    9.97721366e-01,  -4.08118719e-02,   5.37258553e-02,     0.4551766,
 			4.07157079e-02,   9.99166611e-01,   2.88367682e-03,   -36.1866713 + 1.15,
 		   -5.37987690e-02,  -6.89619746e-04,   9.98551559e-01,    21.3061088,
 		    0             ,   0             ,   0             ,    1;
-		m_inputDevice = new TransformedInterface(new LeapInterface(), Xform(m));
+		m2 <<
+			 1.17, -0.0653715, -0.00466023, 0.0,
+		    -0.0444751, 1.35, -0.161685, 10.0,
+		     0.0, 0.0, 1.23, -4.0,
+		     0, 0, 0, 1;
+		m_inputDevice = new TransformedInterface(new TransformedInterface(new LeapInterface(), Xform(m1)), Xform(m2));
 	}
 
 	if (output == "3d") {
