@@ -1,3 +1,4 @@
+import sys
 import subprocess
 import json
 
@@ -5,14 +6,20 @@ from Tkinter import *
 from ttk import *
 
 class TopLevel (Frame):
-	inputs = ['mousekbd', '3dmouse', 'leap']
-	outputs = ['2dprojections', '3dHeadtracked']
+	inputs = ['mousekbd', '3dmouse', 'leap','mousekbd', '3dmouse', 'leap']
+	outputs = ['2dprojections', '2dprojections', '2dprojections', '3dHeadtracked', '3dHeadtracked', '3dHeadtracked']
 
-	def __init__ (self, parent):
+	def __init__ (self, parent, subj="test"):
 		Frame.__init__(self, parent)
 		self.parent = parent
 		self.inputIdx = 0
 		self.outputIdx = 0
+		self.subj = subj
+		if subj[0].isdigit():
+			# Latin square
+			row = int(subj,10)%len(self.inputs)
+			self.inputs = self.inputs[row:] + self.inputs[:row]
+			self.outputs = self.outputs[row:] + self.outputs[:row]
 		self.initUI()
 
 	def initUI (self):
@@ -27,6 +34,7 @@ class TopLevel (Frame):
 		self.subjectLabel = Label(line1, text="Subject")
 		self.subjectLabel.pack(side=LEFT)
 		self.subjectText = Text(line1, height=1)
+		self.subjectText.insert(END, self.subj)
 		self.subjectText.pack(side=RIGHT)
 
 		line2 = Frame(self)
@@ -71,11 +79,10 @@ class TopLevel (Frame):
 			experimentConfigFile.close()
 
 			self.inputIdx += 1
+			self.outputIdx += 1
 			if self.inputIdx == len(self.inputs):
 				self.inputIdx = 0
-				self.outputIdx += 1
-				if self.outputIdx == len(self.outputs):
-					self.outputIdx = 0
+				self.outputIdx = 0
 			self.experimentLabel.config(text="{} / {}".format(self.outputs[self.outputIdx], self.inputs[self.inputIdx]))
 
 			print "Running experiment with config file {}".format(experimentConfigName)
@@ -84,9 +91,12 @@ class TopLevel (Frame):
 
 
 def main ():
+	subj = "test"
+	if len(sys.argv) > 1:
+		subj = sys.argv[1]
 	root = Tk()
 	root.geometry("250x200")
-	app = TopLevel(root)
+	app = TopLevel(root, subj)
 	root.mainloop()
 
 if __name__ == "__main__":
