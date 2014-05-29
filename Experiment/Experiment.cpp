@@ -133,7 +133,7 @@ bool Experiment::init (D3DRenderer* r) {
              0.        , 0.         ,  0.        ,  1.;
 		m_headtrackInput = new SmoothedInterface(
 			new TransformedInterface(new ARInputInterface(), Xform(m)),
-			new DoubleAvgFilter<Eigen::Vector3d, vzero>(8)
+			new DoubleAvgFilter<Eigen::Vector3d, vzero>(12)
 		);
 		renderer->EnableHeadtracking();
 		renderer->setHeadPosition(0.f,0.f,60.f,0.0311f);

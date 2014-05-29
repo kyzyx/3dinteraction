@@ -41,9 +41,9 @@ InputStatus MouseKeyboardInterface::updateDelta()
 		if (keys != NULL) {
 			if (keys[SDLK_LSHIFT]) s.z() = -y/50.; // Move on XZ plane
 			else {
-				s.x() = x/50.;
 				s.y() = y/50.;  // Move on XY plane
 			}
+			s.x() = x/50.;
 		}
 		if (buttons & SDL_BUTTON(1)) {
 			s.setFlag(InputStatus::INPUTFLAG_SELECT);

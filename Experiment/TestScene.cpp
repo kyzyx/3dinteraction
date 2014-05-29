@@ -3,15 +3,39 @@
 #include "TestScene.h"
 #include "InteractionSpace.h"
 #include "D3DMesh.h"
+#include <ctime>
 
 using namespace Eigen;
+
+double randd(){
+  static int first = 1;
+  if (first) {
+    srand(time(0));
+    first = 0;
+  }
+
+  // Return random number
+  int r1 = rand();
+  double r2 = ((double) rand()) / ((double) RAND_MAX);
+  return (r1 + r2) / ((double) RAND_MAX);
+}
+
 TestScene::TestScene(JSONLog *log) : Scene(), m_state(WAIT_START) {
 	m_log = log;
 
+	Vector3d sphereCenter(0,0,15);
+	double sphereradius = 15;
+
+	double z = sphereradius*(1.25*randd() - .625);
+    double at = 0.54;
+	double phi = (M_PI - 2*at)*randd() + at;
+	if (randd() < 0.5) phi = -phi;
+	double d = sqrt(sphereradius*sphereradius - z*z);
+
 	m_startPos = InputStatus();
-	m_startPos.pos = InteractionSpace::randomPointInVolume().cast<double>();
+	m_startPos.pos = sphereCenter + Vector3d(d*sin(phi), d*cos(phi), z);
 	m_endPos = InputStatus();
-	m_endPos.pos = InteractionSpace::randomPointInVolume().cast<double>();
+	m_endPos.pos = sphereCenter + Vector3d(-d*sin(phi), -d*cos(phi), -z);
 	m_log->startScene(m_startPos, m_endPos);
 }
 
@@ -20,9 +44,6 @@ TestScene::~TestScene(void)
 {
 }
 
-double randd(){
-	return rand()/(double) RAND_MAX;
-}
 bool TestScene::initMeshes() {
 	Mesh *mesh;
 
@@ -33,7 +54,7 @@ bool TestScene::initMeshes() {
 	mesh->setColor(.4f, .4f, .4f);
 	mesh->setRotation(rot);
 	mesh->setTranslation(m_startPos.x(), m_startPos.y(), m_startPos.z());
-	mesh->setScale(0.4f,0.4f,0.1f);
+	mesh->setScale(0.5f,0.5f,0.125f);
 
 	rot = AngleAxisf(randd()*M_PI*0.5 - M_PI*0.25, Vector3f::UnitZ()) *
         AngleAxisf(randd()*M_PI*0.8 - M_PI*0.4,  Vector3f::UnitY()) *
@@ -42,7 +63,7 @@ bool TestScene::initMeshes() {
 	mesh->setColor(.4f,.4f,.4f);
 	mesh->setTranslation(m_endPos.x(), m_endPos.y(), m_endPos.z());
 	mesh->setRotation(rot);
-	mesh->setScale(0.4f,0.4f,0.1f);
+	mesh->setScale(0.5f,0.5f,0.125f);
 
 	mesh = addMesh("spaceship", "ico.off");
 	//mesh->setColor(1,0,0);
@@ -70,7 +91,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	// Calculate useful values
-	const float CLICK_DIST = 1.0f;
+	const float CLICK_DIST = 1.2f;
 	float d = (ship->getTranslation() - port->getTranslation()).norm(); // distance to target
 	bool validClick = d <= CLICK_DIST && input.isFlagSet(InputStatus::INPUTFLAG_SELECT);
 
@@ -113,7 +134,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	// Update the ship's position
 	ship->setTranslation((float)input.x(), (float)input.y(), (float)input.z());
 	if (input.inputType != InputStatus::HYDRA && input.inputType != InputStatus::LEAP) {
-		ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
+		//ship->setTranslation(InteractionSpace::closestPointInVolume(ship->getTranslation(), input.inputType != InputStatus::ARTAG));
 	}
 	if (input.isFlagSet(InputStatus::INPUTFLAG_ACTIVE)) ship->setColor(1.f, 0.f, 0.f);
 	else ship->setColor(0.7f,0.f,1.f);
