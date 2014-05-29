@@ -534,7 +534,7 @@ void D3DRenderer::initCamera() {
 	resetTransforms();
 
 	light.diffuse = D3DXVECTOR4(0.9f,0.9f,0.9f,1.f);
-	light.ambient = D3DXVECTOR4(0.1f,0.1f,0.1f,1.f);
+	light.ambient = D3DXVECTOR4(0.2f,0.2f,0.2f,1.f);
 	light.lightpos = D3DXVECTOR4(0.f,0.f,-1.f,1.f);
 }
 

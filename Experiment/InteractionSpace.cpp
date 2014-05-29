@@ -18,11 +18,12 @@ double InteractionSpace::screenwidth(void) {
 Vector3f InteractionSpace::randomPointInVolume(void)
 {
 	Vector3f p;
+	const double margin = 7;
 	do {
 		p = Vector3f::Random();
-		p[0] *= maxcoords[0];
-		p[1] *= maxcoords[1];
-		p[2] = maxcoords[2]*(p[2] + 1)/2;
+		p[0] *= maxcoords[0]-margin;
+		p[1] *= maxcoords[1]-margin;
+		p[2] = (maxcoords[2] - mincoords[2] - 2*margin)*(p[2] + 1)/2 + margin;
 	} while(!inVolume(p));
 	return p;
 }

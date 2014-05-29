@@ -4,23 +4,14 @@
 #include "InteractionSpace.h"
 #include "D3DMesh.h"
 
+using namespace Eigen;
 TestScene::TestScene(JSONLog *log) : Scene(), m_state(WAIT_START) {
 	m_log = log;
 
-	std::random_device rd;
-	std::default_random_engine el(rd());
-	std::uniform_real_distribution<float> x_uniform_dist(-15,15);
-	std::uniform_real_distribution<float> y_uniform_dist(-8,8);
-	std::uniform_real_distribution<float> z_uniform_dist(10,20);
-
 	m_startPos = InputStatus();
-	m_startPos.x() = x_uniform_dist(el);
-	m_startPos.y() = y_uniform_dist(el);
-	m_startPos.z() = z_uniform_dist(el);
+	m_startPos.pos = InteractionSpace::randomPointInVolume().cast<double>();
 	m_endPos = InputStatus();
-	m_endPos.x() = x_uniform_dist(el);
-	m_endPos.y() = y_uniform_dist(el);
-	m_endPos.z() = z_uniform_dist(el);
+	m_endPos.pos = InteractionSpace::randomPointInVolume().cast<double>();
 	m_log->startScene(m_startPos, m_endPos);
 }
 
@@ -29,23 +20,34 @@ TestScene::~TestScene(void)
 {
 }
 
+double randd(){
+	return rand()/(double) RAND_MAX;
+}
 bool TestScene::initMeshes() {
 	Mesh *mesh;
 
+	Eigen::Quaternionf rot = AngleAxisf(randd()*M_PI*0.5 - M_PI*0.25, Vector3f::UnitZ()) *
+        AngleAxisf(randd()*M_PI*0.8 - M_PI*0.4,  Vector3f::UnitY()) *
+	    AngleAxisf(2*M_PI/3 + randd()*M_PI*0.25, Vector3f::UnitX());
 	mesh = addMesh("start", "spaceship.off", true, true);
 	mesh->setColor(.4f, .4f, .4f);
+	mesh->setRotation(rot);
 	mesh->setTranslation(m_startPos.x(), m_startPos.y(), m_startPos.z());
 	mesh->setScale(0.4f,0.4f,0.1f);
 
+	rot = AngleAxisf(randd()*M_PI*0.5 - M_PI*0.25, Vector3f::UnitZ()) *
+        AngleAxisf(randd()*M_PI*0.8 - M_PI*0.4,  Vector3f::UnitY()) *
+	    AngleAxisf(2*M_PI/3 + randd()*M_PI*0.25, Vector3f::UnitX());
 	mesh = addMesh("target", "spaceship.off", true, true);
 	mesh->setColor(.4f,.4f,.4f);
 	mesh->setTranslation(m_endPos.x(), m_endPos.y(), m_endPos.z());
+	mesh->setRotation(rot);
 	mesh->setScale(0.4f,0.4f,0.1f);
 
 	mesh = addMesh("spaceship", "ico.off");
 	//mesh->setColor(1,0,0);
 	mesh->setTranslation(0,0,20);
-	mesh->setScale(1.f, 1.f, 1.f);
+	mesh->setScale(0.8f, 0.8f, 0.8f);
 
 	return true;
 }
@@ -68,7 +70,7 @@ void TestScene::_processInput (InputStatus &input, InputStatus &deltaInput) {
 	}
 
 	// Calculate useful values
-	const float CLICK_DIST = 0.8f;
+	const float CLICK_DIST = 1.0f;
 	float d = (ship->getTranslation() - port->getTranslation()).norm(); // distance to target
 	bool validClick = d <= CLICK_DIST && input.isFlagSet(InputStatus::INPUTFLAG_SELECT);
 
