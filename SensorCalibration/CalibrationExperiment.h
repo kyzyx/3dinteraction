@@ -13,5 +13,6 @@ public:
 
 protected:
 	Alignment alignment;
+	std::vector<Eigen::Vector3f> positions;
 };
 

@@ -9,6 +9,9 @@ using namespace Eigen;
 Vector3f mincoords(-59.79/2+5,-33.632/2+5,25);
 Vector3f maxcoords(59.79/2-5,33.632/2-5,70);
 
+Vector3f InteractionSpace::maxpoint(void) { return maxcoords; }
+Vector3f InteractionSpace::minpoint(void) { return mincoords; }
+
 double InteractionSpace::screenheight(void) {
 	return maxcoords.y()*2;
 }

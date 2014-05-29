@@ -10,6 +10,8 @@ public:
 	static bool inVolume(Eigen::Vector3f p);
 	static double screenwidth();
 	static double screenheight();
+	static Eigen::Vector3f maxpoint();
+	static Eigen::Vector3f minpoint();
 private:
 	InteractionSpace() {;}
 };
