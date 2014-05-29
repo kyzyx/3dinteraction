@@ -1,6 +1,6 @@
 {
 	"subject": "john",
-	"input": "mousekbd",
-	"output": "3d",
-	"scenes": 5
+	"input": "leap",
+	"output": "3dHeadtracked",
+	"scenes": 10
 }

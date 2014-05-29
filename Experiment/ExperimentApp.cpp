@@ -7,11 +7,11 @@
 #include "Scene.h"
 #include "InteractionSpace.h"
 
-ExperimentApp::ExperimentApp(void) : DirectXApp(false), experiment(nullptr)
+ExperimentApp::ExperimentApp(void) : DirectXApp(true), experiment(nullptr)
 {
 }
 
-ExperimentApp::ExperimentApp(std::string configfile) : DirectXApp(false), experiment(new Experiment(configfile))
+ExperimentApp::ExperimentApp(std::string configfile) : DirectXApp(true), experiment(new Experiment(configfile))
 {
 }
 
