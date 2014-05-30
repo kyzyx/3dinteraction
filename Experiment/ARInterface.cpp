@@ -8,7 +8,7 @@ ARInterface& ARInterface::getInstance (void) {
 	return instance;
 }
 
-ARInterface::ARInterface(void) : m_markerSize(5.08), m_tagID(0), m_camera(nullptr)
+ARInterface::ARInterface(void) : m_markerSize(2.54 * 2.5), m_tagID(0), m_camera(nullptr)
 {
 	// Camera Matrix for FLEA3 at 1280x640
 	double _camMat[3][3] = {

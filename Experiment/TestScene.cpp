@@ -27,7 +27,7 @@ TestScene::TestScene(JSONLog *log) : Scene(), m_state(WAIT_START) {
 	double sphereradius = 15;
 
 	double z = sphereradius*(1.25*randd() - .625);
-    double at = 0.54;
+    double at = 0.59;
 	double phi = (M_PI - 2*at)*randd() + at;
 	if (randd() < 0.5) phi = -phi;
 	double d = sqrt(sphereradius*sphereradius - z*z);

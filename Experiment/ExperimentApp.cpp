@@ -44,7 +44,7 @@ void ExperimentApp::setCamera(int camera) {
 	const float negz[] = {0.f,0.f,-1.f};
 	const float posy[] = {0.f,1.f,0.f};
 	const float negy[] = {0.f,-1.f,0.f};
-	const float eye[] = {0.f,0.f,headdistance};
+	const float eye[] = {0.f,0.f,headdistance*1.2};
 	const float sideeye[] = {-InteractionSpace::screenwidth(),0.f,headdistance/2 - 2};
 	const float topeye[] = {0.f,InteractionSpace::screenheight(), headdistance/2 - 2};
 	float hfov = 41;

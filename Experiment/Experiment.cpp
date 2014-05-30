@@ -54,11 +54,10 @@ m_inputDevice(nullptr), m_sceneIdx(0), m_curScene(nullptr), m_headtrackInput(nul
 			4.07157079e-02,   9.99166611e-01,   2.88367682e-03,   -36.1866713 + 1.15,
 		   -5.37987690e-02,  -6.89619746e-04,   9.98551559e-01,    21.3061088,
 		    0             ,   0             ,   0             ,    1;
-		m2 <<
-			 1.17, -0.0653715, -0.00466023, 0.0,
-		    -0.0444751, 1.35, -0.161685, 10.0,
-		     0.0, 0.0, 1.23, -4.0,
-		     0, 0, 0, 1;
+		m2 << 1.14321, 0.0, 0.0, 0.1, 
+-0.0244054, 1.38317, 0.05, 8.31, 
+0.0268531, 0.0154777, 1.23133, -3.95307, 
+0, 0, 0, 1;
 		m_inputDevice = new TransformedInterface(new TransformedInterface(new LeapInterface(), Xform(m1)), Xform(m2));
 	}
 
@@ -158,16 +157,8 @@ void Experiment::onLoop (void) {
 	if ((outputtype & OUTPUT_HEADTRACKED) && m_headtrackInput != nullptr) {
 		InputStatus arInput = m_headtrackInput->getStatus();
 		// Fiducial -> eye position conversion
-		arInput.pos += arInput.rot*Eigen::Vector3d(-5.15,0,-3);
+		arInput.pos += arInput.rot*Eigen::Vector3d(-0,0,-3);
 		std::wstringstream msg;
-		//msg	<< L"Tag Id: " << arInput.flags
-		//	<< L", pos=("
-		//	<< arInput.x() << L", "
-		//	<< arInput.y() << L", "
-		//	<< arInput.z()
-		//	<< L")";
-		//renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
-		msg.clear();
 		msg << "Scene " << m_sceneIdx << " / " << m_numScenes;
 		renderer->drawText(msg.str().c_str(), 300, 100, 0xffffffff, 20);
 		((D3DRenderer*) renderer)->setHeadPosition(arInput.x(), arInput.y(), arInput.z(), 0.0311f);

@@ -59,7 +59,7 @@ InputStatus HydraRelativeInterface::updateDelta(void)
 			s.pos -= originpos;
 
 			if (s.pos.norm() > MOUSE_THRESHOLD) {
-				s.pos *= 1.6;
+				s.pos *= 1.7;
 				s.setFlag(InputStatus::INPUTFLAG_DEBUG);
 			}
 
