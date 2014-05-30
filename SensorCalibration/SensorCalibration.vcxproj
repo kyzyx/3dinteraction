@@ -89,6 +89,7 @@
     <ClInclude Include="..\Experiment\DirectXApp.h" />
     <ClInclude Include="..\Experiment\Experiment.h" />
     <ClInclude Include="..\Experiment\ExperimentApp.h" />
+    <ClInclude Include="..\Experiment\Filter.h" />
     <ClInclude Include="..\Experiment\Flea3.h" />
     <ClInclude Include="..\Experiment\HydraInterface.h" />
     <ClInclude Include="..\Experiment\HydraRelativeInterface.h" />
@@ -133,6 +134,7 @@
     <ClCompile Include="..\Experiment\RelativeInputInterface.cpp" />
     <ClCompile Include="..\Experiment\Scene.cpp" />
     <ClCompile Include="..\Experiment\SDLHandler.cpp" />
+    <ClCompile Include="..\Experiment\SmoothedInterface.cpp" />
     <ClCompile Include="..\Experiment\TestScene.cpp" />
     <ClCompile Include="..\Experiment\timestamp.cpp" />
     <ClCompile Include="CalibrationApp.cpp" />
