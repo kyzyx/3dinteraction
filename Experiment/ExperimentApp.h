@@ -21,6 +21,7 @@ private:
 	void drawMeshes();
 	void setCamera(int camera);
 	enum {CAMERA_MAIN, CAMERA_FRONT, CAMERA_TOP, CAMERA_SIDE};
+	WCHAR* viewnames[4];
 	D3DWindowTarget* views[4];
 protected:
 	Experiment* experiment;

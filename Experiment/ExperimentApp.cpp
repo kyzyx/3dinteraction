@@ -24,6 +24,11 @@ ExperimentApp::~ExperimentApp(void)
 bool ExperimentApp::onInit(void) {
 	if (!DirectXApp::onInit()) return false;
 
+	viewnames[0] = L"Perspective";
+	viewnames[1] = L"Front View";
+	viewnames[2] = L"Top View";
+	viewnames[3] = L"Side View";
+
 	D3DRenderer* dr = (D3DRenderer*) render;
 	experiment->init(dr);
     scene = experiment->getNextScene();	
@@ -81,6 +86,7 @@ void ExperimentApp::onRender(void) {
 			if (i) dr->setAmbient(1.f,1.f,1.f);
 			setCamera(i);
 			drawMeshes();
+			render->drawText(viewnames[i], width/2, 15, 0xffffffff, 35);
 		}
 		dr->setAmbient(0.f,0.f,0.f);
 
