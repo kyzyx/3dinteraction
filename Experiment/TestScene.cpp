@@ -29,13 +29,15 @@ TestScene::TestScene(JSONLog *log) : Scene(), m_state(WAIT_START) {
 	double z = sphereradius*(1.25*randd() - .625);
     double at = 0.59;
 	double phi = (M_PI - 2*at)*randd() + at;
+	double rho = (M_PI - 2*at)*randd()*0.8 + at;
 	if (randd() < 0.5) phi = -phi;
+	if (randd() < 0.5) rho = -rho;
 	double d = sqrt(sphereradius*sphereradius - z*z);
 
 	m_startPos = InputStatus();
-	m_startPos.pos = sphereCenter + Vector3d(d*sin(phi), d*cos(phi), z);
+	m_startPos.pos = sphereCenter + Vector3d(d*sin(phi), d*cos(rho), z);
 	m_endPos = InputStatus();
-	m_endPos.pos = sphereCenter + Vector3d(-d*sin(phi), -d*cos(phi), -z);
+	m_endPos.pos = sphereCenter + Vector3d(-d*sin(phi), -d*cos(rho), -z);
 	m_log->startScene(m_startPos, m_endPos);
 }
 
@@ -69,6 +71,12 @@ bool TestScene::initMeshes() {
 	//mesh->setColor(1,0,0);
 	mesh->setTranslation(0,0,20);
 	mesh->setScale(0.8f, 0.8f, 0.8f);
+
+	mesh = addMesh("screen_grid", "grid.off");
+	mesh->setTranslation(0, 0, -2.5);
+	rot = AngleAxisf(M_PI/2, Vector3f::UnitX());
+	mesh->setRotation(rot);
+	mesh->setScale(2.25f, 2.25f, 2.25f);
 
 	return true;
 }
